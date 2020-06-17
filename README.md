@@ -3,7 +3,7 @@
 
 ### How to use
 
-`npm install flutterwave_node_3`
+`npm install flutterwave-node-v3`
 
 
 ```javascript
@@ -176,7 +176,7 @@ This describes how to charge cards on flw.
 const Flutterwave = require('flutterwave_node_3');
 const open = require('open');
 
-const flw = new Flutterwave("FLWPUBK-348ea9a0fef6ec91be8c3d323350f7fd-X", "FLWSECK-611d0eda25a3fdf506137831019c9197-X", false);
+const flw = new Flutterwave("FLWPUBK-*************-X", "FLWSECK-********************-X", false);
 const payload = {
     "card_number": "5531886652142950",
     "cvv": "564",
@@ -434,14 +434,14 @@ const ussd = async () => {
         try {
 
                 const payload = {
-        "tx_ref": "MC-15852309v5050e8", //This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
-        "account_bank": "058", //This is the Bank numeric code e.g 058
-        "amount": "1500",
-        "currency": "NGN",
-        "email": "user@flw.com",
-        "phone_number": "07033923458",
-        "fullname": "Yemi Desola"
-}
+                    "tx_ref": "MC-15852309v5050e8", //This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
+                    "account_bank": "058", //This is the Bank numeric code e.g 058
+                    "amount": "1500",
+                    "currency": "NGN",
+                    "email": "user@flw.com",
+                    "phone_number": "07033923458",
+                    "fullname": "Yemi Desola"
+                }
 
                 const response = await flw.Charge.ussd(payload)
                 console.log(response);
@@ -557,20 +557,20 @@ const Gh_mobilemoney =  async () =>{
     try {
 
         const payload = {
-           "tx_ref": "MC-158523s09v5050e8",
-        "amount": "150",
-        "type": "mobile_money_ghana",
-        "currency": "GHS",
-        "voucher": "143256743",
-        "network": "MTN", //This is the customer's mobile money network provider (possible values: MTN, VODAFONE, TIGO)
-        "email": "user@gmail.com",
-        "phone_number": "054709929220",
-        "fullname": "John Madakin",
-        "client_ip": "154.123.220.1",
-        "device_fingerprint": "62wd23423rq324323qew1",
-        "meta": {
-            "flightID": "213213AS"
-        }
+            "tx_ref": "MC-158523s09v5050e8",
+            "amount": "150",
+            "type": "mobile_money_ghana",
+            "currency": "GHS",
+            "voucher": "143256743",
+            "network": "MTN", //This is the customer's mobile money network provider (possible values: MTN, VODAFONE, TIGO)
+            "email": "user@gmail.com",
+            "phone_number": "054709929220",
+            "fullname": "John Madakin",
+            "client_ip": "154.123.220.1",
+            "device_fingerprint": "62wd23423rq324323qew1",
+            "meta": {
+                "flightID": "213213AS"
+            }
     }
 
        const response =  await flw.MobileMoney.ghana(payload)
