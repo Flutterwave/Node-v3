@@ -3,13 +3,13 @@
 
 ### How to use
 
-`npm install flutterwave_node_3`
+`npm install flutterwave-node-v3`
 
 
 ```javascript
-const Ravepay = require('flutterwave-node');
+const Flutterwave = require('flutterwave-node-v3');
 
-const rave = new Ravepay(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY, PRODUCTION_FLAG);
 ```
 
 If you pass `true` as the value for **PRODUCTION_FLAG**, the library will use the production url as the base for all calls. Otherwise it will use the staging base url.
@@ -173,10 +173,10 @@ This describes how to charge cards on flw.
 **NB: `enckey` is the encryption key on the dashboard**
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 const open = require('open');
 
-const flw = new Flutterwave("FLWPUBK-348ea9a0fef6ec91be8c3d323350f7fd-X", "FLWSECK-611d0eda25a3fdf506137831019c9197-X", false);
+const flw = new Flutterwave("FLWPUBK-xxxxxxxxxxxx-X", "FLWSECK-xxxxxxxxx-X", false);
 const payload = {
     "card_number": "5531886652142950",
     "cvv": "564",
@@ -244,9 +244,9 @@ This describes how to charge Nigerian bank accounts using Flutterwave
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -288,9 +288,9 @@ This describes how to charge UK bank accounts using Flutterwave
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -329,9 +329,9 @@ charge_uk_acct();
 This shows you how to accept South African ACH charges from your customers
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const ach_payment = async () => {
@@ -374,9 +374,9 @@ ach_payment();
 This describes to allow your customer to pay via a NIP (NIBBS Instant Payment) transfer.
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -421,9 +421,9 @@ bank_trf();
 This describes how to collect payments via ussd
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -461,9 +461,9 @@ ussd();
 This describes how to collect ZAR payments offline using Vouchers
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const charg_voucher = async () => {
@@ -507,9 +507,9 @@ This describes how to collect payments via Mpesa.
 
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -546,9 +546,9 @@ mpesa();
 This describes how to collect payments via Ghana mobile money.
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -597,9 +597,9 @@ This describes how to collect payments via Rwanda mobile money.
 
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -640,9 +640,9 @@ This describes how to collect payments via Uganda mobile money.
 
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const ug_mobile_money =  async () =>{
@@ -683,9 +683,9 @@ redirect to `data.link`
 This describes how to collect payments via mobile money for Franc.
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const franc_mobile_money =  async () =>{
@@ -719,9 +719,9 @@ franc_mobile_money();
 This describes how to collect payments via  Zambia  mobile money.
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -762,9 +762,9 @@ This describes how to create a tokenized charge
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -803,9 +803,9 @@ This describes how to update details tied to a card token
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const update_token = async () => {
@@ -897,9 +897,9 @@ This describes how to get the status of a bulk tokenized charge
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -928,9 +928,9 @@ This describes how to get specific bulk tokenized charge transactions
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -961,9 +961,9 @@ This describes how to fetch all transactions on your account
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -996,9 +996,9 @@ This describes how Get transaction fees
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1031,9 +1031,9 @@ This describes how resend a failed transaction webhook to your server
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1068,9 +1068,9 @@ This describes how to initiate a transaction refund
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1104,9 +1104,9 @@ This describes how Verify transactions using the transaction reference tx_ref
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1134,9 +1134,9 @@ This describes how view Transaction Timeline
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1167,9 +1167,9 @@ View_Transaction_Timeline();
 This describes how to initiate a transfer
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1209,9 +1209,9 @@ initTrans();
 This describes how to initiate a bulk transfer
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1262,9 +1262,9 @@ initBulk();
 This describes how to get applicable transfer fee
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1298,9 +1298,9 @@ getFee();
 This describes how to fetch all transfers on your account
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1335,9 +1335,9 @@ getAllTrans();
 This describes how to create a new virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1376,9 +1376,9 @@ createVcard();
 This describes how to Get all virtual cards
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1404,9 +1404,9 @@ fetchAllVcards();
 This describes how to fetch a virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1436,9 +1436,9 @@ fetchVCard();
 This describes how to fund an existing virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fundCard = async () => {
@@ -1469,9 +1469,9 @@ fundCard();
 This describes how to terminate a virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const terminateCard = async () => {
@@ -1500,9 +1500,9 @@ terminateCard();
 This describes how to fetch transactions by date range on a single card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1536,9 +1536,9 @@ getTransactions();
 This describes how to withdraw existing funds from a virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1570,9 +1570,9 @@ withdrawal();
 This describes how to block a virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const blockCard = async () => {
@@ -1603,9 +1603,9 @@ blockCard();
 This describes how to unblock a virtual card
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const unblockCard = async () => {
@@ -1636,9 +1636,9 @@ unblockCard();
 This describes how to create a virtual account number
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const createAcct = async () => {
 
@@ -1666,9 +1666,9 @@ createAcct();
 This describes how to create bulk virtual account numbers
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const createBulkAcct = async () => {
@@ -1699,9 +1699,9 @@ createBulkAcct();
 This describes how to fetch bulk virtual account numbers using batch id
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchBulk = async () => {
@@ -1727,9 +1727,9 @@ fetchBulk();
 This describes how to fetch a virtual account number using order reference
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetch = async () => {
@@ -1757,9 +1757,9 @@ fetch();
 This describes how to get all wallet balances
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchBal = async () => {
@@ -1785,9 +1785,9 @@ This describes how to get balances for specific currencies
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchBal = async () => {
@@ -1814,9 +1814,9 @@ This describes how to resolve a bank account to get the account holder's details
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const resolveAcct = async () => {
@@ -1844,9 +1844,9 @@ resolveAcct();
 This describes how to fetch bvn information
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1877,9 +1877,9 @@ resolveBvn();
 This describes how to create a transfer beneficiary
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const createBeneficiary = async () => {
 
@@ -1907,9 +1907,9 @@ createBeneficiary();
 This describes how to get all beneficiaries
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchAllBeneficiary = async () => {
@@ -1933,9 +1933,9 @@ fetchAllBeneficiary();
 This describes how to get a single transfer beneficiary details
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -1966,9 +1966,9 @@ This describes how to delete a transfer beneficiary
 
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const delBeneficiary = async () => {
@@ -2000,9 +2000,9 @@ delBeneficiary();
 This describes how to get list of banks you can transfer to
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const getBanks = async () => {
 
@@ -2030,9 +2030,9 @@ getBanks();
 This describes how to get a list of bank branches
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const getBranches = async () => {
@@ -2063,9 +2063,9 @@ getBranches();
 This describes how to fetch all settlements
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchSettlements = async () => {
@@ -2091,9 +2091,9 @@ fetchSettlements();
 This describes how to fetch and search all your settlements
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchSettlement = async () => {
@@ -2125,9 +2125,9 @@ fetchSettlement();
 This describes how to get all subscriptions
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchSubscription = async () => {
@@ -2154,9 +2154,9 @@ fetchSubscription();
 This describes how to cancel a subscription
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const cancelSubscription = async () => {
@@ -2185,9 +2185,9 @@ cancelSubscription();
 This describes how to activate a subscription
 
 ```javascript
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const activateSubscription = async () => {
@@ -2219,9 +2219,9 @@ This describes how to create bill payments
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const createBill = async () => {
@@ -2256,9 +2256,9 @@ This describes  how to create bulk bills payment
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const createBulkBill = async () => {
@@ -2307,9 +2307,9 @@ This describes  how to  get the status of a bill purchase
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const getStatus = async () => {
@@ -2340,9 +2340,9 @@ This describes  how to  update bills order
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const updateBills = async () => {
 
@@ -2372,9 +2372,9 @@ This describes  how to validate services like DSTV smartcard no, Meter number et
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const validateBill = async () => {
 
@@ -2405,9 +2405,9 @@ This describes  how to fetch all bill categories on your account
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const getBillsCategories = async () => {
 
@@ -2434,9 +2434,9 @@ This describes  how to get all government agencies you can pay into
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const paymentAgencies = async () => {
@@ -2464,9 +2464,9 @@ This describes  how to get amount to be paid for a product
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -2498,9 +2498,9 @@ This describes  how to get bill payments
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const getBillsPayment = async () => {
@@ -2535,9 +2535,9 @@ This describes  how to get all products under a government agency.
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const productsUnderAgency = async () => {
@@ -2569,9 +2569,9 @@ This describes  how to create an order using the biller code and the product Id
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const Createorder = async () => {
 
@@ -2622,9 +2622,9 @@ This describes  how to create a payment plan
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const createPaymentPlan = async () => {
@@ -2659,9 +2659,9 @@ This describes  how to fetch all payment plans on your account
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchAllPlans = async () => {
@@ -2687,9 +2687,9 @@ This describes  how to get a single payment plan
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const fetchPlan = async () => {
@@ -2718,9 +2718,9 @@ This describes  how to update an existing payment plan
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const updatePlan = async () => {
 
@@ -2751,9 +2751,9 @@ This describes  how to cancel an existing payment plan
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const cancelPlan = async () => {
@@ -2785,9 +2785,9 @@ This describes  how to create a subaccount on Flutterwave
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const createSubaccount = async () => {
@@ -2834,9 +2834,9 @@ This describes  how to get all subaccounts
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 
@@ -2866,9 +2866,9 @@ This describes  how to fetch a subaccount using the sub-account's ID
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const fetchSubaccount = async () => {
 
@@ -2900,9 +2900,9 @@ This describes  how to update a subaccount
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const updateSubaccount = async () => {
 
@@ -2940,9 +2940,9 @@ This describes how to delete a subaccount
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const updateSubaccount = async () => {
@@ -2974,9 +2974,9 @@ This describes how to create a new Ebills order
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const placeEbillsOrder = async () => {
 
@@ -3017,9 +3017,9 @@ This describes how to update order for ebills
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const updateEbillsOrder = async () => {
@@ -3054,9 +3054,9 @@ This describes how to create an otp
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 const createOTP = async () => {
 
@@ -3092,9 +3092,9 @@ This describes how to validate an otp
 
 ```javascript
 
-const Flutterwave = require('flutterwave_node_3');
+const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY);
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
 
 
 const validateOTP = async () => {
