@@ -1,0 +1,31 @@
+{
+  "name": "rave-node-v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Olufemi",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bluebird": "^3.5.0",
+    "chai-as-promised-also-chain": "^1.0.2",
+    "md5": "2.2.1",
+    "morx": "0.0.5",
+    "node-forge": "0.7.1",
+    "open": "^7.0.4",
+    "q": "1.5.0",
+    "sha.js": "2.4.8"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "dotenv": "^4.0.0",
+    "eslint": "^6.8.0",
+    "mocha": "^5.2.0",
+    "should": "^11.2.1"
+  }
+}

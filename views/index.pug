@@ -1,0 +1,57 @@
+doctype html
+html
+    head
+        title RavePay
+        //- link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.css")
+        //- link(rel="stylesheet", href="/css/style.css")
+
+    body       
+        .container
+            block content
+            h1 #{title}
+
+            form
+                script(src='https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2/hosted/pay')
+                button(type='button', onclick='payWithRave()') Pay Now
+            script.
+                const API_publicKey = "FLWPUBK-3899c4a996764a5d061ede002fa390f3-X";
+                function payWithRave() {
+                    var x = getpaidSetup({
+                        PBFPubKey: API_publicKey,
+                        customer_email: "user@example.com",
+                        amount: 2000,
+                        customer_phone: "234099940409",
+                        currency: "NGN",
+                        payment_options: "card,account",
+                        txref: "rave-123456",
+                        hosted_payment: 1,
+                        //- redirect_url: "https://your-website.com/url-to-redirect-to"
+                        meta: [{
+                        metaname: "flightID",
+                        metavalue: "AP1234"
+                        }],
+                        onclose: function() {},
+                        callback: function(response) {
+                            var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
+                            console.log("This is the response returned after a charge", response);
+                            if (
+                            response.tx.chargeResponseCode == "00" ||
+                            response.tx.chargeResponseCode == "0"
+                            ) {
+                            // redirect to a success page
+                            } else {
+                            // redirect to a failure page.
+                            }
+                            x.close(); // use this to close the modal immediately after payment.
+                        }
+                    });
+                }
+
+            br
+            hr
+            footer 
+                p copyright &copy; 2019
+        
+        //- script(src='/bower_components/bootstrap/js/dist/dropdown.js')
+        //- script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        
