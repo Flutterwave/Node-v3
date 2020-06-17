@@ -587,6 +587,9 @@ Gh_mobilemoney();
 
 ```
 
+Redirect customer to the link returned in the charge initiation response
+redirect to `data.link`
+
 ###  ```Rwanda mobile money```
 
 
@@ -626,6 +629,8 @@ const rw_mobile_money =  async ()=>{
  
 rw_mobile_money();
 ```
+Redirect customer to the link returned in the charge initiation response
+redirect to `data.link`
 
 
 ### ```Uganda mobile money```
@@ -667,6 +672,9 @@ const ug_mobile_money =  async () =>{
  
 ug_mobile_money();
 ```
+
+Redirect customer to the link returned in the charge initiation response
+redirect to `data.link`
 
 
 ### ```Francophone mobile money```
@@ -741,6 +749,9 @@ const zambia_mobile_money =  async () =>{
  
 zambia_mobile_money();
 ```
+
+Redirect customer to the link returned in the charge initiation response
+redirect to `data.link`
 
 
 ## TOKENIZED CHARGES

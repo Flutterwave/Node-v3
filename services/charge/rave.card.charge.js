@@ -1,5 +1,4 @@
 const morx = require('morx');
-const open = require('open');
 const q = require('q');
 const encrypt = require('./encryp')
 
