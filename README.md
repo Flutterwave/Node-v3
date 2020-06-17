@@ -176,7 +176,7 @@ This describes how to charge cards on flw.
 const Flutterwave = require('flutterwave-node-v3');
 const open = require('open');
 
-const flw = new Flutterwave("FLWPUBK-xxxxxxxxxxxx-X", "FLWSECK-xxxxxxxxx-X", false);
+const flw = new Flutterwave("FLWPUBK-*************-X", "FLWSECK-********************-X", false);
 const payload = {
     "card_number": "5531886652142950",
     "cvv": "564",
