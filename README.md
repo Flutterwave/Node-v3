@@ -587,8 +587,19 @@ Gh_mobilemoney();
 
 ```
 
-Redirect customer to the link returned in the charge initiation response
-redirect to `data.link`
+```javascript
+//Response
+{
+  status: 'success',
+  message: 'Charge initiated',
+  meta: {
+    authorization: {
+      redirect: 'https://checkout.flutterwave.com/captcha/verify/1287327:4880b0705d15b949b84e056d7cf8b1dd',
+      mode: 'redirect'
+    }
+
+```
+**Redirect customer to the redirect link returned in the charge initiation response.**
 
 ###  ```Rwanda mobile money```
 
@@ -629,9 +640,19 @@ const rw_mobile_money =  async ()=>{
  
 rw_mobile_money();
 ```
-Redirect customer to the link returned in the charge initiation response
-redirect to `data.link`
+```javascript
+//Response
+{
+  status: 'success',
+  message: 'Charge initiated',
+  meta: {
+    authorization: {
+      redirect: 'https://checkout.flutterwave.com/captcha/verify/1287327:4880b0705d15b949b84e056d7cf8b1dd',
+      mode: 'redirect'
+    }
 
+```
+**Redirect customer to the redirect link returned in the charge initiation response.**
 
 ### ```Uganda mobile money```
 
@@ -673,9 +694,19 @@ const ug_mobile_money =  async () =>{
 ug_mobile_money();
 ```
 
-Redirect customer to the link returned in the charge initiation response
-redirect to `data.link`
+```javascript
+//Response
+{
+  status: 'success',
+  message: 'Charge initiated',
+  meta: {
+    authorization: {
+      redirect: 'https://checkout.flutterwave.com/captcha/verify/1287327:4880b0705d15b949b84e056d7cf8b1dd',
+      mode: 'redirect'
+    }
 
+```
+**Redirect customer to the redirect link returned in the charge initiation response.**
 
 ### ```Francophone mobile money```
 
@@ -750,9 +781,19 @@ const zambia_mobile_money =  async () =>{
 zambia_mobile_money();
 ```
 
-Redirect customer to the link returned in the charge initiation response
-redirect to `data.link`
+```javascript
+//Response
+{
+  status: 'success',
+  message: 'Charge initiated',
+  meta: {
+    authorization: {
+      redirect: 'https://checkout.flutterwave.com/captcha/verify/1287327:4880b0705d15b949b84e056d7cf8b1dd',
+      mode: 'redirect'
+    }
 
+```
+**Redirect customer to the redirect link returned in the charge initiation response.**
 
 ## TOKENIZED CHARGES
 
