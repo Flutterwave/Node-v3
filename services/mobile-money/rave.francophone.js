@@ -11,6 +11,7 @@ var spec = morx.spec()
 	.build('tx_ref', 'required:true, eg:FLW_y-443342')
 	.build('meta', 'required:false')
 	.build('device_fingerprint', 'required:false')
+	.build('redirect_url', 'required:false')
 	.end();
 
 function service(data, _rave) {
