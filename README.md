@@ -544,6 +544,7 @@ mpesa();
 
 
 This describes how to collect payments via Ghana mobile money.
+**NB: OTP on staging (TEST MODE) is `123456`**
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -600,6 +601,7 @@ Gh_mobilemoney();
 
 ```
 **Redirect customer to the redirect link returned in the charge initiation response.**
+**NB: OTP on staging (TEST MODE) is `123456`**
 
 ###  ```Rwanda mobile money```
 
@@ -653,6 +655,7 @@ rw_mobile_money();
 
 ```
 **Redirect customer to the redirect link returned in the charge initiation response.**
+**NB: OTP on staging (TEST MODE) is `123456`**
 
 ### ```Uganda mobile money```
 
@@ -707,6 +710,7 @@ ug_mobile_money();
 
 ```
 **Redirect customer to the redirect link returned in the charge initiation response.**
+**NB: OTP on staging (TEST MODE) is `123456`**
 
 ### ```Francophone mobile money```
 
@@ -794,6 +798,7 @@ zambia_mobile_money();
 
 ```
 **Redirect customer to the redirect link returned in the charge initiation response.**
+**NB: OTP on staging (TEST MODE) is `123456`**
 
 ## TOKENIZED CHARGES
 
