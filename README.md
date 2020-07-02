@@ -827,7 +827,8 @@ const charge_with_token =  async()=>{
             "first_name": "temi",
             "last_name": "desola",
             "narration": "Sample tokenized charge",
-            "tx_ref": "MC-1589482483218"
+            "tx_ref": "MCs"+Date.now(),
+            "redirect_url":"https://www.google.com"
         }
        const response =  await flw.Tokenized.charge(payload)
        console.log(response);

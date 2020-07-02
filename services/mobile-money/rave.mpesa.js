@@ -13,6 +13,7 @@ var spec = morx.spec()
 	.build('meta', 'required:false')
 	.build('device_fingerprint', 'required:false')
 	.build('redirect_url', 'required:false')
+	.build('payment_plan','required:false')
 	.end();
 
 function service(data, _rave) {
