@@ -827,7 +827,8 @@ const charge_with_token =  async()=>{
             "first_name": "temi",
             "last_name": "desola",
             "narration": "Sample tokenized charge",
-            "tx_ref": "MC-1589482483218"
+            "tx_ref": "MCs"+Date.now(),
+            "redirect_url":"https://www.google.com"
         }
        const response =  await flw.Tokenized.charge(payload)
        console.log(response);
@@ -1212,6 +1213,8 @@ View_Transaction_Timeline();
 
 This describes how to initiate a transfer
 
+For more info about the payload parameteres definition, check  [here](https://developer.flutterwave.com/reference#create-a-transfer)
+
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -1369,6 +1372,72 @@ Transfer.fetch(payload)
 
 
 getAllTrans();
+
+```
+
+### ```Get a transfer```
+
+
+This describes how to fetch a single transfer on your account
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
+
+
+const getATransfer = async () => {
+
+    try {
+        const payload = {
+            "id":"1570636" // This is the numeric ID of the transfer you want to fetch. It is returned in the call to create a transfer as data.id
+        }
+
+        const response = await flw.Transfer.get_a_transfer(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+getATransfer();
+
+```
+
+### ```Wallet to Wallet Transfer```
+
+This will show you how to initiate a transfer from one Flutterwave wallet to another
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+
+const flw = new Flutterwave(PUBLICK_KEY, SECRET_KEY,PRODUCTION_FLAG);
+
+const walletToWallet = async () => {
+
+    try {
+        const payload = {
+            "account_bank": "flutterwave", // This should always be set to flutterwave
+            "merchant_id": "2360844", //This is the recipient merchant ID
+            "amount": 5500, //This is the amount to transfer to the recipient
+            "narration": "payment for x service provided",
+            "currency": "NGN", //This can be NGN, GHS, KES, UGX, TZS, USD
+            "reference": "wallet-transfer"+Date.now(), //This is a merchant's unique reference for the transfer, it can be used to query for the status of the transfer
+            "debit_currency": "NGN" //You can pass this when you want to debit a currency balance and send money in another currency.
+        }
+
+        const response = await flw.Transfer.wallet_to_wallet(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+walletToWallet();
 
 ```
 
