@@ -4,18 +4,12 @@ const q = require('q');
 
 const spec = morx.spec()
 	.build('account_bank', 'required:true, eg:044')
-	.build('account_number', 'required:true,validators:isNumeric, eg:06900021')
+	.build('merchant_id', 'required:true,validators:isNumeric, eg:06900021')
 	.build('amount', 'required:true, eg:10')
 	.build('narration', 'required:false,eg:New transfer')
 	.build('currency', 'required:required,eg:NGN')
 	.build('debit_currency', 'required:required, e.g:NGN')
 	.build('reference', 'required:required,eg:mk-902837-jk')
-	.build('destination_branch_code', 'required:false')
-	.build('beneficiary', 'required:false')
-	.build('beneficiary_name', 'required:false')
-	.build('callback_url', 'required:false')
-	.build('debit_currency', 'required:false')
-	.build('meta', 'required:false')
 	.end();
 
 
@@ -25,13 +19,14 @@ function service(data, _rave) {
 	q.fcall(() => {
 
 			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			var params = validated.params;
+            var params = validated.params;
+            
 
 			return (params);
 
 		})
 		.then(params => {
-
+           params.account_number=params.merchant_id
 			return _rave.request('v3/transfers', params)
 		})
 		.then(resp => {
