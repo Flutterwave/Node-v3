@@ -1,3 +1,7 @@
+<p align="center">
+    <img title="Flutterwave" height="200" src="https://flutterwave.com/images/logo-colored.svg" width="50%"/>
+</p>
+
 # Flutterwave Nodejs Library v1.0.0
 
 
