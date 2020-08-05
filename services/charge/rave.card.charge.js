@@ -62,7 +62,6 @@ function service(data, _rave) {
 			var payload = {};
 			payload.public_key = _rave.getPublicKey();
 			payload.client = encrypted;
-			
 	
 			return _rave.request('v3/charges?type=card', payload)
 		})
