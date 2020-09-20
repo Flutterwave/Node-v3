@@ -16,8 +16,11 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npm run lint
+      - run: npm run lint 
       - run: npm test
+        env:
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
   publish-npm:
     needs: build
