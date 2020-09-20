@@ -1,5 +1,5 @@
 <p align="center">
-    <img title="Flutterwave" height="200" src="images/logo.png width="50%"/>
+    <img title="Flutterwave" height="200" src="images/logo.png width="55%"/>
 </p>
 
 # Flutterwave v3 NodeJS Library 
