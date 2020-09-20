@@ -4,7 +4,8 @@
   "description": "The official Node.JS library for Flutterwave v3 payment APIs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\""
   },
   "keywords": [],
   "author": "Flutterwave Developers",
