@@ -125,7 +125,6 @@ describe('#Rave Bills', function () {
       to: '2020-05-05',
     };
     var resp = await billsInstance.fetch_bills(payload);
-    expect(resp).to.have.property('status');
     expect(resp).to.have.property('summary');
     return;
   });
@@ -137,7 +136,6 @@ describe('#Rave Bills', function () {
       id: 'BIL136',
     };
     var resp = await billsInstance.products_under_agency(payload);
-    expect(resp).to.have.property('status');
     expect(resp).to.have.property('products');
     return;
   });
