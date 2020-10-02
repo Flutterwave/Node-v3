@@ -86,7 +86,9 @@ describe('#Rave Bills', function () {
       order_id: 'be9c8abf-4611-46e9-85e7-5a2e8c5d7ab3',
     };
     var resp = await billsInstance.update_bills(payload);
-    return expect(resp).to.have.property('data');
+    expect(resp).to.have.property('status');
+    expect(resp).to.have.property('data');
+    return;
   });
   it('should validate bills services', async function () {
     this.timeout(10000);
@@ -97,7 +99,9 @@ describe('#Rave Bills', function () {
       customer: '08038291822',
     };
     var resp = await billsInstance.validate(payload);
-    return expect(resp).to.have.property('message');
+    expect(resp).to.have.property('status');
+    expect(resp).to.have.property('message');
+    return;
   });
 
   it('should return amount to be paid', async function () {
@@ -108,7 +112,9 @@ describe('#Rave Bills', function () {
       product_id: 'OT150',
     };
     var resp = await billsInstance.amt_to_be_paid(payload);
-    return expect(resp).to.include.all.keys('data', 'message');
+    expect(resp).to.have.property('status');
+    expect(resp).to.include.all.keys('data', 'message');
+    return;
   });
 
   it('should return history of all purchased bill services', async function () {
@@ -119,7 +125,9 @@ describe('#Rave Bills', function () {
       to: '2020-05-05',
     };
     var resp = await billsInstance.fetch_bills(payload);
-    return expect(resp).to.have.property('summary');
+    expect(resp).to.have.property('status');
+    expect(resp).to.have.property('summary');
+    return;
   });
 
   it('should return all products under a government agency.', async function () {
@@ -129,7 +137,9 @@ describe('#Rave Bills', function () {
       id: 'BIL136',
     };
     var resp = await billsInstance.products_under_agency(payload);
-    return expect(resp).to.have.property('products');
+    expect(resp).to.have.property('status');
+    expect(resp).to.have.property('products');
+    return;
   });
 
   it('should Create order using billing code and product id', async function () {
@@ -159,6 +169,8 @@ describe('#Rave Bills', function () {
       ],
     };
     var resp = await billsInstance.create_ord_billing(payload);
-    return expect(resp).to.have.property('message');
+    expect(resp).to.have.property('status');
+    expect(resp).to.have.property('message');
+    return;
   });
 });
