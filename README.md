@@ -32,7 +32,7 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
 
 **1**.  **CHARGE**
 
-  * Card
+  * [Card](#card-charge)
   * Nigerian bank accounts
   * UK bank accounts
   * ACH payment
