@@ -33,140 +33,141 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
 **1**.  **CHARGE**
 
   * [Card](#card-charge)
-  * [Nigerian bank accounts] (#charge-nigerian-bank-accounts)
-  * [UK bank accounts] (#charge-uk-bank-accounts)
-  * [ACH payment] (#ach-payment)
-  * [Bank transfer] (#bank-transfer)
-  * [Ussd] (#ussd)
+  * [Nigerian bank accounts](#charge-nigerian-bank-accounts)
+  * [UK bank accounts](#charge-uk-bank-accounts)
+  * [ACH payment](#ach-payment)
+  * [Bank transfer](#bank-transfer)
+  * [Ussd](#ussd)
   * [Validate a charge]
 
 **2**. **MOBILE MONEY**
 
- * [Mpesa] (#mpesa)
- * [Ghana] (#ghana-mobile-money)
- * [Rwanda] (#rwanda-mobile-money)
- * [Uganda] (#uganda-mobile-money)
- * [Francophone Africa] (#francohohne-mobile-money)
- * [Zambia] (#zambia-mobile-money)
+ * [Mpesa](#mpesa)
+ * [Ghana](#ghana-mobile-money)
+ * [Rwanda](#rwanda-mobile-money)
+ * [Uganda](#uganda-mobile-money)
+ * [Francophone Africa](#francohohne-mobile-money)
+ * [Zambia](#zambia-mobile-money)
 
 
 **3**. **TOKENIZED CHARGES**
 
-  * [Charge with token] (#charge-with-token)
-  * [Update token details] (#update-token-details)
-  * [Create bulk tokenized charge] (#create-bulk-tokenized-charge)
-  * [Get a bulk tokenized charge status] (#get-a-bulk-tokenized-charge-status)
-  * [Get bulk tokenized charge transactions] (#get-bulk-tokenized-charge-transactions)
+  * [Charge with token](#charge-with-token)
+  * [Update token details](#update-token-details)
+  * [Create bulk tokenized charge](#create-bulk-tokenized-charge)
+  * [Get a bulk tokenized charge status](#get-a-bulk-tokenized-charge-status)
+  * [Get bulk tokenized charge transactions](#get-bulk-tokenized-charge-transactions)
 
   
 **4**.  **TRANSACTIONS**
 
-  * [Get all transactions] (#get-all-transactions)
-  * [Get transaction fee] (#get-transaction-fee)
-  * [Resend transaction webhook] (#resend-transaction-webhook)
-  * [Transaction refund] (#transaction-refund)
-  * [Verify transaction] (#verify-transaction)
-  * [View transaction timeline] (#view-transaction-timeline)
+  * [Get all transactions](#get-all-transactions)
+  * [Get transaction fee](#get-transaction-fee)
+  * [Resend transaction webhook](#resend-transaction-webhook)
+  * [Transaction refund](#transaction-refund)
+  * [Verify transaction](#verify-transaction)
+  * [View transaction timeline](#view-transaction-timeline)
 
 **4**.  **TRANSFERS**
 
-  * [Create a transfer] (#create-a-transfer)
-  * [Create bulk transfer] (#create-bulk-transfer)
-  * [Get transfer fee] (#get-transfer-fee)
-  * [Get all transfers] (#get-all-transfers)
-  * [Get a transfers] (#get-a-transfers)
-  * [Wallet to Wallet Transfer] (#wallet-to-wallet-transfer)
+  * [Create a transfer](#create-a-transfer)
+  * [Create bulk transfer](#create-bulk-transfer)
+  * [Get transfer fee](#get-transfer-fee)
+  * [Get all transfers](#get-all-transfers)
+  * [Get a transfers](#get-a-transfers)
+  * [Wallet to Wallet Transfer](#wallet-to-wallet-transfer)
 
 **6**. **VIRTUAL CARDS** 
 
-*   [Create virtual card] (#create-virtual-card)
-*   [Get all virtual cards] (#get-all-virtual-cards)
-*   [Get a virtual card] (#get-a-virtual-card)
-*   [Fund a virtual card] (#fund-a-virtual-card)
-*   [Terminate a virtual card] (#terminate-a-virtual-card)
-*   [Get virtual card transactions] (#get-virtual-card-transactions)
-*   [Withdraw from a virtual card] (#withdraw-from-a-virtual-card)
-*   [Block virtual cards] (#block-virtual-cards)
-*   [Unblock virtual cards] (#unblock-virtual-cards)
+*   [Create virtual card](#create-virtual-card)
+*   [Get all virtual cards](#get-all-virtual-cards)
+*   [Get a virtual card](#get-a-virtual-card)
+*   [Fund a virtual card](#fund-a-virtual-card)
+*   [Terminate a virtual card](#terminate-a-virtual-card)
+*   [Get virtual card transactions](#get-virtual-card-transactions)
+*   [Withdraw from a virtual card](#withdraw-from-a-virtual-card)
+*   [Block virtual cards](#block-virtual-cards)
+*   [Unblock virtual cards](#unblock-virtual-cards)
 
 **7**. **VIRTUAL ACCOUNT NUMBERS** 
 
-*   [Create a virtual account number] (#create-a-virtual-account-number)
-*   [Create bulk virtual account numbers] (#create-bulk-virtual-account-numbers)
-*   [Resolve account details] (#resolve-account-details)
-*   [Resolve bvn details] (#resolve-bvn-details)
-*   [Get bulk virtual account details] (#get-bulk-virtual-account-details)
-*   [Get a virtual account number] (#get-a-virtual-account-number)
+*   [Create a virtual account number](#create-a-virtual-account-number)
+*   [Create bulk virtual account numbers](#create-bulk-virtual-account-numbers)
+*   [Resolve account details](#resolve-account-details)
+*   [Resolve bvn details](#resolve-bvn-details)
+*   [Get bulk virtual account details](#get-bulk-virtual-account-details)
+*   [Get a virtual account number](#get-a-virtual-account-number)
 
 **8**. **MISC** 
 
-*   [Get all wallet balances] (#get-all-wallet-balances)
-*   [Get balances per currency] (#get-balances-per-currency)
-*   [Resolve account details] (#resolve-account-details)
-*   [Resolve bvn details] (#resolve-bvn-details)
+*   [Get all wallet balances](#get-all-wallet-balances)
+*   [Get balances per currency](#get-balances-per-currency)
+*   [Resolve account details](#resolve-account-details)
+*   [Resolve bvn details](#resolve-bvn-details)
 
 
 **9**. **BENEFICIARIES** 
 
-*   [Create a beneficiary] (#create-a-beneficiary)
-*   [List all beneficiaries] (#list-all-beneficiaries)*   [Fetch a beneficiary] (#fetch-a-beneficiary)
-*   [Delete a beneficiary] (#delete-a-beneficiary)
+*   [Create a beneficiary](#create-a-beneficiary)
+*   [List all beneficiaries](#list-all-beneficiaries)
+*   [Fetch a beneficiary](#fetch-a-beneficiary)
+*   [Delete a beneficiary](#delete-a-beneficiary)
 
 **10**. **BANKS** 
 
-*   [Get all banks] (#get-all-banks)
-*   [Get bank branches] (#get-bank-branches)
+*   [Get all banks](#get-all-banks)
+*   [Get bank branches](#get-bank-branches)
 
 **11**. **SETTLEMENTS** 
 
-*  [Get all settlements] (#get-all-settlements)
-*  [Get a settlement] (#get-a-settlement)
+*  [Get all settlements](#get-all-settlements)
+*  [Get a settlement](#get-a-settlement)
 
 **12**. **SUBSCRIPTIONS** 
 
-*   [Get all subscriptions] (#get-all-subscriptions)
-*   [Cancel a subscription] (#cancel-a-subscription)
-*   [Activate a subscription] (#activate-a-subscription)
+*   [Get all subscriptions](#get-all-subscriptions)
+*   [Cancel a subscription](#cancel-a-subscription)
+*   [Activate a subscription](#activate-a-subscription)
 
 **13**. **BILLS** 
 
-*   [Create a bill payment] (#create-a-bill-payment)
-*   [Create bulk bills] (#create-bulk-bills)
-*   [Get status of a bill payment] (#get-status-of-a-bill-payment)
-*   [Update bills order] (#update-bills-order)
-*   [Validate bill service] (#validate-bill-service)
-*   [Get bill categories] (#get-bill-categories)
-*   [Get bill payment agencies] (#get-bill-payment-agencies)
-*   [Get amount to be paid for a product] (#get-amount-to-be-paid-for-a-product)
-*   [Get bill payments] (#get-bill-payments)
-*   [Get products under an agency] (#get-products-under-an-agency)
-*   [Create order using billing code and product id] (#create-order-using-billing-code-and-product-id)
+*   [Create a bill payment](#create-a-bill-payment)
+*   [Create bulk bills](#create-bulk-bills)
+*   [Get status of a bill payment](#get-status-of-a-bill-payment)
+*   [Update bills order](#update-bills-order)
+*   [Validate bill service](#validate-bill-service)
+*   [Get bill categories](#get-bill-categories)
+*   [Get bill payment agencies](#get-bill-payment-agencies)
+*   [Get amount to be paid for a product](#get-amount-to-be-paid-for-a-product)
+*   [Get bill payments](#get-bill-payments)
+*   [Get products under an agency](#get-products-under-an-agency)
+*   [Create order using billing code and product id](#create-order-using-billing-code-and-product-id)
 
 **14**. **PAYMENT PLANS** 
 
-*   [Create payment plan] (#create-payment-plan)
-*   [Get payment plans] (#get-payment-plans)
-*   [Get a payment plan] (#get-a-payment-plan)
-*   [Update a payment plan] (#update-a-payment-plan)
-*   [Cancel a payment plan] (#cancel-a-payment-plan)
+*   [Create payment plan](#create-payment-plan)
+*   [Get payment plans](#get-payment-plans)
+*   [Get a payment plan](#get-a-payment-plan)
+*   [Update a payment plan](#update-a-payment-plan)
+*   [Cancel a payment plan](#cancel-a-payment-plan)
 
 **15**. **SUBACCOUNTS** 
 
-*   [Create a subaccount] (#create-a-subaccount)
-*   [Fetch all subaccounts] (#fetch-all-subaccounts)
-*   [Fetch a subaccount] (#fetch-a-subaccount)
-*   [Update a subaccount] (#update-a-subaccount)
-*   [Delete a subaccount] (#delete-a-subaccount)
+*   [Create a subaccount](#create-a-subaccount)
+*   [Fetch all subaccounts](#fetch-all-subaccounts)
+*   [Fetch a subaccount](#fetch-a-subaccount)
+*   [Update a subaccount](#update-a-subaccount)
+*   [Delete a subaccount](#delete-a-subaccount)
 
 **16**. **EBILLS** 
 
-*   [Place ebills order] (#place-ebills-order)
-*   [Update ebills order] (#update-ebills-order)
+*   [Place ebills order](#place-ebills-order)
+*   [Update ebills order](#update-ebills-order)
 
 **17**. **OTPS** 
 
-*   [Create Otp] (#create-otp)
-*   [Validate Otp] (#validate-otp)
+*   [Create Otp](#create-otp)
+*   [Validate Otp](#validate-otp)
 
 
 For more information on the services listed above, visit the [Flutterwave website](https://developer.flutterwave.com/v3.0/docs)
