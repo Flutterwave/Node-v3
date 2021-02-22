@@ -1216,6 +1216,40 @@ View_Transaction_Timeline();
 ## TRANSFERS
 
 
+### ```Verify Bank Account before transfer```
+
+This describes how to verify a bank account before initiating transfer
+For more info about the payload parameteres definition, check  [here](https://developer.flutterwave.com/docs/bank-account-verification)
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+
+const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY  );
+
+
+const initVerify = async () => {
+
+    try {
+        const payload = {
+            "account_bank": "044", //This is the recipient bank code. Get list here :https://developer.flutterwave.com/v3.0/reference#get-all-banks
+            "account_number": "0690000040"
+        }
+
+        const response = await flw.Transfer.verify(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+initVerify();
+
+```
+
+
+
 ### ```Create a transfer```
 
 
@@ -1243,9 +1277,7 @@ const initTrans = async () => {
             "debit_currency": "NGN"
         }
 
-        const response = await flw.
-
-Transfer.initiate(payload)
+        const response = await flw.Transfer.initiate(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
