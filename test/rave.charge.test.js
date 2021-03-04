@@ -22,7 +22,7 @@ describe("#Rave charge", function () {
 
         var payload = {
 
-            "public_key": "FLWPUBK-348ea9a0fef6ec91be8c3d323350f7fd-X",
+            "public_key": public_key,
             "card_number": "4556052704172643",
             "cvv": "899",
             "expiry_month": "01",
