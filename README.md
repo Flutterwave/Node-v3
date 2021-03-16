@@ -1168,7 +1168,9 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY  );
 const verify = async () => {
 
     try {
-        const payload = {"id": "5708" //This is the transaction unique identifier. It is returned in the initiate transaction call as data.id}
+        const payload = {
+            "id": "5708" //This is the transaction unique identifier. It is returned in the initiate transaction call as data.id
+        }
         const response = await flw.Transaction.verify(payload)
         console.log(response);
     } catch (error) {
