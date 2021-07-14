@@ -1,11 +1,20 @@
 const morx = require('morx');
 const q = require('q');
+const axios = require('axios');
+const package = require('../../package.json');
 
 const spec = morx.spec()
 	.build('id', 'required:true, eg:41497')
 	.end();
 
 function service(data, _rave) {
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+         "publicKey": _rave.getPublicKey(),
+         "language": "NodeJs v3",
+         "version": package.version,
+         "title": "Incoming call",
+             "message": "Fetch a Settlement"
+       })
 
 	var d = q.defer();
 

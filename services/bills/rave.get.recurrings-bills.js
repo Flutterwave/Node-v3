@@ -1,5 +1,7 @@
 const morx = require('morx');
 const q = require('q');
+const axios = require('axios');
+const package = require('../../package.json');
 
 
 var spec = morx.spec()
@@ -7,6 +9,13 @@ var spec = morx.spec()
 
 
 function service(_rave) {
+	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
+         "publicKey": _rave.getPublicKey(),
+         "language": "NodeJs v3",
+         "version": package.version,
+         "title": "Incoming call",
+             "message": "Get-recurring-bill"
+       })
 
 	var d = q.defer();
 
