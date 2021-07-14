@@ -15,8 +15,8 @@ chai.use(chaiAsPromised);
 describe("#Rave Subscriptions", function () {
 
 
-    const public_key = "FLWPUBK_TEST-337d4e3e6c0c10c22b28cac389a35d46-X";
-    const secret_key = "FLWSECK_TEST-e152af301dd20a263805ef195ebe6819-X";
+    const public_key = process.env.PUBLIC_KEY;
+    const secret_key = process.env.SECRET_KEY;
     const ravebase = new base(public_key, secret_key);
     var subscriptionInstance = new Subscriptions(ravebase);
 
