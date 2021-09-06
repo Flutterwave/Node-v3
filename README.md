@@ -2900,7 +2900,7 @@ cancelPlan();
 
 ## SUBACCOUNTS
 
-###  ```Create a payment plan```
+###  ```Create a subaccount```
 
 This describes  how to create a subaccount on Flutterwave
 
