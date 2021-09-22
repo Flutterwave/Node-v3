@@ -1756,6 +1756,9 @@ unblockCard();
 
 This describes how to create a virtual account number
 
+Note: BVN is required for static account numbers i.e if the value of is_permanent is True.
+Kindly visit our API section found [here](https://developer.flutterwave.com/reference#create-a-virtual-account-number-1) for more information.
+
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
