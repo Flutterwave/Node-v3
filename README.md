@@ -1756,7 +1756,7 @@ unblockCard();
 
 This describes how to create a virtual account number
 
-Note: BVN is required for static account numbers i.e if the value of is_permanent is True.
+Note: BVN is required for creating static account numbers in the Live Environment i.e if the value of is_permanent is True.
 Kindly visit our API section found [here](https://developer.flutterwave.com/reference#create-a-virtual-account-number-1) for more information.
 
 ```javascript
@@ -1770,6 +1770,7 @@ const createAcct = async () => {
         const payload = {
             "email": "johnmadakin@allstar.com",
             "is_permanent": true,
+            "bvn":"12345678901"
             "tx_ref": "jhn-mdkn-101923123463"
         }
         const response = await flw.
