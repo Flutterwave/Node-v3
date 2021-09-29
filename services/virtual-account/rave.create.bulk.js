@@ -7,6 +7,7 @@ const spec = morx.spec()
 
     .build('email', 'required:true, eg:ade_temi@icloud.com')
     .build('is_permanent', 'required:false, eg:true')
+    .build('bvn', 'required:false, eg:12345678901')
     .build('accounts', 'required:false, eg:5')
     .build('tx_ref', 'required:true, eg:jhn-mdkn-10192029920')
     .build('amount', 'required:false, eg:5000')

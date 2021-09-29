@@ -7,6 +7,7 @@ const spec = morx.spec()
 
     .build('email', 'required:true, eg:ade_temi@icloud.com')
     .build('is_permanent', 'required:false, eg:true')
+    .build('bvn', 'required:false, eg:12345678901')
     .build('frequency', 'required:false, eg:4')
     .build('duration', 'required:false, eg:4')
     .build('narration', 'required:false, eg:New card created')
