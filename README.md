@@ -1243,9 +1243,7 @@ const initTrans = async () => {
             "debit_currency": "NGN"
         }
 
-        const response = await flw.
-
-Transfer.initiate(payload)
+        const response = await flw.Transfer.initiate(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1295,9 +1293,7 @@ const initBulk = async () => {
             ]
         }
 
-        const response = await flw.
-
-Transfer.bulk(payload)
+        const response = await flw.Transfer.bulk(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1331,9 +1327,7 @@ const getFee = async () => {
             "currency":"NGN"
         }
 
-        const response = await flw.
-
-Transfer.fee(payload)
+        const response = await flw.Transfer.fee(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1366,9 +1360,7 @@ const getAllTrans = async () => {
             "status":"failed"
         }
 
-        const response = await flw.
-
-Transfer.fetch(payload)
+        const response = await flw.Transfer.fetch(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1506,9 +1498,7 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY  );
 const fetchAllVcards = async () => {
 
     try {
-        const response = await flw.
-
-VirtualCard.fetch_all()
+        const response = await flw.VirtualCard.fetch_all()
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1570,9 +1560,7 @@ const fundCard = async () => {
             "amount":500,
             "debit_currency":"NGN"
         }
-        const response = await flw.
-
-VirtualCard.fund(payload)
+        const response = await flw.VirtualCard.fund(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1601,9 +1589,7 @@ const terminateCard = async () => {
         const payload = {
             "id":"c6d7f40b-f772-47b7-8136-81256d2f87a2"
         }
-        const response = await flw.
-
-VirtualCard.terminate(payload)
+        const response = await flw.VirtualCard.terminate(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1637,9 +1623,7 @@ const getTransactions = async () => {
             "index":"0", //Pass "0" if you want to start from the beginning
             "size":"5"  //Specify how many transactions you want to retrieve in a single call
         }
-        const response = await flw.
-
-VirtualCard.transactions(payload)
+        const response = await flw.VirtualCard.transactions(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1670,9 +1654,7 @@ const withdrawal = async () => {
             "id":"92b5d258-e85f-4ca6-835d-e0c6fa20d958",
             "amount":10
         }
-        const response = await flw.
-
-VirtualCard.withdraw_funds(payload)
+        const response = await flw.VirtualCard.withdraw_funds(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1703,9 +1685,7 @@ const blockCard = async () => {
             "id":"92b5d258-e85f-4ca6-835d-e0c6fa20d958",
             "status_action":"block"
         }
-        const response = await flw.
-
-VirtualCard.block(payload)
+        const response = await flw.VirtualCard.block(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1736,9 +1716,7 @@ const unblockCard = async () => {
             "id":"92b5d258-e85f-4ca6-835d-e0c6fa20d958",
             "status_action":"unblock"
         }
-        const response = await flw.
-
-VirtualCard.block(payload)
+        const response = await flw.VirtualCard.block(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -1773,8 +1751,7 @@ const createAcct = async () => {
             "bvn":"12345678901"
             "tx_ref": "jhn-mdkn-101923123463"
         }
-        const response = await flw.
-VirtualAcct.create(payload)
+        const response = await flw.VirtualAcct.create(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
