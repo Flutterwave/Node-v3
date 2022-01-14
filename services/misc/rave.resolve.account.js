@@ -6,6 +6,8 @@ const package = require('../../package.json');
 const spec = morx.spec()
 	.build('account_bank', 'required:true, eg:044')
 	.build('account_number', 'required:true,validators:isNumeric, eg:06900021')
+	.build('country', 'required:false, eg:KE')
+	.build('type', 'required:false, eg:MOBILEMONEY')
 	.end();
 
 
