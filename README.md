@@ -99,6 +99,7 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
 *  Get balances per currency
 *   Fetch a beneficiary
 *   Get a virtual account number
+*   Resolve account number
 
 **9**. **BENEFICIARIES** 
 
