@@ -1277,7 +1277,7 @@ const initBulk = async () => {
             "bulk_data": [
                 {
                     "bank_code": "044",
-                    "account_numberr": "0690000032",
+                    "account_number": "0690000032",
                     "amount": 45000,
                     "currency": "NGN",
                     "narration": "akhlm blktrnsfr",
