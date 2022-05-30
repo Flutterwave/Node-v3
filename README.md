@@ -380,7 +380,7 @@ ach_payment();
 
 #### ``` Bank Transfer```
 
-This describes to allow your customer to pay via a NIP (NIBBS Instant Payment) transfer.
+This describes to allow your customer to pay via a NIP (NIBSS Instant Payment) transfer.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
