@@ -17,6 +17,8 @@ const spec = morx.spec()
 	.build('payment_plan', 'required:false')
 	.build('device_fingerprint', 'required:false,eg:12233')
 	.build('subaccounts', 'required:false')
+	.build('do_3ds', 'required:false')
+	.build('redirect_url', 'required:false,eg:https://flutterwave.com/ng')
 	.end();
 
 
