@@ -10,10 +10,52 @@
 ![NPM](https://img.shields.io/npm/l/flutterwave-node-v3)
 
 
-### How to use
+## Introduction
 
-`npm install flutterwave-node-v3`
+The Node library provides easy access to Flutterwave for Business (F4B) v3 APIs for your Node apps. It abstracts the complexity involved in direct integration and allows you to make quick calls to the APIs.
 
+Available features include:
+
+- Collections: Card, Account, Mobile money, Bank Transfers, USSD, Barter, NQR.
+- Payouts and Beneficiaries.
+- Recurring payments: Tokenization and Subscriptions.
+- Split payments
+- Card issuing
+- Transactions dispute management: Refunds and Chargebacks.
+- Transaction reporting: Collections, Payouts, Settlements, Refunds and Chargebacks.
+- Bill payments: Airtime, Data bundle, Cable, Power, Toll, E-bills, and Remitta.
+- Identity verification: Resolve bank account, resolve BVN information and generate OTP.
+
+
+## Table of Content
+
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [Initialization](#initialization)
+4. [Usage](#usage)
+5. [Testing](#testing)
+6. [Debugging Errors](#debugging-errors)
+7. [Support](#support)
+8. [Contribution guidelines](#contribution-guidelines)
+9. [License](#license)
+10. Changelog
+
+## Requirements
+
+1. Flutterwave for business [API Keys](https://developer.flutterwave.com/docs/integration-guides/authentication)
+2. Node 
+
+
+## Installation
+
+To install the library, run this comman in your terminal:
+
+```sh
+npm install flutterwave-node-v3
+```
+
+
+## Initialization
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -21,33 +63,17 @@ const Flutterwave = require('flutterwave-node-v3');
 const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
 ```
 
- For staging, Use TEST API Keys and for production, use LIVE API KEYS.
- You can get your PUBLIC_KEY and SECRET_KEY from the Flutterwave dashboard. 
+For staging, Use TEST API Keys and for production, use LIVE API KEYS.
+You can get your PUBLIC_KEY and SECRET_KEY from the Flutterwave dashboard. 
 
- Go [here](https://dashboard.flutterwave.com/dashboard/settings/apis) to get your API Keys. 
- 
- Turn on Sandbox to get TEST API KEYS and Turn off Sandbox to get LIVE API KEYS
+Read the [requirement section](#requirements) for more information on how to get your API keys.
 
-## Flutterwave Services exposed by the library
 
-**1**.  **CHARGE**
 
-  * Card
-  * Nigerian bank accounts
-  * UK bank accounts
-  * ACH payment
-  * Bank transfer
-  * Ussd
-  * Validate a charge
+## Usage
 
-**2**. **MOBILE MONEY**
+1. [Collections](documentation/collections.md)
 
- * Mpesa
- * Uganda
- * Ghana
- * Zambia
- * Francophone Africa
- * Rwanda
 
 **3**. **TOKENIZED CHARGES**
 
@@ -168,126 +194,6 @@ const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
 For more information on the services listed above, visit the [Flutterwave website](https://developer.flutterwave.com/v3.0/docs)
 
 
-
-
-## Charge
- 
-
-### ```card charge```
-
-This describes how to charge cards on flw.
-
-
-
-**NB: `enckey` is the encryption key on the dashboard**
-
-```javascript
-const Flutterwave = require('flutterwave-node-v3');
-const open = require('open');
-
-const flw = new Flutterwave("FLWPUBK-*************-X", "FLWSECK-********************-X");
-const payload = {
-    "card_number": "5531886652142950",
-    "cvv": "564",
-    "expiry_month": "09",
-    "expiry_year": "21",
-    "currency": "NGN",
-    "amount": "100",
-    "redirect_url": "https://www.google.com",
-    "fullname": "Olufemi Obafunmiso",
-    "email": "olufemi@flw.com",
-    "phone_number": "0902620185",
-    "enckey": "611d0eda25a3c931863d92c4",
-    "tx_ref": "MC-32444ee--4eerye4euee3rerds4423e43e" // This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
-
-}
-
-
-const chargeCard = async () => {
-    try {
-        const response = await flw.Charge.card(payload)
-        console.log(response)
-        if (response.meta.authorization.mode === 'pin') {
-            let payload2 = payload
-            payload2.authorization = {
-                "mode": "pin",
-                "fields": [
-                    "pin"
-                ],
-                "pin": 3310
-            }
-            const reCallCharge = await flw.Charge.card(payload2)
-
-            const callValidate = await flw.Charge.validate({
-                "otp": "12345",
-                "flw_ref": reCallCharge.data.flw_ref
-            })
-            console.log(callValidate)
-
-        }
-        if (response.meta.authorization.mode === 'redirect') {
-
-            var url = response.meta.authorization.redirect
-            open(url)
-        }
-
-        console.log(response)
-
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-chargeCard();
-
-
-
-```
-
-
-
-### ```Charge Nigerian bank accounts```
-
-This describes how to charge Nigerian bank accounts using Flutterwave
-
-```javascript
-
-const Flutterwave = require('flutterwave-node-v3');
-
-const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY);
-
-
-
-const charge_ng_acct = async () => {
-    
-    try {
-
-        const payload = {
-            "tx_ref": "MC-1585dshdhdsdv5050e8", //This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
-            "amount": "100", //This is the amount to be charged.
-            "account_bank": "044", //This is the Bank numeric code. You can get a list of supported banks and their respective codes Here: https://developer.flutterwave.com/v3.0/reference#get-all-banks
-            "account_number": "0690000037",
-            "currency": "NGN",
-            "email": "olufemi@flw.com",
-            "phone_number": "0902620185", //This is the phone number linked to the customer's mobile money account
-            "fullname": "Olufemi Obafunmiso"
-        }
-
-        const response = await flw.Charge.ng(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
-
-charge_ng_acct();
-
-
-
-```
 
 
 ### ```Charge UK bank accounts```
@@ -3223,3 +3129,36 @@ validateOTP();
 
 ```
 
+
+## Testing
+
+All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. They can be run by running the test command in your terminal.
+
+```sh
+npm run test
+```
+
+
+## Debugging Errors
+
+We understand that you may run into some errors while integrating our library. You can read more about our error messages [here](https://developer.flutterwave.com/docs/integration-guides/errors).
+
+For `authorization` and `validation` error responses, double-check your API keys and request. If you get a `server` error, kindly engage the team for support.
+
+
+## Support
+
+For additional assistance using this library, contact the developer experience (DX) team via [email](mailto:developers@flutterwavego.com) or on [slack](https://bit.ly/34Vkzcg). 
+
+You can also follow us [@FlutterwaveEng](https://twitter.com/FlutterwaveEng) and let us know what you think 😊.
+
+
+## Contribution guidelines
+Read more about our community contribution guidelines [here](/CONTRIBUTING.md)
+
+
+## License
+
+By contributing to this library, you agree that your contributions will be licensed under its [MIT license](/LICENSE).
+
+Copyright (c) Flutterwave Inc.

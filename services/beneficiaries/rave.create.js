@@ -6,6 +6,8 @@ const package = require('../../package.json');
 const spec = morx.spec()
 	.build('account_number', 'required:true, eg:0690000034')
 	.build('account_bank', 'required:true, eg:044')
+	.build('beneficiary_name', 'required:true, eg:Flutterwave-Developers')
+	.build('currency','required:false, eg:NGN')
 	.end();
 
 function service(data, _rave) {

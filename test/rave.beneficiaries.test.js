@@ -19,16 +19,17 @@ describe("#Rave Beneficiaries", function () {
     const ravebase = new base(public_key, secret_key);
     var beneficiariesInstance = new beneficiaries(ravebase);
 
-    it("should create Beneficiary", async function () {
+    it("should create a new beneficiary ", async function () {
         this.timeout(10000);
 
         var payload = {
-            "account_number": "0690000034",
-            "account_bank":"044"
+            "account_number":"0690000034",
+            "account_bank":"044",
+            "beneficiary_name": "Flutterwave Developers"
         }
+
         var resp = await beneficiariesInstance.create(payload);
         return expect(resp).to.have.property('data')
-  
     });
 
     it("should return a single beneficiary ", async function () {

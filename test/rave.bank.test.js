@@ -49,6 +49,7 @@ describe("#Rave Bank", function () {
             "callback_url": "https://www.flutterwave.com/ng/",
             "debit_currency": "NGN"
         }
+
         var resp = await transferInstance.initiate(payload);
         return expect(resp).to.have.property('data')
     });
@@ -59,6 +60,7 @@ describe("#Rave Bank", function () {
         var payload = {
             "country": "NG"
         }
+
         var resp = await banksInstance.country(payload);
         return expect(resp).to.have.property('data')
     });
@@ -69,6 +71,7 @@ describe("#Rave Bank", function () {
         var payload = {
             "id": "280"
         }
+
         var resp = await banksInstance.branches(payload);
         return expect(resp).to.have.property('data')
     });
