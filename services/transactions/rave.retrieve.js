@@ -5,6 +5,12 @@ const package = require('../../package.json');
 
 var spec = morx.spec()
 	.build('status', 'required:false, eg:failed')
+	// Matching the spec https://developer.flutterwave.com/reference/endpoints/transactions/
+	.build('page', 'required:false, eg:1')
+	.build('from', 'required:false, eg:2022-08-05')
+	.build('to', 'required:false, eg:2022-08-06')
+	.build('tx_ref', 'required:false, eg:tx-09tx39md0')
+	.build('currency', 'required:false, eg:NGN')
 	.end();
 
 function service(data,_rave) {
@@ -38,7 +44,6 @@ function service(data,_rave) {
 		})
 		.then(response => {
 
-			// console.log(response.body);
 			d.resolve(response.body);
 
 		})
