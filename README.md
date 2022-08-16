@@ -1224,7 +1224,7 @@ For more info about the payload parameteres definition, check  [here](https://de
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(PUBLIC_KEY, SECRET_KEY  );
+const flw = new Flutterwave(PUBLIC_KEY,SECRET_KEY);
 
 
 const initVerify = async () => {
