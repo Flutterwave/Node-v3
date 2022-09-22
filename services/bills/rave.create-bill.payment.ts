@@ -1,7 +1,10 @@
+import axios from "axios";
+import RaveBase from "../../lib/rave.base";
+import { CreateBillPayload, CreateBillResponse } from "./types";
+
 const morx = require('morx');
 const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const package_json = require('../../package.json');
 
 const spec = morx.spec()
 
@@ -14,12 +17,13 @@ const spec = morx.spec()
 	.end();
 
 
+	createbill.morxspc = spec;
 
-function service(data, _rave) {
+export default function createbill(data: CreateBillPayload, _rave: RaveBase): Promise<CreateBillResponse> {
 	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
          "publicKey": _rave.getPublicKey(),
          "language": "NodeJs v3",
-         "version": package.version,
+         "version": package_json.version,
          "title": "Incoming call",
              "message": "Create bills"
        })
@@ -33,16 +37,16 @@ function service(data, _rave) {
 			return (params);
 
 		})
-		.then(params => {
+		.then((params: any) => {
 			//   console.log(params)
 			return _rave.request('v3/bills', params)
 		})
-		.then(resp => {
+		.then((resp: any) => {
 
 			d.resolve(resp.body);
 
 		})
-		.catch(err => {
+		.catch((err: any) => {
 
 			d.reject(err);
 
@@ -51,5 +55,3 @@ function service(data, _rave) {
 	return d.promise;
 
 }
-service.morxspc = spec;
-module.exports = service;

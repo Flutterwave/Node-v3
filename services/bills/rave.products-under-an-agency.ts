@@ -1,22 +1,24 @@
+import RaveBase from "../../lib/rave.base";
+import { PUAResponse } from "./types";
+
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
+const package_json = require('../../package.json');
 
 const spec = morx.spec()
-
-	.build('reference', 'required:true, eg:BPUSSD1588268275502326')
+	.build('id', 'required:true, eg:BIL136')
 	.end();
 
+	prdts_under_agency.morxspc = spec;
 
-
-function service(data, _rave) {
+export default function prdts_under_agency(data, _rave: RaveBase): Promise<PUAResponse> {
 	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
          "publicKey": _rave.getPublicKey(),
          "language": "NodeJs v3",
-         "version": package.version,
+         "version": package_json.version,
          "title": "Incoming call",
-             "message": "Get-bill-status"
+             "message": "Get-bill-products-under-an-agency"
        })
 
 	var d = q.defer();
@@ -28,18 +30,18 @@ function service(data, _rave) {
 			return (params);
 
 		})
-		.then(params => {
+		.then((params: any) => {
 
 
 			params.method = "GET"
-			return _rave.request(`v3/bills/${params.reference}`, params)
+			return _rave.request(`v3/billers/${params.id}/products`, params)
 		})
-		.then(resp => {
+		.then((resp: any) => {
 
-			d.resolve(resp.body);
+			d.resolve(resp.body.data);
 
 		})
-		.catch(err => {
+		.catch((err: any) => {
 
 			d.reject(err);
 
@@ -48,5 +50,3 @@ function service(data, _rave) {
 	return d.promise;
 
 }
-service.morxspc = spec;
-module.exports = service;
