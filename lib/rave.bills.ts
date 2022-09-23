@@ -43,17 +43,17 @@ export default class Bills {
   fetch_bills_Cat() {
     return bill_cat({}, this.rave);
   }
-  fetch_bills_agencies(data) {
+  fetch_bills_agencies(data?: any) {
     return bill_agencies(data, this.rave);
   }
   fetch_status(data: {reference: string}) {
     return status(data, this.rave);
   }
-  products_under_agency(data) {
+  products_under_agency(data:{ reference: string }) {
     return prdts_under_agency(data, this.rave);
   }
 
-  update_bills(data) {
+  update_bills(data:{ reference: string }) {
     return update_bills_order(data, this.rave);
   }
 

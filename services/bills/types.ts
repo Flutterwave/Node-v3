@@ -185,7 +185,7 @@ export interface CreateOrdBillingPayload {
   product_id: string;
   amount: string;
   reference?: string;
-  customer: Object;
+  customer: object;
   fields: OrdBillingPayload[];
 }
 

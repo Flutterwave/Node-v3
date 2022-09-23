@@ -12,17 +12,35 @@ export interface RequestOptions {
   baseUrl: string;
   method: 'body' | 'qs';
   datakey: boolean;
-  json: Object;
+  json: object;
   headers: RequestHeader;
-  body?: Object;
+  body?: object;
   qs?: any;
 }
 
 export interface FLWResponse {
-  status: "success" | "error";
+  status: 'success' | 'error';
   message: string;
-} 
-export type Currencies = "NGN" | "KES" | "GHS" | "USD"
+}
+
+export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX';
+export type PaymentTypes = 'card' | 'account' | 'account-ach-us';
+export type CardProviders = 'MASTERCARD' | 'VISA' | 'VERVE';
+
+export type ChargeMeta = {
+  flightID?: string;
+  sideNote?: string;
+  authorization?: {
+    transfer_reference: string;
+    transfer_account: string;
+    transfer_bank: string;
+    account_expiration: string;
+    transfer_note: string;
+    transfer_amount: number;
+    mode: string;
+    redirect: string
+  };
+};
 
 export type CountryCodes = keyof {
   BD: 'Bangladesh';

@@ -50,7 +50,7 @@ export default class RaveBase {
     }
   }
 
-  request(path: string, payload: Payload, callback?: Function ) {
+  request(path: string, payload: any, callback?: Function ) {
     let requestOptions: RequestOptions = {
       uri: path,
       baseUrl: '',

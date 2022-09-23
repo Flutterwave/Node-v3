@@ -28,7 +28,7 @@ export type BeneficiaryResponseData = {
   account_number: string;
   bank_code: string;
   full_name: string;
-  meta?: Object;
+  meta?: object;
   created_at: string;
   bank_name: string;
 };

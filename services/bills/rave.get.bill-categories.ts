@@ -13,7 +13,7 @@ var spec = morx
 
   bill_cat.morxspc = spec;
 
-export default function bill_cat(data:Object, _rave:RaveBase): Promise<BillingCategoryResponse> {
+export default function bill_cat(data:object, _rave:RaveBase): Promise<BillingCategoryResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {

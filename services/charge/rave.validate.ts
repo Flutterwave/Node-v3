@@ -1,19 +1,25 @@
 import RaveBase from '../../lib/rave.base';
-import axios from "axios"
-import { BillingAgencyResponse } from './types';
+import { ValidateChargePayload, ValidateChargeResponse } from './types';
 
 const morx = require('morx');
 const q = require('q');
+const encrypt = require('./encryp');
+const axios = require('axios');
 const package_json = require('../../package.json');
 
 var spec = morx
   .spec()
-
+  .build('type', 'required:false, eg:card')
+  .build('otp', 'required:true, eg:12345')
+  .build('flw_ref', 'required:true, eg:RVFC6477605CE934')
   .end();
 
-bill_agencies.morxspc = spec;
+validate_charge.morxspc = spec;
 
-export default function bill_agencies(data: any, _rave: RaveBase): Promise<BillingAgencyResponse> {
+export default function validate_charge(
+  data: ValidateChargePayload,
+  _rave: RaveBase,
+): Promise<ValidateChargeResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {
@@ -21,7 +27,7 @@ export default function bill_agencies(data: any, _rave: RaveBase): Promise<Billi
       language: 'NodeJs v3',
       version: package_json.version,
       title: 'Incoming call',
-      message: 'Get-bill-payment-agencies',
+      message: 'Validate Charge',
     },
   );
 
@@ -36,9 +42,7 @@ export default function bill_agencies(data: any, _rave: RaveBase): Promise<Billi
     return params;
   })
     .then((params: any) => {
-      // params.seckey = _rave.getSecretKey();
-      params.method = 'GET';
-      var uri = `v3/billers`;
+      var uri = `v3/validate-charge`;
 
       return _rave.request(uri, params);
     })
