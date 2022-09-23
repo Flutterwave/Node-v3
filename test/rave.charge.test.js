@@ -1,10 +1,10 @@
-var charge = require('../lib/rave.charge');
-var base = require('../lib/rave.base');
 var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
+const { default: RaveBase } = require('../build/lib/rave.base');
+const { default: Charge } = require('../build/lib/rave.charge');
 var dotenv = require('dotenv').config();
 
 chai.use(chaiAsPromised);
@@ -14,8 +14,8 @@ describe("#Rave charge", function () {
 
     const public_key = process.env.PUBLIC_KEY;
     const secret_key = process.env.SECRET_KEY;
-    const ravebase = new base(public_key, secret_key);
-    var chargeInstance = new charge(ravebase);
+    const ravebase = new RaveBase(public_key, secret_key);
+    var chargeInstance = new Charge(ravebase);
 
     it("should charge a card", async function () {
         this.timeout(10000);

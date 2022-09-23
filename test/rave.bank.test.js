@@ -1,11 +1,11 @@
-var banks = require('../lib/rave.banks');
-var payout = require('../lib/rave.transfers');
-var base = require('../lib/rave.base');
 var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
+const Transfers = require('../lib/rave.transfers');
+const { default: RaveBase } = require('../build/lib/rave.base');
+const { default: Bank } = require('../build/lib/rave.banks');
 var dotenv = require('dotenv').config();
 
 
@@ -16,9 +16,9 @@ describe("#Rave Bank", function () {
 
     const public_key = process.env.PUBLIC_KEY;
     const secret_key = process.env.SECRET_KEY;
-    const ravebase = new base(public_key, secret_key);
-    var banksInstance = new banks(ravebase);
-    var transferInstance = new payout(ravebase);
+    const ravebase = new RaveBase(public_key, secret_key);
+    var banksInstance = new Bank(ravebase);
+    var transferInstance = new Transfers(ravebase);
 
     it("should create a XAF transfer ", async function () {
         this.timeout(15000);

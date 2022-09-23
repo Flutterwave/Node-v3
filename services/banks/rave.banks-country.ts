@@ -4,8 +4,6 @@ import { BankResponse } from './types';
 var morx = require('morx');
 var q = require('q');
 const axios = require('axios');
-const jsonpackage = require('../../package.json');
-
 var spec = morx.spec().build('country', 'required:true, eg:NG').end();
 
 banks_country.morxspc = spec;
@@ -19,7 +17,7 @@ export default function banks_country(
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: jsonpackage.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Get Bank by Country',
     },

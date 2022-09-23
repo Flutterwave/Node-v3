@@ -5,7 +5,7 @@ const morx = require('morx');
 const q = require('q');
 const encrypt = require('./encryp');
 const axios = require('axios');
-const package_json = require('../../package.json');
+
 
 var spec = morx
   .spec()
@@ -25,7 +25,7 @@ export default function validate_charge(
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package_json.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Validate Charge',
     },

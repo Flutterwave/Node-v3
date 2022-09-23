@@ -4,7 +4,7 @@ import { NGBanksPayload, UssdChargeResponse } from './types';
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package_json = require('../../package.json');
+
 
 var spec = morx
   .spec()
@@ -33,7 +33,7 @@ export default function ussd_Charge(data: NGBanksPayload, _rave: RaveBase): Prom
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package_json.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Initiate USSD charge',
     },

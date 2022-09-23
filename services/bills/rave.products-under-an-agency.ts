@@ -4,7 +4,7 @@ import { PUAResponse } from "./types";
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package_json = require('../../package.json');
+
 
 const spec = morx.spec()
 	.build('id', 'required:true, eg:BIL136')
@@ -16,7 +16,7 @@ export default function prdts_under_agency(data, _rave: RaveBase): Promise<PUARe
 	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
          "publicKey": _rave.getPublicKey(),
          "language": "NodeJs v3",
-         "version": package_json.version,
+         "version": process.env.npm_package_version,
          "title": "Incoming call",
              "message": "Get-bill-products-under-an-agency"
        })

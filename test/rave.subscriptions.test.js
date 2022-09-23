@@ -1,5 +1,4 @@
 var beneficiaries = require('../lib/rave.beneficiaries');
-var base = require('../lib/rave.base');
 var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');

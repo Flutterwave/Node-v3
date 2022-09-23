@@ -4,7 +4,6 @@ import { DeleteBeneficiaryResponse } from './types';
 
 const morx = require('morx');
 const q = require('q');
-const jsonpackage = require('../../package.json');
 
 const spec = morx
   .spec()
@@ -19,7 +18,7 @@ export default function del_beneficiary(data: {id: string}, _rave: RaveBase): Pr
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: jsonpackage.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Delete Beneficiary',
     },

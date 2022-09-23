@@ -4,7 +4,6 @@ import { RetrieveAllBeneficiaryResponse } from "./types";
 
 const morx = require('morx');
 const q = require('q');
-const jsonpackage = require('../../package.json');
 
 var spec = morx
   .spec()
@@ -18,7 +17,7 @@ export default function retrieve_all(data: Object, _rave: RaveBase): Promise<Ret
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: jsonpackage.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'List all Beneficiaries',
     },

@@ -4,7 +4,7 @@ import { UpdateBillOrderResponse } from './types';
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package_json = require('../../package.json');
+
 
 const spec = morx
   .spec()
@@ -24,7 +24,7 @@ export default function update_bills_order(
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package_json.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Update-bill-order',
     },

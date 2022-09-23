@@ -4,7 +4,7 @@ import { CreateBulkBillPayload, CreateBulkBillResponse } from "./types";
 
 const morx = require('morx');
 const q = require('q');
-const package_json = require('../../package.json');
+
 
 const spec = morx
   .spec()
@@ -29,7 +29,7 @@ export default function create_bulk(data: CreateBulkBillPayload, _rave: RaveBase
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package_json.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Create bulk bills',
     },

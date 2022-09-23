@@ -1,10 +1,11 @@
 var settlement = require('../lib/rave.settlements');
-var base = require('../lib/rave.base');
 var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
+const { default: RaveBase } = require('../lib/rave.base');
+const Settlements = require('../lib/rave.settlements');
 var dotenv = require('dotenv').config();
 
 
@@ -15,8 +16,8 @@ describe("#Rave Settlements", function () {
 
     const public_key = process.env.PUBLIC_KEY;
     const secret_key = process.env.SECRET_KEY;
-    const ravebase = new base(public_key, secret_key);
-    const settlementInstance = new settlement(ravebase);
+    const ravebase = new RaveBase(public_key, secret_key);
+    const settlementInstance = new Settlements(ravebase);
 
     it("should return all settlements ", async function () {
         this.timeout(10000);

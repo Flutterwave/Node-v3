@@ -4,7 +4,6 @@ import { BeneficiariesCreatePayload, CreateBeneficiaryResponse } from "./types";
 
 const morx = require('morx');
 const q = require('q');
-const jsonpackage = require('../../package.json');
 
 const spec = morx
   .spec()
@@ -22,7 +21,7 @@ export default function create_beneficiary(data: BeneficiariesCreatePayload, _ra
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: jsonpackage.version,
+      version: process.env.npm_package_version,
       title: 'Incoming call',
       message: 'Create Beneficiary',
     },

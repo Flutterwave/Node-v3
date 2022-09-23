@@ -1,10 +1,10 @@
-var ebills = require('../lib/rave.ebills');
-var base = require('../lib/rave.base');
 var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
+const { default: RaveBase } = require('../lib/rave.base');
+const Ebills = require('../lib/rave.ebills');
 var dotenv = require('dotenv').config();
 
 
@@ -15,8 +15,8 @@ describe("#Rave Ebills", function () {
 
     const public_key = process.env.PUBLIC_KEY;
     const secret_key = process.env.SECRET_KEY;
-    const ravebase = new base(public_key, secret_key);
-    const ebillsInstance = new ebills(ravebase);
+    const ravebase = new RaveBase(public_key, secret_key);
+    const ebillsInstance = new Ebills(ravebase);
 
     it("should  create a new Ebills order ", async function () {
         this.timeout(10000);
