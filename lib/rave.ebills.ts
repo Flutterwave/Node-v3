@@ -8,6 +8,7 @@ export default class Ebills {
   constructor(arg: RaveBase) {
     this.rave = arg;
   }
+  
   order(data: eBillPayload) {
     return order_ebills(data, this.rave);
   }
