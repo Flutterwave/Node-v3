@@ -5,7 +5,7 @@ const package = require('../../package.json');
 
 
 const spec = morx.spec()
-	.build('amount', 'required:true, eg:5000')
+	.build('amount', 'required:false, eg:5000')
 	.build('name', 'required:true, eg:Monthly Nepa Bill Collection')
 	.build('interval', 'required:true, eg:monthly')
 	.build('duration', 'required:false, eg:24')
