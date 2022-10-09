@@ -1,6 +1,6 @@
 import create_otp from "../services/otps/rave.create";
 import validate_otp from "../services/otps/rave.validate";
-import { CreateOTPPayload } from "../services/otps/types";
+import { CreateOTPPayload, ValidateOTPPayload } from "../services/otps/types";
 import RaveBase from "./rave.base";
 
 export default class Otp {
@@ -14,7 +14,7 @@ export default class Otp {
 
 	}
 
-	validate(data) {
+	validate(data: ValidateOTPPayload) {
 
 		return validate_otp(data, this.rave);
 

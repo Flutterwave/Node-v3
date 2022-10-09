@@ -26,6 +26,7 @@ export interface FLWResponse {
 export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX';
 export type PaymentTypes = 'card' | 'account' | 'account-ach-us';
 export type CardProviders = 'MASTERCARD' | 'VISA' | 'VERVE';
+export type Intervals = 'yearly' | 'quarterly' | 'monthly' | 'weekly' | 'daily'
 
 export type ChargeMeta = {
   flightID?: string;
