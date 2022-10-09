@@ -43,6 +43,14 @@ export type ChargeMeta = {
   };
 };
 
+export type PageMeta = {
+  page_info: {
+    total: number;
+    current_page: number;
+    total_pages: number;
+  };
+}
+
 export type CountryCodes = keyof {
   BD: 'Bangladesh';
   BE: 'Belgium';

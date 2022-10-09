@@ -1,4 +1,4 @@
-import { Currencies, FLWResponse, Intervals } from '../../utils/types';
+import { Currencies, FLWResponse, Intervals, PageMeta } from '../../utils/types';
 
 export type PaymentPlanType = {
   id: number;
@@ -58,12 +58,6 @@ export interface SinglePaymentResponse extends FLWResponse {
 }
 
 export interface GetPaymentsResponse extends FLWResponse {
-  meta: {
-    page_info: {
-      total: number;
-      current_page: number;
-      total_pages: number;
-    };
-  };
+  meta: PageMeta;
   data: PaymentPlanType;
 }
