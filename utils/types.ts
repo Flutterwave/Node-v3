@@ -51,6 +51,10 @@ export type PageMeta = {
   };
 }
 
+export type IDPayload = {
+  id: string
+}
+
 export type CountryCodes = keyof {
   BD: 'Bangladesh';
   BE: 'Belgium';
