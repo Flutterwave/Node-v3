@@ -16,7 +16,7 @@ export default class Tokenized {
     this.rave = arg;
   }
   /**
-   * This endpoint allows the developer to intiate a tokenized transactions.
+   * This method allows the developer to intiate a tokenized transactions.
    *
    *  A card must initially be charged before it can be tokenized. Only cards can be tokenized.
    *
@@ -27,7 +27,7 @@ export default class Tokenized {
   }
 
   /**
-   * This endpoint allows you to query the status of a bulk tokenized charge.
+   * This method allows you to query the status of a bulk tokenized charge.
    *
    * @link https://developer.flutterwave.com/reference/endpoints/tokenized-charge#get-status-of-bulk-tokenized-charges
    */
