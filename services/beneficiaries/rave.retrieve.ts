@@ -1,17 +1,18 @@
-import axios from "axios";
-import RaveBase from "../../lib/rave.base";
-import { RetrieveAllBeneficiaryResponse } from "./types";
+import axios from 'axios';
+import RaveBase from '../../lib/rave.base';
+import { RetrieveAllBeneficiaryResponse } from './types';
 
 const morx = require('morx');
 const q = require('q');
 
-var spec = morx
-  .spec()
-  .end();
+var spec = morx.spec().end();
 
 retrieve_all.morxspc = spec;
 
-export default function retrieve_all(data: Object, _rave: RaveBase): Promise<RetrieveAllBeneficiaryResponse> {
+export default function retrieve_all(
+  data: {page: number;},
+  _rave: RaveBase,
+): Promise<RetrieveAllBeneficiaryResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {
