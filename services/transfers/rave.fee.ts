@@ -4,7 +4,6 @@ import { FeePayload, TransferFeeResponse } from "./types";
 var morx = require('morx');
 var q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 var spec = morx
   .spec()
@@ -20,7 +19,7 @@ export default function fee_transfer(data: FeePayload, _rave: RaveBase): Promise
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Get-transfer-fee',
     },

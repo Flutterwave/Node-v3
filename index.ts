@@ -18,7 +18,7 @@ import Transfers from './lib/rave.transfers';
 import Virtual_account from './lib/rave.virtual_account';
 import Virtual_card from './lib/rave.virtual_cards';
 
-export default class Rave {
+ class Rave {
   private rave: RaveBase;
   public Bank: Bank;
   public Beneficiary: Beneficiaries;
@@ -76,3 +76,5 @@ export default class Rave {
     return this.rave.getIntegrityHash(data);
   }
 }
+
+module.exports = Rave

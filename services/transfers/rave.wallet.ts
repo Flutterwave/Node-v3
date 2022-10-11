@@ -5,7 +5,6 @@ import { WalletToWalletPayload } from "./types";
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 const spec = morx
   .spec()
@@ -26,7 +25,7 @@ export default function wallet(data: WalletToWalletPayload, _rave: RaveBase): Pr
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Wallet-transfer',
     },

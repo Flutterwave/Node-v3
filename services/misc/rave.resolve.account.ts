@@ -1,10 +1,8 @@
 import RaveBase from '../../lib/rave.base';
 import { ResolveAccountPayload } from './types';
-
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 const spec = morx
   .spec()
@@ -25,7 +23,7 @@ export default function resolve_act(
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Account resolve',
     },

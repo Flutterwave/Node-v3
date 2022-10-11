@@ -2,7 +2,7 @@
   "name": "flutterwave-node-v3",
   "version": "1.0.11",
   "description": "The official Node.JS library for Flutterwave v3 payment APIs",
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
@@ -11,7 +11,6 @@
   "author": "Flutterwave Developers",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.7.18",
     "axios": "^0.21.4",
     "bluebird": "^3.7.2",
     "chai-as-promised-also-chain": "^1.0.2",
@@ -23,6 +22,7 @@
     "sha.js": "^2.4.11"
   },
   "devDependencies": {
+    "@types/node": "^18.8.4",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^10.0.0",

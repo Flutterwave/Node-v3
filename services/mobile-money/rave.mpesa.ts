@@ -4,7 +4,6 @@ import { MobileMoneyPayload, MobileResponse } from "./types";
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 var spec = morx
   .spec()
@@ -29,7 +28,7 @@ export default function mpesa_money(data: MobileMoneyPayload, _rave: RaveBase): 
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Initiate Mpesa Mobile Money charge',
     },

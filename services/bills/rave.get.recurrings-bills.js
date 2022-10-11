@@ -1,7 +1,6 @@
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 
 var spec = morx.spec()

@@ -4,7 +4,6 @@ import { CreateTransferPayload, TransferResponse } from './types';
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 const spec = morx
   .spec()
@@ -34,7 +33,7 @@ export default function initiate_transfer(
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Initiate-transfer',
     },
@@ -47,13 +46,13 @@ export default function initiate_transfer(
 
     return params;
   })
-    .then((params) => {
+    .then((params: any) => {
       return _rave.request('v3/transfers', params);
     })
-    .then((resp) => {
+    .then((resp: any) => {
       d.resolve(resp.body);
     })
-    .catch((err) => {
+    .catch((err: any) => {
       d.reject(err);
     });
 

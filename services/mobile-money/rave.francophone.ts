@@ -4,7 +4,6 @@ import { MobileMoneyNetworks, MobileMoneyPayload, MobileResponse } from "./types
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
-const package = require('../../package.json');
 
 var spec = morx
   .spec()
@@ -28,7 +27,7 @@ export default function franc(data: MobileMoneyPayload, _rave:RaveBase): Promise
     {
       publicKey: _rave.getPublicKey(),
       language: 'NodeJs v3',
-      version: package.version,
+      version: require('../../../package.json').version,
       title: 'Incoming call',
       message: 'Initiate Francophone Mobile Money charge',
     },
