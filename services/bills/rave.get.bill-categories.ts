@@ -1,19 +1,21 @@
-import axios from "axios";
-import RaveBase from "../../lib/rave.base";
-import { BillingCategoryResponse } from "./types";
+import axios from 'axios';
+import RaveBase from '../../lib/rave.base';
+import { BillingCategoryResponse, GetBillingCategoriesPayload } from './types';
 
 const morx = require('morx');
 const q = require('q');
-
 
 var spec = morx
   .spec()
 
   .end();
 
-  bill_cat.morxspc = spec;
+bill_cat.morxspc = spec;
 
-export default function bill_cat(data:object, _rave:RaveBase): Promise<BillingCategoryResponse> {
+export default function bill_cat(
+  data: GetBillingCategoriesPayload,
+  _rave: RaveBase,
+): Promise<BillingCategoryResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {
