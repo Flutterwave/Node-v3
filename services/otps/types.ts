@@ -10,20 +10,54 @@ export type OTPType = {
 };
 
 export type CreateOTPPayload = {
+  /**
+   * This is Integer length of the OTP being generated. Expected values are between 5 and 7.
+   */
   length: number;
+  /**
+   * This is customer object used to include the recipient information.
+   */
   customer: {
+    /**
+     * This is the full name of the recipient of the OTP.
+     */
     name: string;
-    email: string;
-    phone: string;
+    /**
+     * This is the email address of the recipient of the OTP. You should specify this if you intend to send the OTPs to the user's email address.
+     */
+    email?: string;
+    /**
+     * This is the phone number of the recipient of the OTP. This is important for sending the OTP via WhatsApp or SMS.
+     */
+    phone?: string;
   };
+  /**
+   * This is your merchant/business name. It would display when the OTP is sent.
+   */
   sender: string;
-  send: string;
+  /**
+   * Set to true to send otp to customer.
+   */
+  send: boolean;
+  /**
+   * Pass the medium you want your customers to receive the OTP on. Expected values are sms, email and whatsapp.
+   */
   medium: Array<Medium>;
+  /**
+   * Pass an integer value represented in minutes for how long you want the OTP to live for before expiring.
+   */
   expiry: number;
 };
 
 export type ValidateOTPPayload = {
+  /**
+   * This is the reference that was returned in the create OTP response.
+   */
   reference: string;
+  /**
+   * This is the One time Pin sent to the user. You are meant to collect this from the user for validation.
+   */
+  otp: number;
 };
 
 type Transaction = {

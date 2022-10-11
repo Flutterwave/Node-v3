@@ -1,5 +1,6 @@
 import axios from 'axios';
 import RaveBase from '../../lib/rave.base';
+import { GetPaymentsPayload } from '../payment-plans/types';
 import { RetrieveAllBeneficiaryResponse } from './types';
 
 const morx = require('morx');
@@ -10,7 +11,7 @@ var spec = morx.spec().end();
 retrieve_all.morxspc = spec;
 
 export default function retrieve_all(
-  data: {page: number;},
+  data: GetPaymentsPayload,
   _rave: RaveBase,
 ): Promise<RetrieveAllBeneficiaryResponse> {
   axios.post(

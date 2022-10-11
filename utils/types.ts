@@ -23,7 +23,7 @@ export interface FLWResponse {
   message: string;
 }
 
-export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX' | 'TZS' | 'RWF' | 'GBP';
+export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX' | 'TZS' | 'RWF' | 'GBP' | 'XAF' | 'XOF';
 export type PaymentTypes = 'card' | 'account' | 'account-ach-us';
 export type CardProviders = 'MASTERCARD' | 'VISA' | 'VERVE';
 export type Intervals = 'yearly' | 'quarterly' | 'monthly' | 'weekly' | 'daily'
