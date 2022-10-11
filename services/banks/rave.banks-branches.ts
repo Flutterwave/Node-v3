@@ -1,6 +1,6 @@
-import axios from 'axios';
 import RaveBase from '../../lib/rave.base';
 import { BranchResponse } from './types';
+const axios = require('axios');
 
 const morx = require('morx');
 const q = require('q');

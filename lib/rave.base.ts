@@ -73,6 +73,7 @@ export default class RaveBase {
     requestOptions.baseUrl = this.getBaseUrl();
     requestOptions.method = requestMethod;
     requestOptions[datakey] = RaveUtils.initDefaultValue(payload, {});
+    //@ts-ignore
     requestOptions.json = requestJSON;
 
     if (callback) {

@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 import RaveBase from '../../lib/rave.base';
 import { AmountToBePaidPayload, AmountToBePaidResponse } from './types';
 

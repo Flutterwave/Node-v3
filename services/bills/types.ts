@@ -14,7 +14,7 @@ export type BillingCategoryType = {
   date_added: string;
   country: CountryCodes;
   is_airtime: boolean;
-  summary;
+  summary: string;
   biller_name: BillingType;
   item_code: string;
   short_name: string;
@@ -28,11 +28,11 @@ export type FetchBillsPayload = {
   /**
    * This is the start date it can be in any of this formats: YYYY-MM-DDTHH:MM:SSZ or YYYY-MM-DD
    */
-  from: string;
+  from?: string;
   /**
    * This is the end date, it can be in any of this formats: YYYY-MM-DDTHH:MM:SSZ or YYYY-MM-DD
    */
-  to: string;
+  to?: string;
   /**
    * This is the page you want to start from
    */

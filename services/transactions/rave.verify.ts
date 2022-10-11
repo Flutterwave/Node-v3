@@ -26,6 +26,7 @@ export default function verify_trans(
     var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
     // console.log(validated)
     var params = {};
+    //@ts-ignore
     var params = validated.params;
 
     return params;

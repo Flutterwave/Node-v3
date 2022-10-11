@@ -1,7 +1,7 @@
-import axios from "axios";
 import RaveBase from "../../lib/rave.base";
 import { CreateBulkBillPayload, CreateBulkBillResponse } from "./types";
 
+const axios = require('axios');
 const morx = require('morx');
 const q = require('q');
 

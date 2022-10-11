@@ -78,8 +78,8 @@ export default class Bills {
    *
    * @link https://developer.flutterwave.com/reference/endpoints/bills#get-bill-payments
    */
-  fetch_bills(data: FetchBillsPayload) {
-    return bills(data, this.rave);
+  fetch_bills(data?: FetchBillsPayload) {
+    return bills(data || {}, this.rave);
   }
 
   /**

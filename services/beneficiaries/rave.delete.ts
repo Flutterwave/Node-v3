@@ -1,6 +1,7 @@
-import axios from 'axios';
+const axios = require('axios');
 import RaveBase from '../../lib/rave.base';
 import { DeleteBeneficiaryResponse } from './types';
+
 
 const morx = require('morx');
 const q = require('q');

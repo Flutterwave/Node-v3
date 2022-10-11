@@ -1,4 +1,5 @@
 import RaveBase from '../../lib/rave.base';
+import { BalanceResponse } from './types';
 
 const morx = require('morx');
 const q = require('q');
@@ -11,7 +12,7 @@ var spec = morx
 
 get_bal.morxspc = spec;
 
-export default function get_bal(data: any, _rave: RaveBase) {
+export default function get_bal(data: any, _rave: RaveBase): Promise<BalanceResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {

@@ -1,10 +1,9 @@
 import RaveBase from '../../lib/rave.base';
-import axios from "axios"
 import { BillingAgencyResponse } from './types';
 
 const morx = require('morx');
 const q = require('q');
-
+const axios = require('axios');
 
 var spec = morx
   .spec()

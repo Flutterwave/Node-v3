@@ -1,5 +1,5 @@
 import RaveBase from '../../lib/rave.base';
-import { ResolveAccountPayload } from './types';
+import { ResolveAccountPayload, ResolveAccountResponse } from './types';
 const morx = require('morx');
 const q = require('q');
 const axios = require('axios');
@@ -17,7 +17,7 @@ resolve_act.morxspc = spec;
 export default function resolve_act(
   data: ResolveAccountPayload,
   _rave: RaveBase,
-) {
+): Promise<ResolveAccountResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {

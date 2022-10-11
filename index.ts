@@ -18,7 +18,7 @@ import Transfers from './lib/rave.transfers';
 import Virtual_account from './lib/rave.virtual_account';
 import Virtual_card from './lib/rave.virtual_cards';
 
- class Rave {
+ export default class Rave {
   private rave: RaveBase;
   public Bank: Bank;
   public Beneficiary: Beneficiaries;

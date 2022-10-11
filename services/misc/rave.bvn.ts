@@ -1,5 +1,5 @@
 import RaveBase from '../../lib/rave.base';
-import { BVNPayload } from './types';
+import { BVNPayload, BVNResponse } from './types';
 
 var morx = require('morx');
 var q = require('q');
@@ -9,7 +9,10 @@ var spec = morx.spec().build('bvn', 'required:true, eg:123456789').end();
 
 bankBVN.morxspc = spec;
 
-export default function bankBVN(data: BVNPayload, _rave: RaveBase) {
+export default function bankBVN(
+  data: BVNPayload,
+  _rave: RaveBase,
+): Promise<BVNResponse> {
   axios.post(
     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
     {

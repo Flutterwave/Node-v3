@@ -36,7 +36,7 @@ export default function validate_bill(data: ValidateBillingPayload, _rave: RaveB
 
     return params;
   })
-    .then((params) => {
+    .then((params: any) => {
       params.method = 'GET';
       return _rave.request(
         `v3/bill-items/${params.item_code}/validate?code=${params.code}&customer=${params.customer}`,
