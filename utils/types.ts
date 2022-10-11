@@ -23,13 +23,19 @@ export interface FLWResponse {
   message: string;
 }
 
-export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX' | 'TZS' | 'RWF';
+export type Currencies = 'NGN' | 'KES' | 'GHS' | 'USD' | 'ZAR' | 'UGX' | 'TZS' | 'RWF' | 'GBP';
 export type PaymentTypes = 'card' | 'account' | 'account-ach-us';
 export type CardProviders = 'MASTERCARD' | 'VISA' | 'VERVE';
 export type Intervals = 'yearly' | 'quarterly' | 'monthly' | 'weekly' | 'daily'
 
 export type ChargeMeta = {
+  /**
+   * This could be the extra information you want to pass.
+   */
   flightID?: string;
+  /**
+   * This could be any message you'd like to associate with this call.
+   */
   sideNote?: string;
   authorization?: {
     transfer_reference: string;

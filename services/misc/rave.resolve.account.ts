@@ -1,5 +1,5 @@
 import RaveBase from '../../lib/rave.base';
-import { AccountPayload } from './types';
+import { ResolveAccountPayload } from './types';
 
 const morx = require('morx');
 const q = require('q');
@@ -17,7 +17,7 @@ const spec = morx
 resolve_act.morxspc = spec;
 
 export default function resolve_act(
-  data: AccountPayload,
+  data: ResolveAccountPayload,
   _rave: RaveBase,
 ) {
   axios.post(
