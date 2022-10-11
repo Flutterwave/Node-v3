@@ -1,9 +1,21 @@
 import { Currencies, FLWResponse, PageMeta } from '../../utils/types';
 
 export type SettlementsPayload = {
+  /**
+   * This is the page number to retrieve e.g. setting 1 retrieves the first page.
+   */
   page?: number;
+  /**
+   * This is the specified date to start the list from. YYYY-MM-DD.
+   */
   from?: string;
+  /**
+   * The is the specified end period for the search . YYYY-MM-DD.
+   */
   to?: string;
+  /**
+   * This is the unique id of the sub account you want to fetch. It is returned in the call to create a sub account.
+   */
   subaccount_id?: string;
 };
 
@@ -43,11 +55,19 @@ export type SettlementType = {
 };
 
 export type RetrieveSettlementPayload = {
-    id: string
-    from?: string
-    to?: string
-}
-
+  /**
+   * This is the unique id of the sub account you want to fetch. It is returned in the call to create a sub account.
+   */
+  id: string;
+  /**
+   * The start date range to retrieve data from. Expected format is YYYY-MM-DD.
+   */
+  from?: string;
+  /**
+   * The end date range to retrieve data. Expected format is YYYY-MM-DD.
+   */
+  to?: string;
+};
 
 export interface SettlementResponse extends FLWResponse {
   meta: PageMeta;
@@ -55,5 +75,5 @@ export interface SettlementResponse extends FLWResponse {
 }
 
 export interface RetrieveSettlementResponse extends FLWResponse {
-    data: SettlementType
+  data: SettlementType;
 }
