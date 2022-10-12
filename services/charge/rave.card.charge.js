@@ -27,6 +27,7 @@ var spec = morx.spec()
 	.build('tx_ref', 'required:true, eg:FLW_y-443342')
 	.build('redirect_url', 'required:false')
 	.build('meta', 'required:false')
+	.build('payment_plan', 'required:false eg:17758')
 	.build('device_fingerprint', 'required:false')
 	.end();
 
