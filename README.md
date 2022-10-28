@@ -1376,7 +1376,7 @@ const activateSubscription = async () => {
 
     try {
         const payload={
-            "id":"3477" //This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
+            "id":"3477" //This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.id
         }
         
         const response = await flw.Subscription.activate(payload)
