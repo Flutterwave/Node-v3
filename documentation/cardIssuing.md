@@ -17,7 +17,7 @@ This describes how to create a new virtual card
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
 
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 
 
 
@@ -28,17 +28,16 @@ const createVcard = async () => {
         const payload = {
             "currency": "NGN",
             "amount": 200,
-            "billing_name": "Jermaine Graham",
-            "billing_address": "2014 Forest Hills Drive",
-            "billing_city": "Node",
-            "billing_state": "Javascript",
-            "billing_postal_code": "000009",
-            "billing_country": "NG",
+            "first_name":"Dwayne",
+            "last_name":"Johnson",
+            "date_of_birth":"1972/05/02",
+            "email":"dwaynejohnson@gmail.com",
+            "phone":"08082479297",
+            "title":"Mr",
+            "gender":"M" ,
             "callback_url": "https://your-callback-url.com/"
         }
-        const response = await flw.
-
-VirtualCard.create(payload)
+        const response = await flw.VirtualCard.create(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
@@ -95,9 +94,7 @@ const fetchVCard = async () => {
         const payload = {
             "id":"c6d7f40b-f772-47b7-8136-81256d2f87a2" //This is the unique id of the particular card you want to fetch its details. You can get this id from the call to create a virtual card or list virtual cards as data.id
         }
-        const response = await flw.
-
-VirtualCard.fetch(payload)
+        const response = await flw.VirtualCard.fetch(payload)
         console.log(response);
     } catch (error) {
         console.log(error)
