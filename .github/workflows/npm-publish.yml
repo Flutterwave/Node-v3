@@ -33,11 +33,14 @@ jobs:
           npm audit fix
           npm install
 
-      - name: code coverage
+      - name: run code coverage
         env:
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run coverage
+
+      - name: report code coverage
+        run: npm run report-coverage
 
       - name: upload coverage report to codecov
         uses: codecov/codecov-action@v2
