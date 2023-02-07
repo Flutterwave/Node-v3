@@ -5,7 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha **/*.test.js",
-    "test-watch": "nodemon --exec \"npm test\""
+    "test-watch": "nodemon --exec \"npm test\"",
+    "coverage": "nyc npm run test"
+  },
+  "nyc": {
+    "coverage": "test",
+    "check-coverage": true,
+    "functions": 50,
+    "lines": 50,
+    "report-dir": "./coverage",
+    "reporter": [
+      "lcov",
+      "html"
+    ]
   },
   "keywords": [],
   "author": "Flutterwave Developers",
@@ -30,6 +42,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "mocha": "^9.2.2",
+    "nyc": "^15.1.0",
     "prettier": "2.8.3",
     "should": "^13.2.3"
   },
