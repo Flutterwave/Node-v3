@@ -38,3 +38,9 @@ jobs:
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run coverage
+
+      - name: upload coverage report to codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
