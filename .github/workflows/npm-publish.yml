@@ -42,8 +42,8 @@ jobs:
       - name: report code coverage
         run: npm run report-coverage
 
-      - name: upload coverage report to codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests
+      # - name: upload coverage report to codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     flags: unittests
