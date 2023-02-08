@@ -33,7 +33,7 @@ jobs:
           npm audit fix
           npm install
 
-      - name: run code coverage
+      - name: run unit tests and coverage scan
         env:
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
