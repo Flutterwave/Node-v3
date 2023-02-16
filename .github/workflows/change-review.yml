@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: 'Node.js v${{ matrix.node }}'
+    name: Review changes on Dev (Commits/PRs)
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -30,7 +30,6 @@ jobs:
             ${{ runner.os }}-node-v${{ matrix.node }}-
       - name: Install Dependencies
         run: |
-          npm audit fix
           npm install
 
       - name: run unit tests and coverage scan
