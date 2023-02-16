@@ -9,10 +9,6 @@
 ![npm](https://img.shields.io/npm/dt/flutterwave-node-v3)
 ![NPM](https://img.shields.io/npm/l/flutterwave-node-v3)
 
-## Test header
-
-sample description.
-
 ### How to use
 
 `npm install flutterwave-node-v3`

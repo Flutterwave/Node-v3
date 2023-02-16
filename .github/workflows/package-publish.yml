@@ -1,15 +1,8 @@
 name: Publish to NPM
 
-# on:
-#   release:
-#     types: [created]
-
 on:
-  push:
-    branches: ['dev']
-  pull_request:
-    types:
-      - opened
+  release:
+    types: [created]
 
 jobs:
   check-docs-update:
@@ -46,31 +39,31 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
 
-  # distribute:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 16
+  distribute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
 
-  #     - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 16
-  #         registry-url: https://registry.npmjs.org/
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
 
-  #     - run: npm ci
+      - run: npm ci
 
-  #     - run: npm publish
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-  #     - name: push build status to Slack
-  #       uses: 8398a7/action-slack@v3
-  #       with:
-  #         status: ${{ job.status }}
-  #         fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
-  #       env:
-  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  #       if: always()
+      - name: push build status to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
