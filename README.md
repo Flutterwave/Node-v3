@@ -2,13 +2,12 @@
     <img title="Flutterwave" height="200" src="https://flutterwave.com/images/logo/full.svg" width="50%"/>
 </p>
 
-# Flutterwave v3 NodeJS Library 
+# Flutterwave v3 NodeJS Library
 
 ![Node.js Package](https://github.com/Flutterwave/Flutterwave-node-v3/workflows/Node.js%20Package/badge.svg)
 ![npm](https://img.shields.io/npm/v/flutterwave-node-v3)
 ![npm](https://img.shields.io/npm/dt/flutterwave-node-v3)
 ![NPM](https://img.shields.io/npm/l/flutterwave-node-v3)
-
 
 ## Introduction
 
@@ -59,7 +58,6 @@ npm install flutterwave-node-v3
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 ```
 
@@ -86,9 +84,10 @@ Read the [requirement section](#requirements) for more information on how to get
 13. [Ebills](documentation/ebills.md)
 14. [Misc](documentation/misc.md)
 
+### `Get bill payment agencies`
+
 
 ## SUBSCRIPTIONS
-
 ### ```Get all subscriptions```
 
 This describes how to get all subscriptions
@@ -97,7 +96,6 @@ This describes how to get all subscriptions
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const fetchSubscription = async () => {
 
@@ -109,11 +107,7 @@ const fetchSubscription = async () => {
         console.log(error)
     }
 
-}
-
-
 fetchSubscription();
-
 
 ```
 
@@ -126,7 +120,6 @@ This describes how to cancel a subscription
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const cancelSubscription = async () => {
 
@@ -143,11 +136,10 @@ const cancelSubscription = async () => {
 
 }
 
-
 cancelSubscription();
-
 ```
 
+### `Create order using billing code and product id`
 
 ### ```Activate a subscription```
 
@@ -157,7 +149,6 @@ This describes how to activate a subscription
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const activateSubscription = async () => {
 
@@ -174,362 +165,277 @@ const activateSubscription = async () => {
 
 }
 
-
 activateSubscription();
-
 ```
 
 ## PAYMENT PLANS
-
 ###  ```Create payment plan```
 
 This describes  how to create a payment plan
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const createPaymentPlan = async () => {
+  try {
+    const payload = {
+      amount: 500,
+      name: 'the olufemi obafunmiso plan 2', //This is the name of the payment, it will appear on the subscription reminder emails
+      interval: 'monthly', //This will determine the frequency of the charges for this plan. Could be monthly, weekly, etc.
+      duration: 24, //This is the frequency, it is numeric, e.g. if set to 5 and intervals is set to monthly you would be charged 5 months, and then the subscription stops
+    };
 
-    try {
-
-        const payload = {
-            "amount": 500,
-            "name": "the olufemi obafunmiso plan 2", //This is the name of the payment, it will appear on the subscription reminder emails
-            "interval": "monthly", //This will determine the frequency of the charges for this plan. Could be monthly, weekly, etc.
-            "duration": 24 //This is the frequency, it is numeric, e.g. if set to 5 and intervals is set to monthly you would be charged 5 months, and then the subscription stops
-            
-        }
-
-        const response = await flw.PaymentPlan.create(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.PaymentPlan.create(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 createPaymentPlan();
-
 ```
 
+### `Get payment plan`
 
-###  ```Get payment plan```
-
-This describes  how to fetch all payment plans on your account
+This describes how to fetch all payment plans on your account
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const fetchAllPlans = async () => {
-
-    try {
-
-        const response = await flw.PaymentPlan.get_all()
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+  try {
+    const response = await flw.PaymentPlan.get_all();
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 fetchAllPlans();
-
 ```
 
-###  ```Get a payment plan```
+### `Get a payment plan`
 
-This describes  how to get a single payment plan
+This describes how to get a single payment plan
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
-
 const fetchPlan = async () => {
+  try {
+    const payload = {
+      id: '5443', //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
+    };
 
-    try {
-        const payload = {
-            "id":"5443" //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
-        }
-
-        const response = await flw.PaymentPlan.get_plan(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.PaymentPlan.get_plan(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 fetchPlan();
-
 ```
 
-###  ```Update a payment plan```
+### `Update a payment plan`
 
-This describes  how to update an existing payment plan
+This describes how to update an existing payment plan
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const updatePlan = async () => {
+  try {
+    const payload = {
+      id: '5443', //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
+      name: 'January neighbourhood contribution',
+      status: 'active',
+    };
 
-    try {
-        const payload = {
-            "id":"5443", //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
-            "name": "January neighbourhood contribution",
-            "status": "active"
-        }
-
-        const response = await flw.PaymentPlan.update(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.PaymentPlan.update(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 updatePlan();
-
 ```
 
-
-###  ```Cancel a payment plan```
-
-This describes  how to cancel an existing payment plan
+### `Cancel a payment plan`
+This describes how to cancel an existing payment plan
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
-
 const cancelPlan = async () => {
+  try {
+    const payload = {
+      id: '5443', //This is the unique ìd` of the payment plan you want to cancel
+    };
 
-    try {
-        const payload = {
-            "id":"5443" //This is the unique ìd` of the payment plan you want to cancel
-            
-        }
-
-        const response = await flw.PaymentPlan.cancel(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.PaymentPlan.cancel(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 cancelPlan();
-
 ```
 
 ## SUBACCOUNTS
+### `Create a payment plan`
 
-###  ```Create a payment plan```
-
-This describes  how to create a subaccount on Flutterwave
+This describes how to create a subaccount on Flutterwave
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const createSubaccount = async () => {
+  try {
+    const payload = {
+      account_bank: '044',
+      account_number: '0690000037',
+      business_name: 'Eternal Blue',
+      business_email: 'petya@stux.net',
+      business_contact: 'Anonymous',
+      business_contact_mobile: '090890382',
+      business_mobile: '09087930450',
+      country: 'NG',
+      meta: [
+        {
+          meta_name: 'mem_adr',
+          meta_value: '0x16241F327213',
+        },
+      ],
+      split_type: 'percentage',
+      split_value: 0.5,
+    };
 
-    try {
-        const payload = {
-            "account_bank": "044",
-            "account_number": "0690000037",
-            "business_name": "Eternal Blue",
-            "business_email": "petya@stux.net",
-            "business_contact": "Anonymous",
-            "business_contact_mobile": "090890382",
-            "business_mobile": "09087930450",
-            "country": "NG",
-            "meta": [
-                {
-                    "meta_name": "mem_adr",
-                    "meta_value": "0x16241F327213"
-                }
-            ],
-            "split_type": "percentage",
-            "split_value": 0.5
-        }
-
-        const response = await flw.Subaccount.create(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.Subaccount.create(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 createSubaccount();
-
 ```
 
+### `Fetch all subaccounts`
 
-
-###  ```Fetch all subaccounts```
-
-This describes  how to get all subaccounts
-
+This describes how to get all subaccounts
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
-
-
 const fetchAllSubaccounts = async () => {
-
-    try {
-        
-
-        const response = await flw.Subaccount.fetch_all()
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+  try {
+    const response = await flw.Subaccount.fetch_all();
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 fetchAllSubaccounts();
-
 ```
 
+### `Fetch a subaccount`
 
-
-###  ```Fetch a subaccount```
-
-This describes  how to fetch a subaccount using the sub-account's ID
+This describes how to fetch a subaccount using the sub-account's ID
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const fetchSubaccount = async () => {
+  try {
+    const payload = {
+      id: '5716',
+    };
 
-    try {
-
-        const payload = {
-            "id":"5716"
-        }
-        
-
-        const response = await flw.Subaccount.fetch(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.Subaccount.fetch(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 fetchSubaccount();
-
 ```
 
+### `Update a subaccount`
 
-
-###  ```Update a subaccount```
-
-This describes  how to update a subaccount
+This describes how to update a subaccount
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
+
 const updateSubaccount = async () => {
+  try {
+    const payload = {
+      id: '3244', //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
+      business_name: 'Xyx lol!',
+      business_email: 'mad@o.enterprises',
+      account_bank: '044',
+      account_number: '0690000040',
+      split_type: 'flat',
+      split_value: '200',
+    };
 
-    try {
-
-        const payload = {
-            "id": "3244", //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
-            "business_name": "Xyx lol!",
-            "business_email": "mad@o.enterprises",
-            "account_bank": "044",
-            "account_number": "0690000040",
-            "split_type": "flat",
-            "split_value": "200"
-        }
-
-
-        const response = await flw.Subaccount.update(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.Subaccount.update(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 updateSubaccount();
-
-
 ```
 
-
-###  ```Delete a subaccount```
+### `Delete a subaccount`
 
 This describes how to delete a subaccount
 
 ```javascript
-
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
-
 const updateSubaccount = async () => {
+  try {
+    const payload = {
+      id: '3244', //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
+    };
 
-    try {
-
-        const payload = {
-            "id": "3244" //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
-        }
-
-
-        const response = await flw.Subaccount.delete(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
+    const response = await flw.Subaccount.delete(payload);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 updateSubaccount();
-
 ```
 
 ## Testing
@@ -539,7 +445,6 @@ All of the libraries tests are run on Mocha. Available tests include `rave.bank.
 ```sh
 npm run test
 ```
-
 
 ## Debugging Errors
 

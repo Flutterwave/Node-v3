@@ -1,0 +1,49 @@
+name: Review package
+on:
+  push:
+    branches: ['dev']
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  test:
+    name: Review changes on Dev (Commits/PRs)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - uses: actions/checkout@v2
+
+      - name: 'Cache node_modules'
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v${{ matrix.node }}-
+
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      - name: run unit tests and coverage scan
+        env:
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: npm run coverage
+
+      - name: upload coverage report to codecov
+        uses: codecov/codecov-action@v2
+
+      - name: push build status to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
