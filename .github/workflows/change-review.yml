@@ -39,8 +39,20 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run coverage
 
-      - name: report code coverage
-        run: npm run report-coverage
+      - name: upload coverage report to codecov
+        uses: codecov/codecov-action@v2
+
+      - name: push build status to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
+
+      # - name: report code coverage
+      #   run: npm run report-coverage
 
       # - name: upload coverage report to codecov
       #   uses: codecov/codecov-action@v2
