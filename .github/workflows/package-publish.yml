@@ -1,0 +1,76 @@
+name: Publish to NPM
+
+# on:
+#   release:
+#     types: [created]
+
+on:
+  push:
+    branches: ['dev']
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  check-docs-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            +(documentation)/*.md
+            *.md
+            CHANGE*.md
+          FILES: |
+            CHANGELOG.md
+
+      - name: log git diff
+        run: |
+          echo ${{ env.GIT_DIFF }}
+          echo ${{ env.MATCHED_FILES }}
+          echo ${{ env.GIT_DIFF_FILTERED }}
+
+      - name: Check if README.md or Doc/** is updated else exit
+        if: (env.GIT_DIFF == '')
+        run: |
+          echo Update documentation files and README.md before push
+          exit 1
+
+      - name: push build status to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
+
+  # distribute:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 16
+
+  #     - uses: actions/checkout@v2
+
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 16
+  #         registry-url: https://registry.npmjs.org/
+
+  #     - run: npm ci
+
+  #     - run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  #     - name: push build status to Slack
+  #       uses: 8398a7/action-slack@v3
+  #       with:
+  #         status: ${{ job.status }}
+  #         fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+  #       env:
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #       if: always()
