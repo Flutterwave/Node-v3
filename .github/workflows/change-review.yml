@@ -1,4 +1,4 @@
-name: Review package
+name: Review changes on Dev (Commits/PRs)
 on:
   push:
     branches: ['dev']
@@ -7,8 +7,7 @@ on:
       - opened
 
 jobs:
-  test:
-    name: Review changes on Dev (Commits/PRs)
+  code-check:
     runs-on: ubuntu-latest
 
     steps:

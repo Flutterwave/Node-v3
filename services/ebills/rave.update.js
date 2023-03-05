@@ -1,51 +1,44 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-const spec = morx.spec()
-	.build('reference', 'required:true, eg:RVEBLS-F81CEEEE8218-73362')
-	.build('amount', 'required:true, eg:10')
-	.build('currency', 'required:true,eg:NGN')
-	.end();
-
+const spec = joi.object({
+  reference: joi.string().trim().max(100).required(),
+  amount: joi.number().required(),
+  currency: joi.string().uppercase().length(3).default('NGN'),
+});
 
 function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Update eBills details"
-       })
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'Update eBills details',
+    },
+  );
 
-	const d = q.defer();
-	q.fcall(() => {
+  const d = q.defer();
+  q.fcall(() => {
+    const { error, value } = spec.validate(data);
+    var params = value;
+    return params;
+  })
+    .then((params) => {
+      params.method = 'PUT';
+      return _rave.request(`v3/ebills/${params.reference}`, params);
+    })
+    .then((resp) => {
+      d.resolve(resp.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			const validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			const params = validated.params;
-			// _rave.params = params
-			return (params);
-
-		})
-		.then(params => {
-			params.method = "PUT";
-			// console.log(params)
-			return _rave.request(`v3/ebills/${params.reference}`, params)
-		})
-		.then(resp => {
-
-			d.resolve(resp.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		});
-
-	return d.promise;
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;

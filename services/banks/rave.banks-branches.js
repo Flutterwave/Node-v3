@@ -1,11 +1,11 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-// console.log(package.version)
-
-const spec = morx.spec().build('id', 'required:true, eg:133').end();
+const spec = joi.object({
+  id: joi.string().required(),
+});
 
 function service(data, _rave) {
   axios.post(
@@ -22,10 +22,8 @@ function service(data, _rave) {
   var d = q.defer();
 
   q.fcall(() => {
-    var validated = morx.validate(data, spec, _rave.MORX_DEFAULT, {
-      throw_error: true,
-    });
-    var params = validated.params;
+    const { error, value } = spec.validate(data);
+    var params = value;
     return params;
   })
     .then((params) => {
@@ -34,7 +32,6 @@ function service(data, _rave) {
 
       return _rave.request(uri, params);
     })
-
     .then((response) => {
       d.resolve(response.body);
     })

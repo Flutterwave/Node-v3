@@ -1,56 +1,47 @@
-var morx = require('morx');
+const joi = require('joi');
 var q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
-const path = require('path')
+const path = require('path');
 
-var spec = morx.spec()
-	.build('id', 'required:true, eg:a1b7864f-c56d-4453-bf55-a08db4acb5fe')
-	.end();
+const spec = joi.object({
+  id: joi.string().required(),
+});
 
 function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Fetch Beneficiary"
-       })
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'Fetch Beneficiary',
+    },
+  );
 
-	var d = q.defer();
+  var d = q.defer();
 
-	q.fcall(() => {
+  q.fcall(() => {
+    const { error, value } = spec.validate(data);
+    var params = value;
+    return params;
+  })
+    .then((params) => {
+      params.method = 'GET';
+      var uri = `v3/beneficiaries/${params.id}`;
 
-			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT,  {throw_error:true});
-			var params = validated.params;
+      return _rave.request(uri, params);
+    })
+    .then((response) => {
+      // console.log(response.body);
+      d.resolve(response.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			return params
-
-
-		})
-		.then(params => {
-
-
-			params.method = "GET";
-			var uri = `v3/beneficiaries/${params.id}`
-
-			return _rave.request(uri, params)
-
-		})
-		.then(response => {
-
-			// console.log(response.body);
-			d.resolve(response.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		})
-
-	return d.promise;
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;
