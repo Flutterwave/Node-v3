@@ -8,7 +8,8 @@ const spec = morx.spec()
 	.build('amount', 'required:true, eg:5000')
 	.build('name', 'required:true, eg:Monthly Nepa Bill Collection')
 	.build('interval', 'required:true, eg:monthly')
-	.build('duration', 'required:true, eg:24')
+	.build('duration', 'required:false, eg:24')
+	.build('currency', 'required:false, eg:USD')
 	.end();
 
 function service(data, _rave) {

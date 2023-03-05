@@ -19,6 +19,7 @@ const spec = morx.spec()
 	.build('subaccounts', 'required:false')
 	.build('do_3ds', 'required:false')
 	.build('redirect_url', 'required:false,eg:https://flutterwave.com/ng')
+	.build('meta', 'required:false')
 	.end();
 
 

@@ -1,4 +1,5 @@
 var banks = require('../lib/rave.banks');
+var payout = require('../lib/rave.transfers');
 var base = require('../lib/rave.base');
 
 var Promise = require('bluebird');
