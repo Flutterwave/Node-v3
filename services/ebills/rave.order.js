@@ -1,59 +1,61 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-
-
-const spec = morx.spec()
-	.build('email', 'required:true, eg:044')
-	.build('tx_ref', 'required:true, eg:MC-06900021')
-	.build('ip', 'required:true, eg:127.9.0.7')
-	.build('custom_business_name', 'required:true, eg:John Madakin')
-	.build('amount', 'required:true, eg:10')
-	.build('currency', 'required:true,eg:NGN')
-	.build('country', 'required:true,eg:NG')
-	.build('number_of_units', 'required:true, e.g:1')
-	.build('phone_number', 'required:true,eg:09384747474')
-	.end();
-
+const spec = joi.object({
+  email: joi.string().max(100).email().required(),
+  tx_ref: joi.string().trim().max(100).required(),
+  ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  custom_business_name: joi.string().trim().max(100).required(),
+  amount: joi.number().required(),
+  currency: joi.string().uppercase().length(3).default('NGN'),
+  country: joi.string().uppercase().length(2).default('NG'),
+  number_of_units: joi.number().required(),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    }),
+});
 
 function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Create eBills"
-       })
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'Create eBills',
+    },
+  );
 
-	const d = q.defer();
-	q.fcall(() => {
+  const d = q.defer();
+  q.fcall(() => {
+    const { error, value } = spec.validate(data);
+    var params = value;
+    return params;
+  })
+    .then((params) => {
+      return _rave.request('v3/ebills', params);
+    })
+    .then((resp) => {
+      d.resolve(resp.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			const validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			const params = validated.params;
-			// _rave.params = params
-			return (params);
-
-		})
-		.then(params => {
-
-			// console.log(params)
-			return _rave.request('v3/ebills', params)
-		})
-		.then(resp => {
-
-			d.resolve(resp.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		});
-
-	return d.promise;
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;
