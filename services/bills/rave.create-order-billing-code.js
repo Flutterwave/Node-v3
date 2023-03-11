@@ -1,58 +1,74 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-
-const spec = morx.spec()
-	.build('id', 'required:true, eg:BIL136')
-	.build('amount', 'required:true, eg:3000.50')
-	.build('reference', 'required:true, eg:BPUSSD1588268275502326')
-	.build('country', 'required:false, eg:NG')
-	.build('customer', 'required:true, eg:{ "name": "emmanuel", "email": "emmanuel@x.com", "phone_number": "08060811638"}')
-	.build('fields', 'required:true, eg:[{"id": "42107711:42107712","quantity": "1","value": "3500"}, { "id": "42107710", "quantity": "1", "value": "t@x.com" }]')
-	.build('product_id', 'required:true, eg:OT151')
-	.end();
-
-
+const spec = joi.object({
+  id: joi.string().required(),
+  product_id: joi.string().required(),
+  amount: joi.string().required(),
+  country: joi.string().required(),
+  reference: joi.string().trim().max(100).required(),
+  customer: joi
+    .object({
+      name: joi.string().required(),
+      email: joi.string().email().required(),
+      phone_number: joi
+        .string()
+        .max(50)
+        .custom((value) => {
+          if (value && !/^\+?\d+$/.test(value))
+            throw new Error('phone number should be digits');
+          return value;
+        })
+        .required(),
+    })
+    .required(),
+  fields: joi
+    .array()
+    .items(
+      joi.object({
+        id: joi.string(),
+        quantity: joi.string(),
+        value: joi.string(),
+      }),
+    )
+    .required(),
+});
 
 function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Create-order-billing-code"
-       })
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'Create-order-billing-code',
+    },
+  );
 
-	var d = q.defer();
-	q.fcall(() => {
+  var d = q.defer();
+  q.fcall(() => {
+    const { error, value } = spec.validate(data);
+    var params = value;
+    return params;
+  })
+    .then((params) => {
+      params.method = 'POST';
+      return _rave.request(
+        `v3/billers/${params.id}/products/${params.product_id}/orders`,
+        params,
+      );
+    })
+    .then((resp) => {
+      d.resolve(resp.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT,  {throw_error:true});
-			var params = validated.params;
-
-			return (params);
-
-		})
-		.then(params => {
-
-
-			params.method = "POST"
-			return _rave.request(`v3/billers/${params.id}/products/${params.product_id}/orders`, params)
-		})
-		.then(resp => {
-
-			d.resolve(resp.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		});
-
-	return d.promise;
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;

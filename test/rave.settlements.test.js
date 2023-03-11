@@ -262,9 +262,15 @@ describe('#Rave Settlements', function () {
         },
       });
 
-    var resp = await settlementInstance.fetch_all();
+    var payload = {
+      page: '1',
+    };
+
+    var resp = await settlementInstance.fetch_all(payload);
+    // console.log(resp);
 
     expect(fetchSettlementSuccessStub).to.have.been.calledOnce;
+    expect(fetchSettlementSuccessStub).to.have.been.calledOnceWith(payload);
 
     expect(resp.body).to.have.property('status', 'success');
     expect(resp.body).to.have.property('data');

@@ -30,7 +30,6 @@ function service(data, _rave) {
     .then((params) => {
       params.method = 'GET';
       var uri = `v3/beneficiaries/${params.id}`;
-
       return _rave.request(uri, params);
     })
     .then((response) => {

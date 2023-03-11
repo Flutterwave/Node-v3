@@ -1,64 +1,64 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-var spec = morx.spec()
-	.build('currency', 'required:true, eg:GHS')
-	.build('order_id', 'required:USS_URG_893982923s2323')
-	.build('amount', 'required:true, eg:10')
-	.build('phone_number', 'required:false, eg:08030930236')
-	.build('email', 'required:true, eg:debowalefaulkner@gmail.com')
-	.build('fullname', 'required:false, eg:lawal')
-	.build('client_ip', 'required:false, eg:127.0.0.1')
-	.build('tx_ref', 'required:true, eg:FLW_y-443342')
-	.build('meta', 'required:false')
-	.build('device_fingerprint', 'required:false')
-	.build('redirect_url', 'required:false')
-	.end();
+const spec = joi.object({
+  currency: joi.string().uppercase().length(3).valid('KES').required(),
+  amount: joi.number().required(),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    })
+    .required(),
+  email: joi.string().max(100).email().required(),
+  fullname: joi.string().max(100),
+  client_ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  tx_ref: joi.string().trim().max(100).required(),
+  meta: joi.array().items(joi.object({})),
+  device_fingerprint: joi.string().trim().max(200),
+  redirect_url: joi.string().uri(),
+});
 
 function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Initiate Mpesa Mobile Money charge"
-       })
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'Initiate Mpesa Mobile Money charge',
+    },
+  );
 
-	var d = q.defer();
+  var d = q.defer();
 
-	q.fcall(() => {
+  q.fcall(() => {
+    const { error, value } = spec.validate(data);
+    var params = value;
+    return params;
+  })
+    .then((params) => {
+      return _rave.request('v3/charges?type=mpesa', params);
+    })
+    .then((response) => {
+      d.resolve(response.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			var params = validated.params;
-
-			return (params);
-
-		})
-		.then(params => {
-
-
-			return _rave.request('v3/charges?type=mpesa', params)
-		})
-		.then(response => {
-
-
-
-
-			d.resolve(response.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		})
-
-	return d.promise;
-
-
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;

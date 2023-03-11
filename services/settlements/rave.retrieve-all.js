@@ -3,7 +3,11 @@ const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-const spec = joi.object({});
+const spec = joi.object({
+  from: joi.string().isoDate(),
+  to: joi.string().isoDate(),
+  page: joi.string().min(1),
+});
 
 function service(data, _rave) {
   axios.post(
@@ -20,12 +24,13 @@ function service(data, _rave) {
   const d = q.defer();
 
   q.fcall(() => {
-    var params = spec;
+    const { error, value } = spec.validate(data);
+    var params = value;
     return params;
   })
     .then((params) => {
       params.method = 'GET';
-      var uri = `v3/settlements`;
+      var uri = `v3/settlements?`;
 
       return _rave.request(uri, params);
     })

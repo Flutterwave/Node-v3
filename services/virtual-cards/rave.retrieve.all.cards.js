@@ -1,55 +1,43 @@
-const morx = require('morx');
+const joi = require('joi');
 const q = require('q');
 const axios = require('axios');
 const package = require('../../package.json');
 
-var spec = morx.spec()
+const spec = joi.object({});
 
-	.end();
+function service(data, _rave) {
+  axios.post(
+    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+    {
+      publicKey: _rave.getPublicKey(),
+      language: 'NodeJs v3',
+      version: package.version,
+      title: 'Incoming call',
+      message: 'List-all-cards',
+    },
+  );
 
-function service(data,_rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "List-all-cards"
-       })
+  var d = q.defer();
 
-	var d = q.defer();
+  q.fcall(() => {
+    var params = spec;
+    return params;
+  })
+    .then((params) => {
+      params.method = 'GET';
+      var uri = `v3/virtual-cards`;
 
-	q.fcall(() => {
+      return _rave.request(uri, params);
+    })
+    .then((response) => {
+      // console.log(response.body);
+      d.resolve(response.body);
+    })
+    .catch((err) => {
+      d.reject(err);
+    });
 
-			var validated = morx.validate(spec,data, _rave.MORX_DEFAULT);
-			var params = validated.params;
-
-			return params
-
-
-		})
-		.then(params => {
-
-
-			params.method = "GET";
-			var uri = `v3/virtual-cards`
-
-			return _rave.request(uri, params)
-
-		})
-		.then(response => {
-
-			// console.log(response.body);
-			d.resolve(response.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		})
-
-	return d.promise;
-
+  return d.promise;
 }
 service.morxspc = spec;
 module.exports = service;

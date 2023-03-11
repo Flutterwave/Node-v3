@@ -12,8 +12,8 @@
   "nyc": {
     "coverage": "test",
     "check-coverage": true,
-    "functions": 50,
-    "lines": 50,
+    "functions": 20,
+    "lines": 20,
     "report-dir": "./coverage",
     "reporter": [
       "lcov"

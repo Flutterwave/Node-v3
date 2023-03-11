@@ -31,6 +31,57 @@ describe('#Rave OTP', function () {
     sinon.restore();
   });
 
+  it('should generate OTP and return success message', async function () {
+    this.timeout(10000);
+
+    const generateOTPSuccessStub = sinon.stub(otpInstance, 'create').resolves({
+      body: {
+        status: 'success',
+        message: 'OTP generated successfully',
+        data: [
+          {
+            medium: 'email',
+            reference: 'CF-BARTER-20230305031441503636',
+            otp: '1495545',
+            expiry: '2023-03-05T03:19:41.8110726+00:00',
+          },
+          {
+            medium: 'whatsapp',
+            reference: 'CF-BARTER-20230305031443536582',
+            otp: '1495545',
+            expiry: '2023-03-05T03:19:43.4362097+00:00',
+          },
+        ],
+      },
+    });
+
+    var payload = {
+      length: 7,
+      customer: {
+        name: 'Kazan',
+        email: 'kazan@mailinator.com',
+        phone: '2348131149273',
+      },
+      sender: 'Test Sender',
+      send: true,
+      medium: ['email', 'whatsapp'],
+      expiry: 5,
+    };
+
+    var resp = await otpInstance.create(payload);
+
+    expect(generateOTPSuccessStub).to.have.been.calledOnce;
+    expect(generateOTPSuccessStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('data');
+    expect(resp.body.message).to.eq('OTP generated successfully');
+
+    expect(resp.body.data[0]).to.have.property('medium');
+    expect(resp.body.data[0]).to.have.property('reference');
+    expect(resp.body.data[0]).to.have.property('expiry');
+  });
+
   it('should validate OTP and return success message', async function () {
     this.timeout(10000);
 
