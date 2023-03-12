@@ -89,73 +89,43 @@ describe('#Rave transfers', function () {
   it('should create EUR/GBP bank transfer', async function () {
     this.timeout(10000);
 
-    // const createEUTransferStub = sinon
-    //   .stub(transferInstance, 'initiate')
-    //   .resolves({
-    //     body: {
-    //       status: 'success',
-    //       message: 'Transfer Queued Successfully',
-    //       data: {
-    //         id: 396433,
-    //         account_number: 'FOREIGN-ACCOUNT',
-    //         bank_code: 'FOREIGN-BANK',
-    //         full_name: 'Flutterwave Developers',
-    //         created_at: '2023-03-11T01:14:26.000Z',
-    //         currency: 'EUR',
-    //         amount: 50,
-    //         fee: 35,
-    //         status: 'NEW',
-    //         reference: 'new-intl-eu-test-transferlmworj',
-    //         meta: [[Object]],
-    //         narration: "Test EU Int'l bank transfers",
-    //         complete_message: '',
-    //         requires_approval: 0,
-    //         is_approved: 1,
-    //         bank_name: 'FA-BANK',
-    //       },
-    //     },
-    //   });
-
-    // var payload = {
-    //   amount: 50,
-    //   narration: "Test EU Int'l bank transfers",
-    //   currency: 'EUR',
-    //   reference: 'new-intl-eu-test-transferlmworj',
-    //   beneficiary_name: 'Flutterwave Developers',
-    //   meta: [
-    //     {
-    //       AccountNumber: 'DA091983888373BGH',
-    //       RoutingNumber: 'BECFDE7HKKX',
-    //       SwiftCode: 'BECFDE7HKKX',
-    //       BankName: 'LLOYDS BANK',
-    //       BeneficiaryName: 'Flutterwave Developers',
-    //       BeneficiaryCountry: 'DE',
-    //       PostalCode: '80489',
-    //       StreetNumber: '31',
-    //       StreetName: 'Handelsbank Elsenheimer Str.',
-    //       City: 'München',
-    //     },
-    //   ],
-    // };
-
-    // var payload = {
-    //   amount: 50,
-    //   narration: "Test EU Int'l bank transfers",
-    //   currency: 'EUR',
-    //   reference: 'new-intl-eu-terl09hufj',
-    //   beneficiary_name: 'Flutterwave Developers',
-    //   meta: {},
-    // };
+    const createEUTransferStub = sinon
+      .stub(transferInstance, 'initiate')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'Transfer Queued Successfully',
+          data: {
+            id: 396433,
+            account_number: 'FOREIGN-ACCOUNT',
+            bank_code: 'FOREIGN-BANK',
+            full_name: 'Flutterwave Developers',
+            created_at: '2023-03-11T01:14:26.000Z',
+            currency: 'EUR',
+            amount: 50,
+            fee: 35,
+            status: 'NEW',
+            reference: 'new-intl-eu-test-transferlmworj',
+            meta: [[Object]],
+            narration: "Test EU Int'l bank transfers",
+            complete_message: '',
+            requires_approval: 0,
+            is_approved: 1,
+            bank_name: 'FA-BANK',
+          },
+        },
+      });
 
     var payload = {
       amount: 50,
       narration: "Test EU Int'l bank transfers",
       currency: 'EUR',
-      reference: 'new-intl-eu-test-transferlmworj097046510',
+      reference: 'new-intl-eu-test-transferlmworj',
       beneficiary_name: 'Flutterwave Developers',
       meta: [
         {
           AccountNumber: 'DA091983888373BGH',
+          RoutingNumber: 'BECFDE7HKKX',
           SwiftCode: 'BECFDE7HKKX',
           BankName: 'LLOYDS BANK',
           BeneficiaryName: 'Flutterwave Developers',
@@ -170,15 +140,13 @@ describe('#Rave transfers', function () {
 
     var resp = await transferInstance.initiate(payload);
 
-    // expect(createEUTransferStub).to.have.been.calledOnce;
-    // expect(createEUTransferStub).to.have.been.calledOnceWith(payload);
+    expect(createEUTransferStub).to.have.been.calledOnce;
+    expect(createEUTransferStub).to.have.been.calledOnceWith(payload);
 
-    // expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('status', 'success');
 
-    // expect(resp.body.data).to.have.property('reference');
-    // expect(resp.body.data.reference).to.eq('new-intl-eu-test-transferlmworj');
-
-    console.log(resp);
+    expect(resp.body.data).to.have.property('reference');
+    expect(resp.body.data.reference).to.eq('new-intl-eu-test-transferlmworj');
   });
 
   it('should create USD bank transfer', async function () {
@@ -296,5 +264,126 @@ describe('#Rave transfers', function () {
 
     expect(resp.body.data).to.have.property('reference');
     expect(resp.body.data.reference).to.eq('mk-902837-jk555');
+  });
+
+  it('should fetch transfer details', async function () {
+    this.timeout(10000);
+
+    const fetchTransferStub = sinon
+      .stub(transferInstance, 'get_a_transfer')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'Transfer fetched',
+          data: {
+            id: 396478,
+            account_number: 'FOREIGN-ACCOUNT',
+            bank_code: 'FOREIGN-BANK',
+            full_name: 'Flutterwave Developers',
+            created_at: '2023-03-12T00:42:44.000Z',
+            currency: 'EUR',
+            debit_currency: null,
+            amount: 50,
+            fee: 35,
+            status: 'NEW',
+            reference: 'new-intl-eu-104',
+            meta: [[Object]],
+            narration: "Test EU Int'l bank transfers",
+            approver: null,
+            complete_message: '',
+            requires_approval: 0,
+            is_approved: 1,
+            bank_name: 'FA-BANK',
+          },
+        },
+      });
+
+    var payload = {
+      id: '396478',
+    };
+
+    var resp = await transferInstance.get_a_transfer(payload);
+
+    expect(fetchTransferStub).to.have.been.calledOnce;
+    expect(fetchTransferStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+
+    expect(resp.body.data).to.have.property('reference');
+    expect(resp.body.data.reference).to.eq('new-intl-eu-104');
+  });
+
+  it.only('should fetch all transfers', async function () {
+    this.timeout(10000);
+
+    // const fetchTransferStub = sinon
+    //   .stub(transferInstance, 'get_a_transfer')
+    //   .resolves({
+    //     body: {
+    //       status: 'success',
+    //       message: 'Transfer fetched',
+    //       data: {
+    //         id: 396478,
+    //         account_number: 'FOREIGN-ACCOUNT',
+    //         bank_code: 'FOREIGN-BANK',
+    //         full_name: 'Flutterwave Developers',
+    //         created_at: '2023-03-12T00:42:44.000Z',
+    //         currency: 'EUR',
+    //         debit_currency: null,
+    //         amount: 50,
+    //         fee: 35,
+    //         status: 'NEW',
+    //         reference: 'new-intl-eu-104',
+    //         meta: [[Object]],
+    //         narration: "Test EU Int'l bank transfers",
+    //         approver: null,
+    //         complete_message: '',
+    //         requires_approval: 0,
+    //         is_approved: 1,
+    //         bank_name: 'FA-BANK',
+    //       },
+    //     },
+    //   });
+
+    var payload = { status: 'failed' };
+
+    var resp = await transferInstance.fetch(payload);
+
+    // expect(fetchTransferStub).to.have.been.calledOnce;
+    // expect(fetchTransferStub).to.have.been.calledOnceWith(payload);
+
+    // expect(resp.body).to.have.property('status', 'success');
+
+    // expect(resp.body.data).to.have.property('reference');
+    // expect(resp.body.data.reference).to.eq('new-intl-eu-104');
+
+    console.log(resp);
+  });
+
+  it('should fetch transfer fees', async function () {
+    this.timeout(10000);
+
+    const fetchFeeStub = sinon.stub(transferInstance, 'fee').resolves({
+      body: {
+        status: 'success',
+        message: 'Transfer fee fetched',
+        data: [{ currency: 'NGN', fee_type: 'value', fee: 26.875 }],
+      },
+    });
+
+    var payload = {
+      amount: '12500',
+      currency: 'NGN',
+    };
+
+    var resp = await transferInstance.fee(payload);
+
+    expect(fetchFeeStub).to.have.been.calledOnce;
+    expect(fetchFeeStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+
+    expect(resp.body.data[0]).to.have.property('fee_type');
+    expect(resp.body.data[0]).to.have.property('fee');
   });
 });
