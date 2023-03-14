@@ -13,4 +13,4 @@ This release fixes all npm warnings and dependabot error messages.
 - [ADDED] Support for ApplePay, GooglePay and eNaira payments.
 
 Planned tasks
-- [] Add tests for new schemas and classes.
+- Add tests for new schemas and classes.
