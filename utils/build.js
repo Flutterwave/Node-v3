@@ -3,6 +3,7 @@ const { listSchema } = require('../services/schema/base');
 const { logger } = require('./logger');
 const { validator } = require('./validator');
 
+// make parameter required in the listSchema
 function enforceRequired(schema, paramList) {
   if (!Array.isArray(paramList)) {
     throw new Error('paramList must be an array');

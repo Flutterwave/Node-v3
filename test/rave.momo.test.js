@@ -65,6 +65,7 @@ describe('#Rave Mobile Money', function () {
     };
 
     var resp = await momoInstance.ghana(payload);
+    resp;
 
     expect(createGHSMoMo).to.have.been.calledOnce;
     expect(createGHSMoMo).to.have.been.calledOnceWith(payload);
@@ -267,6 +268,7 @@ describe('#Rave Mobile Money', function () {
     };
 
     var resp = await momoInstance.franco_phone(payload);
+    console.log(resp);
 
     expect(createXAFMoMo).to.have.been.calledOnce;
     expect(createXAFMoMo).to.have.been.calledOnceWith(payload);

@@ -1,46 +1,16 @@
-const joi = require('joi');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
+const { fetchSchema } = require('../schema/base');
 
-const spec = joi.object({
-  id: joi.string().required(),
-});
-
-function service(data, _rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: package.version,
-      title: 'Incoming call',
-      message: 'Cancel Payment plan',
-    },
+async function service(data, _rave) {
+  validator(fetchSchema, data);
+  logger(`Cancel a payment plan`, _rave);
+  data.method = 'PUT';
+  const { body: response } = await _rave.request(
+    `v3/payment-plans/${data.id}/cancel`,
+    data,
   );
-
-  const d = q.defer();
-
-  q.fcall(() => {
-    const { error, value } = spec.validate(data);
-    var params = value;
-    return params;
-  })
-    .then((params) => {
-      params.method = 'PUT';
-      var uri = `v3/payment-plans/${params.id}/cancel`;
-
-      return _rave.request(uri, params);
-    })
-    .then((response) => {
-      // console.log(response.body);
-      d.resolve(response.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
+  return response;
 }
-service.morxspc = spec;
+
 module.exports = service;

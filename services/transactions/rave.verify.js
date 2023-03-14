@@ -1,30 +1,16 @@
-const joi = require('joi');
-const q = require('q');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
+const { fetchSchema } = require('../schema/base');
 
-const spec = joi.object({
-  id: joi.string().required(),
-});
-
-function service(data, _rave) {
-  var d = q.defer();
-
-  q.fcall(() => {
-    const { error, value } = spec.validate(data);
-    var params = value;
-    return params;
-  })
-    .then((params) => {
-      params.method = 'GET';
-      return _rave.request(`v3/transactions/${params.id}/verify`, params);
-    })
-    .then((response) => {
-      d.resolve(response.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
+async function service(data, _rave) {
+  validator(fetchSchema, data);
+  logger(`Verify Transactions`, _rave);
+  data.method = 'GET';
+  const { body: response } = await _rave.request(
+    `v3/transactions/${data.id}/verify`,
+    data,
+  );
+  return response;
 }
-service.morxspc = spec;
+
 module.exports = service;

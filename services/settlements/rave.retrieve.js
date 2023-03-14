@@ -1,45 +1,16 @@
-const joi = require('joi');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
+const { fetchSchema } = require('../schema/base');
 
-const spec = joi.object({
-  id: joi.string().required(),
-});
-
-function service(data, _rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: package.version,
-      title: 'Incoming call',
-      message: 'Fetch a Settlement',
-    },
+async function service(data, _rave) {
+  validator(fetchSchema, data);
+  logger(`Fetch a settlement`, _rave);
+  data.method = 'GET';
+  const { body: response } = await _rave.request(
+    `/v3/settlements/${data.id}`,
+    data,
   );
-
-  var d = q.defer();
-
-  q.fcall(() => {
-    const { error, value } = spec.validate(data);
-    var params = value;
-    return params;
-  })
-    .then((params) => {
-      params.method = 'GET';
-      var uri = `v3/settlements/${params.id}`;
-
-      return _rave.request(uri, params);
-    })
-    .then((response) => {
-      d.resolve(response.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
+  return response;
 }
-service.morxspc = spec;
+
 module.exports = service;

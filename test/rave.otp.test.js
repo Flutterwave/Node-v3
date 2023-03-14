@@ -69,6 +69,7 @@ describe('#Rave OTP', function () {
     };
 
     var resp = await otpInstance.create(payload);
+    // console.log(resp);
 
     expect(generateOTPSuccessStub).to.have.been.calledOnce;
     expect(generateOTPSuccessStub).to.have.been.calledOnceWith(payload);
@@ -101,6 +102,7 @@ describe('#Rave OTP', function () {
     };
 
     var resp = await otpInstance.validate(payload);
+    // console.log(resp);
 
     expect(validateOTPSuccessStub).to.have.been.calledOnce;
     expect(validateOTPSuccessStub).to.have.been.calledOnceWith(payload);
