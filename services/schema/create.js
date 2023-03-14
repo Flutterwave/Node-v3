@@ -315,7 +315,7 @@ const momoSchema = joi.object({
 
 // create a payment plan
 const planSchema = joi.object({
-  amount: joi.number().positive().required(),
+  amount: joi.number().positive(),
   name: joi.string().trim().max(150).required(),
   interval: joi
     .string()
