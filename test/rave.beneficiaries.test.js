@@ -31,7 +31,7 @@ describe('#Rave Beneficiaries', function () {
     sinon.restore();
   });
 
-  it('should create Beneficiary', async function () {
+  it('should create a Beneficiary', async function () {
     this.timeout(10000);
 
     const createBeneficiariesSuccessStub = sinon
@@ -57,6 +57,7 @@ describe('#Rave Beneficiaries', function () {
     };
 
     var resp = await beneficiariesInstance.create(payload);
+    // console.log(resp);
 
     // success case
     expect(createBeneficiariesSuccessStub).to.have.been.calledOnce;

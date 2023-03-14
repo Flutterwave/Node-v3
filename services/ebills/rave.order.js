@@ -1,61 +1,12 @@
-const joi = require('joi');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
+const { orderSchema } = require('../schema/auxillary');
 
-const spec = joi.object({
-  email: joi.string().max(100).email().required(),
-  tx_ref: joi.string().trim().max(100).required(),
-  ip: joi
-    .string()
-    .ip({
-      version: ['ipv4', 'ipv6'],
-    })
-    .default('::127.0.0.1'),
-  custom_business_name: joi.string().trim().max(100).required(),
-  amount: joi.number().required(),
-  currency: joi.string().uppercase().length(3).default('NGN'),
-  country: joi.string().uppercase().length(2).default('NG'),
-  number_of_units: joi.number().required(),
-  phone_number: joi
-    .string()
-    .max(50)
-    .custom((value) => {
-      if (value && !/^\+?\d+$/.test(value))
-        throw new Error('phone number should be digits');
-      return value;
-    }),
-});
-
-function service(data, _rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: package.version,
-      title: 'Incoming call',
-      message: 'Create eBills',
-    },
-  );
-
-  const d = q.defer();
-  q.fcall(() => {
-    const { error, value } = spec.validate(data);
-    var params = value;
-    return params;
-  })
-    .then((params) => {
-      return _rave.request('v3/ebills', params);
-    })
-    .then((resp) => {
-      d.resolve(resp.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
+async function service(data, _rave) {
+  validator(orderSchema, data);
+  const { body: response } = await _rave.request(`v3/ebills`, data);
+  logger(`Create an ebill`, _rave);
+  return response;
 }
-service.morxspc = spec;
+
 module.exports = service;
