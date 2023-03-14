@@ -1,42 +1,12 @@
-const joi = require('joi');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { handleEmptyFetch } = require('../../utils/build');
 
-const spec = joi.object({});
-
-function service(_rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: package.version,
-      title: 'Incoming call',
-      message: 'Get-recurring-bill',
-    },
+async function service(data, _rave) {
+  return handleEmptyFetch(
+    data,
+    `Fetch recurring bill payments`,
+    `v3/recurring-bills?`,
+    _rave,
   );
-
-  var d = q.defer();
-
-  q.fcall(() => {
-    var params = spec;
-    return params;
-  })
-    .then((params) => {
-      params.method = 'GET';
-      var uri = `v3/recurring-bills`;
-
-      return _rave.request(uri, params);
-    })
-    .then((response) => {
-      d.resolve(response.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
 }
-service.morxspc = spec;
+
 module.exports = service;

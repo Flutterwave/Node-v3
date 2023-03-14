@@ -1,13 +1,12 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { fetchSchema } = require('../schema/base');
+const { chargeSchema } = require('../schema/create');
 
 async function service(data, _rave) {
-  validator(fetchSchema, data);
-  logger(`Retrieve bills by agency`, _rave);
-  data.method = 'GET';
+  validator(chargeSchema, data);
+  logger(`Create ApplePay charge`, _rave);
   const { body: response } = await _rave.request(
-    `v3/billers/${data.id}/products`,
+    `v3/charges?type=applepay`,
     data,
   );
   return response;

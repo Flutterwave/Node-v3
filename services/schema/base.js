@@ -9,13 +9,15 @@ const fetchSchema = joi.object({
 const listSchema = joi.object({
   id: joi.string(),
   page: joi.string().min(1),
+  index: joi.string().min(1),
+  size: joi.string().min(1),
   from: joi.string().isoDate(),
   to: joi.string().isoDate(),
   reference: joi.string(),
   tx_ref: joi.string().trim().max(100),
   currency: joi.string().uppercase().length(3).default('NGN'),
   country: joi.string().uppercase().length(2).default('NG'),
-  amount: joi.number(),
+  amount: joi.number().positive(),
   status: joi.string().max(20),
   interval: joi
     .string()
@@ -33,6 +35,12 @@ const listSchema = joi.object({
   plan: joi.string().min(1),
   customer_fullname: joi.string().max(100),
   email: joi.string().max(100).email(),
+  airtime: joi.number().integer().positive().min(0).max(1),
+  data_bundle: joi.number().integer().positive().min(0).max(1),
+  power: joi.number().integer().positive().min(0).max(1),
+  internet: joi.number().integer().positive().min(0).max(1),
+  toll: joi.number().integer().positive().min(0).max(1),
+  cable: joi.number().integer().positive().min(0).max(1),
 });
 
 // Set id for update
