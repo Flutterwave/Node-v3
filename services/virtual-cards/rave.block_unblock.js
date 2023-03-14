@@ -9,12 +9,12 @@ const spec = joi.object({
 
 async function service(data, _rave) {
   validator(spec, data);
-  logger(`Fund a virtual card`, _rave);
   data.method = 'PUT';
   const { body: response } = await _rave.request(
     `v3/virtual-cards/${data.id}/status/${data.status_action}`,
     data,
   );
+  logger(`Fund a virtual card`, _rave);
   return response;
 }
 module.exports = service;

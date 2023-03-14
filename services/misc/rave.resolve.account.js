@@ -4,9 +4,9 @@ const { resolveSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
   validator(resolveSchema, data);
-  logger(`Resolve bank account details`, _rave);
   data.method = 'GET';
   const { body: response } = await _rave.request(`v3/accounts/resolve`, data);
+  logger(`Resolve bank account details`, _rave);
   return response;
 }
 

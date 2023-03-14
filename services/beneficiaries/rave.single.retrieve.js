@@ -4,12 +4,12 @@ const { fetchSchema } = require('../schema/base');
 
 async function service(data, _rave) {
   validator(fetchSchema, data);
-  logger(`Fetch a transfer beneficiary`, _rave);
   data.method = 'GET';
   const { body: response } = await _rave.request(
     `/v3/beneficiaries/${data.id}`,
     data,
   );
+  logger(`Fetch a transfer beneficiary`, _rave);
   return response;
 }
 

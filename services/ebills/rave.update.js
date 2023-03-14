@@ -4,12 +4,12 @@ const { updateSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
   validator(updateSchema, data);
-  logger(`Update ebills details`, _rave);
   data.method = 'PUT';
   const { body: response } = await _rave.request(
     `v3/ebills/${data.reference}`,
     data,
   );
+  logger(`Update ebills details`, _rave);
   return response;
 }
 

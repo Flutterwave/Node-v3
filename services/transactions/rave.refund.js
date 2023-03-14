@@ -4,12 +4,12 @@ const { refundSchema } = require('../schema/create');
 
 async function service(data, _rave) {
   validator(refundSchema, data);
-  logger(`Initiate a refund`, _rave);
   data.method = 'POST';
   const { body: response } = await _rave.request(
     `v3/transactions/${data.id}/refund`,
     data,
   );
+  logger(`Initiate a refund`, _rave);
   return response;
 }
 

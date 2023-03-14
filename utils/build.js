@@ -31,16 +31,16 @@ function enforceRequired(schema, paramList) {
 async function handleEmptyFetch(param, name, uri, _rave) {
   if (param === undefined || param === null) {
     param = {};
-    logger(name, _rave);
     param.method = 'GET';
     const { body: response } = await _rave.request(uri, param);
+    logger(name, _rave);
     return response;
   }
 
-  logger(name, _rave);
   validator(listSchema, param);
   param.method = 'GET';
   const { body: response } = await _rave.request(uri, param);
+  logger(name, _rave);
   return response;
 }
 

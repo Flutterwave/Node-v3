@@ -4,8 +4,8 @@ const { createOTPSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
   validator(createOTPSchema, data);
-  logger(`Create OTP`, _rave);
   const { body: response } = await _rave.request(`v3/otps`, data);
+  logger(`Create OTP`, _rave);
   return response;
 }
 

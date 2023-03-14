@@ -5,12 +5,12 @@ const { validator } = require('../../utils/validator');
 
 async function service(data, _rave) {
   validator(listSchema, data);
-  logger(`Fetch transfer fees`, _rave);
   data.method = 'GET';
   const { body: response } = await _rave.request(
     `v3/transfers/fee?currency=${data.currency}&amount=${data.amount}`,
     data,
   );
+  logger(`Fetch transfer fees`, _rave);
   return response;
 }
 module.exports = service;

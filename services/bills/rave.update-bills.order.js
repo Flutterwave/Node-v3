@@ -4,12 +4,12 @@ const { updateOrderSchema } = require('../schema/bill');
 
 async function service(data, _rave) {
   validator(updateOrderSchema, data);
-  logger(`Update bill order`, _rave);
   data.method = 'PUT';
   const { body: response } = await _rave.request(
     `v3/product-orders/${data.reference}`,
     data,
   );
+  logger(`Update bill order`, _rave);
   return response;
 }
 

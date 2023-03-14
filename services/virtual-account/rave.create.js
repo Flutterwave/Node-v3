@@ -4,11 +4,11 @@ const { accountSchema } = require('../schema/create');
 
 async function service(data, _rave) {
   validator(accountSchema, data);
-  logger(`Create a virtual account`, _rave);
   const { body: response } = await _rave.request(
     `v3/virtual-account-numbers`,
     data,
   );
+  logger(`Create a virtual account`, _rave);
   return response;
 }
 

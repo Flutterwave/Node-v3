@@ -4,11 +4,11 @@ const { chargeSchema } = require('../schema/create');
 
 async function service(data, _rave) {
   validator(chargeSchema, data);
-  logger(`Create ACH charge`, _rave);
   const { body: response } = await _rave.request(
     `v3/charges?type=ach_payment`,
     data,
   );
+  logger(`Create ACH charge`, _rave);
   return response;
 }
 

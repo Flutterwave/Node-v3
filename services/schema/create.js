@@ -116,6 +116,54 @@ const bulkTokenSchema = joi.object({
   bulk_data: joi.array().items(bulkTokenDataSchema).required(),
 });
 
+// create bulk transfers
+const bulkTransferSchema = joi.object({
+  title: joi.string(),
+  bulk_data: joi
+    .array()
+    .items(
+      joi.object({
+        bank_code: joi.string().length(3).required(),
+        account_number: joi.string().trim().max(20).required(),
+        amount: joi.number().positive().required(),
+        currency: joi.string().uppercase().length(3).default('NGN').required(),
+        narration: joi.string(),
+        reference: joi.string(),
+        meta: joi.when('currency', {
+          is: 'ZAR',
+          then: joi
+            .array()
+            .items(
+              joi.object({
+                first_name: joi.string(),
+                last_name: joi.string(),
+                email: joi.string().email().required(),
+                mobile_number: joi
+                  .string()
+                  .max(50)
+                  .custom((value) => {
+                    if (value && !/^\+?\d+$/.test(value))
+                      throw new Error('phone number should be digits');
+                    return value;
+                  })
+                  .required(),
+                recipient_address: joi.string().required(),
+                sender: joi.string().required(),
+                sender_country: joi
+                  .string()
+                  .uppercase()
+                  .length(2)
+                  .default('NG')
+                  .required(),
+              }),
+            )
+            .required(),
+        }),
+      }),
+    )
+    .required(),
+});
+
 // create virtual card
 const cardSchema = joi.object({
   currency: joi.string().uppercase().length(3).valid('USD').required(),
@@ -314,6 +362,7 @@ const transferSchema = joi.object({
     otherwise: joi.string().trim().max(20).required(),
   }),
   narration: joi.string().max(100),
+  debit_subaccount: joi.string().max(100),
   debit_currency: joi.string().uppercase().length(3).default('NGN'),
   reference: joi.string().trim().max(100),
   beneficiary: joi.number(),
@@ -488,12 +537,25 @@ const tokenSchema = joi.object({
   redirect_url: joi.string(),
 });
 
+// Initiate transfers from one F4B wallet to another
+const walletTransferSchema = joi.object({
+  amount: joi.number().positive().required(),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
+  account_bank: joi.string().default('flutterwave').required(),
+  account_number: joi.string().trim().max(20).required(),
+  narration: joi.string().max(100).required(),
+  debit_subaccount: joi.string().max(200),
+  debit_currency: joi.string().uppercase().length(3).default('NGN'),
+  reference: joi.string().trim().max(100),
+});
+
 module.exports = {
   accountSchema,
   bankChargeSchema,
   beneficiarySchema,
   bulkAccountSchema,
   bulkTokenSchema,
+  bulkTransferSchema,
   cardSchema,
   cardChargeSchema,
   chargeSchema,
@@ -503,4 +565,5 @@ module.exports = {
   subaccountSchema,
   transferSchema,
   tokenSchema,
+  walletTransferSchema,
 };

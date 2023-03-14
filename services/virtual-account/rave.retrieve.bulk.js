@@ -2,12 +2,12 @@ const { fetchBulkAccountSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
   validator(fetchBulkAccountSchema, data);
-  logger(`Fetch bulk account details`, _rave);
   data.method = 'GET';
   const { body: response } = await _rave.request(
     `v3/bulk-virtual-account-numbers/${data.batch_id}`,
     data,
   );
+  logger(`Fetch bulk account details`, _rave);
   return response;
 }
 

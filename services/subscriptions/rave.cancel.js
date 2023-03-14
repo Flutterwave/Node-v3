@@ -4,12 +4,12 @@ const { fetchSchema } = require('../schema/base');
 
 async function service(data, _rave) {
   validator(fetchSchema, data);
-  logger(`Cancel a subscription`, _rave);
   data.method = 'PUT';
   const { body: response } = await _rave.request(
     `v3/subscriptions/${data.id}/cancel`,
     data,
   );
+  logger(`Cancel a subscription`, _rave);
   return response;
 }
 

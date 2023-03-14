@@ -13,6 +13,7 @@ const listSchema = joi.object({
   size: joi.string().min(1),
   from: joi.string().isoDate(),
   to: joi.string().isoDate(),
+  bulk_id: joi.string(),
   reference: joi.string(),
   tx_ref: joi.string().trim().max(100),
   currency: joi.string().uppercase().length(3).default('NGN'),
@@ -48,8 +49,16 @@ const updateSchema = joi.object({
   id: joi.string().required(),
 });
 
+// validate collections
+const validateSchema = joi.object({
+  otp: joi.string().min(5).max(7).required(),
+  flw_ref: joi.string().required(),
+  type: joi.string().valid('card', 'account'),
+});
+
 module.exports = {
   fetchSchema,
   listSchema,
   updateSchema,
+  validateSchema,
 };
