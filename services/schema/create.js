@@ -4,10 +4,10 @@ const joi = require('joi');
 const accountSchema = joi.object({
   email: joi.string().max(100).email().required(),
   is_permanent: joi.boolean().required(),
-  bvn: joi.string
-    .trim()
-    .length(11)
-    .when('is_permanent', { is: true, then: joi.required() }),
+  bvn: joi.when('is_permanent', {
+    is: true,
+    then: joi.string().trim().length(11).required(),
+  }),
   duration: joi.string().min(1),
   frequency: joi.string().min(1),
   narration: joi.string().max(100),
@@ -25,14 +25,53 @@ const beneficiarySchema = joi.object({
 const bulkAccountSchema = joi.object({
   email: joi.string().max(100).email().required(),
   is_permanent: joi.boolean().required(),
-  bvn: joi.string
-    .trim()
-    .length(11)
-    .when('is_permanent', { is: true, then: joi.required() }),
+  bvn: joi.when('is_permanent', {
+    is: true,
+    then: joi.string().trim().length(11).required(),
+  }),
   accounts: joi.string().min(1).required(),
   frequency: joi.string().min(1),
   tx_ref: joi.string().trim().max(100),
   amount: joi.number(),
+});
+
+// create mobile money charge
+const momoSchema = joi.object({
+  amount: joi.number().required(),
+  email: joi.string().max(100).email().required(),
+  tx_ref: joi.string().trim().max(100).required(),
+  currency: joi.string().uppercase().length(3).required(),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    })
+    .required(),
+  network: joi.when('currency', {
+    is: 'GHS',
+    then: joi.string().default('MTN').required(),
+  }),
+  country: joi.when('currency', {
+    is: joi.valid('XAF', 'XOF'),
+    then: joi.string().uppercase().length(2).default('CM').required(),
+  }),
+  order_id: joi.when('currency', {
+    is: 'RWF',
+    then: joi.string().trim().max(100).required(),
+  }),
+  fullname: joi.string().max(100),
+  client_ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  meta: joi.array().items(joi.object({})),
+  device_fingerprint: joi.string().trim().max(200),
+  redirect_url: joi.string().uri(),
 });
 
 // create a payment plan
@@ -49,7 +88,7 @@ const planSchema = joi.object({
 });
 
 // initiate the refunds
-const refundSchema = oi.object({
+const refundSchema = joi.object({
   id: joi.string().required(),
   amount: joi.number().required(),
 });
@@ -240,6 +279,7 @@ module.exports = {
   accountSchema,
   beneficiarySchema,
   bulkAccountSchema,
+  momoSchema,
   planSchema,
   refundSchema,
   subaccountSchema,

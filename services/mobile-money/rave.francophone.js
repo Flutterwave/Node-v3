@@ -1,6 +1,6 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { momoSchema } = require('../schema/base');
+const { momoSchema } = require('../schema/create');
 
 async function service(data, _rave) {
   validator(momoSchema, data);
