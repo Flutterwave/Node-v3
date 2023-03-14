@@ -1,43 +1,7 @@
-const joi = require('joi');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { handleEmptyFetch } = require('../../utils/build');
 
-const spec = joi.object({});
-
-function service(data, _rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: package.version,
-      title: 'Incoming call',
-      message: 'Get-all-wallet-balance',
-    },
-  );
-
-  var d = q.defer();
-
-  q.fcall(() => {
-    var params = spec;
-    return params;
-  })
-    .then((params) => {
-      params.method = 'GET';
-      var uri = `v3/balances`;
-
-      return _rave.request(uri, params);
-    })
-    .then((response) => {
-      // console.log(response.body);
-      d.resolve(response.body);
-    })
-    .catch((err) => {
-      d.reject(err);
-    });
-
-  return d.promise;
+async function service(data, _rave) {
+  return handleEmptyFetch(data, `Fetch all balances`, `/v3/balances?`, _rave);
 }
-service.morxspc = spec;
+
 module.exports = service;

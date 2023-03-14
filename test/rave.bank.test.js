@@ -1,5 +1,4 @@
 var banks = require('../lib/rave.banks');
-var payout = require('../lib/rave.transfers');
 var base = require('../lib/rave.base');
 
 var Promise = require('bluebird');
@@ -74,6 +73,7 @@ describe('#Rave Bank', function () {
     };
 
     var resp = await banksInstance.country(payload);
+    // console.log(resp);
 
     expect(bankStub).to.have.been.calledOnce;
     expect(bankStub).to.have.been.calledOnceWith(payload);
@@ -135,6 +135,7 @@ describe('#Rave Bank', function () {
     };
 
     var resp = await banksInstance.branches(payload);
+    // console.log(resp);
 
     expect(bankBranchStub).to.have.been.calledOnce;
     expect(bankBranchStub).to.have.been.calledOnceWith(payload);
