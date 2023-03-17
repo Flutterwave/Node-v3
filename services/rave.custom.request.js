@@ -1,31 +1,27 @@
-var morx = require('morx');
+// var morx = require('morx');
 
-var q = require('q');
+// var q = require('q');
 
-function newRefund(path, data, _rave) {
+// function newRefund(path, data, _rave) {
+//   var d = q.defer();
 
-    var d = q.defer();
+//   q.fcall(() => {
+//     path = path || 'NO PATH PASSED, PLEASE PASS A VALID PATH';
 
-    q.fcall(() => {
+//     if (path == 'NO PATH PASSED, PLEASE PASS A VALID PATH') {
+//       throw path;
+//     }
 
-            path = path || "NO PATH PASSED, PLEASE PASS A VALID PATH";
+//     return _rave.request(path, data);
+//   })
+//     .then((response) => {
+//       d.resolve(response);
+//     })
+//     .catch((err) => {
+//       d.reject(err);
+//     });
 
-            if (path == "NO PATH PASSED, PLEASE PASS A VALID PATH") {
-                throw path;
-            }
+//   return d.promise;
+// }
 
-            return _rave.request(path, data);
-        })
-        .then(response => {
-            d.resolve(response);
-        })
-        .catch(err => {
-            d.reject(err);
-        })
-
-    return d.promise;
-
-
-}
-
-module.exports = newRefund;
+// module.exports = newRefund;

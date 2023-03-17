@@ -1,4 +1,13 @@
-# Changelog template
+# Changelog
+
+## 1.1.1 | 2023-03-17
+
+This release fixes morx errors throw in custom request class.
+
+### Morx error fix.
+
+- [FIXED] Morx error returned in custom service class in v1.1.0
+
 
 ## 1.1.0 | 2023-03-14
 
@@ -14,3 +23,4 @@ This release fixes all npm warnings and dependabot error messages.
 
 Planned tasks
 - [] Add tests for new schemas and classes.
+
