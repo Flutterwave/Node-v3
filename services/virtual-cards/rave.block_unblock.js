@@ -1,46 +1,20 @@
-const morx = require('morx');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const joi = require('joi');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
 
-const spec = morx.spec()
-	.build('id', 'required:true, eg:a1b7864f-c56d-4453-bf55-a08db4acb5fe')
-	.build('status_action', 'required:true, eg:block')
-	.end();
+const spec = joi.object({
+  id: joi.string().required(),
+  status_action: joi.string().valid('block', 'unblock').required(),
+});
 
-function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Block/unblock-card"
-       })
-
-	var d = q.defer();
-
-	q.fcall(() => {
-
-			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			var params = validated.params;
-			return params
-		})
-		.then(params => {
-			params.method = "PUT";
-			var uri = `v3/virtual-cards/${params.id}/status/${params.status_action}`
-			return _rave.request(uri, params)
-
-		})
-		.then(response => {
-
-			d.resolve(response.body);
-		})
-		.catch(err => {
-
-			d.reject(err);
-		})
-
-	return d.promise;
+async function service(data, _rave) {
+  validator(spec, data);
+  data.method = 'PUT';
+  const { body: response } = await _rave.request(
+    `v3/virtual-cards/${data.id}/status/${data.status_action}`,
+    data,
+  );
+  logger(`Fund a virtual card`, _rave);
+  return response;
 }
-service.morxspc = spec;
 module.exports = service;

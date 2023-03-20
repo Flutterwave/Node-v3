@@ -1,48 +1,16 @@
-const morx = require('morx');
-const q = require('q');
-const axios = require('axios');
-const package = require('../../package.json');
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
+const { retrieveSchema } = require('../schema/auxillary');
 
-const spec = morx.spec()
-	.build('bulk_id', 'required:false, eg:131')
-	.end();
-
-
-function service(data, _rave) {
-	axios.post('https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent', {
-         "publicKey": _rave.getPublicKey(),
-         "language": "NodeJs v3",
-         "version": package.version,
-         "title": "Incoming call",
-             "message": "Fetch bulk token transaction"
-       })
-
-	var d = q.defer();
-	q.fcall(() => {
-
-			var validated = morx.validate(data, spec, _rave.MORX_DEFAULT);
-			var params = validated.params;
-
-			return (params);
-
-		})
-		.then(params => {
-			params.method = "GET"
-			return _rave.request(`v3/bulk-tokenized-charges/${params.bulk_id}`, params)
-		})
-		.then(resp => {
-
-			d.resolve(resp.body);
-
-		})
-		.catch(err => {
-
-			d.reject(err);
-
-		});
-
-	return d.promise;
-
+async function service(data, _rave) {
+  validator(retrieveSchema, data);
+  data.method = 'GET';
+  const { body: response } = await _rave.request(
+    `v3/bulk-tokenized-charges/${data.bulk_id}`,
+    data,
+  );
+  logger(`Bulk tokenized status`, _rave);
+  return response;
 }
-service.morxspc = spec;
+
 module.exports = service;

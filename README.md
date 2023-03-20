@@ -37,7 +37,7 @@ Available features include:
 7. [Support](#support)
 8. [Contribution guidelines](#contribution-guidelines)
 9. [License](#license)
-10. Changelog
+10. [Changelog](/CHANGELOG.md)
 
 ## Requirements
 
@@ -83,6 +83,7 @@ Read the [requirement section](#requirements) for more information on how to get
 13. [OTP](documentation/otp.md)
 13. [Ebills](documentation/ebills.md)
 14. [Misc](documentation/misc.md)
+15. Virtual Cards
 
 ### `Get bill payment agencies`
 

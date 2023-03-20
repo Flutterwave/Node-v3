@@ -19,6 +19,9 @@ Collect payments from your users via any of these methods:
 10. Zambia Mobile Money
 11. Francophone Mobile Money (for Senegal, Cote D'Ivoire, Mali and Cameroon).
 12. USSD
+13. eNaira
+14. ApplePay 
+15. GooglePay
 
 There are three steps involved in collecting payments from your users:
 

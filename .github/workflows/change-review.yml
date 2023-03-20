@@ -1,4 +1,4 @@
-name: Review package
+name: Review changes on Dev (Commits/PRs)
 on:
   push:
     branches: ['dev']
@@ -7,8 +7,7 @@ on:
       - opened
 
 jobs:
-  test:
-    name: Review changes on Dev (Commits/PRs)
+  code-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,4 +45,5 @@ jobs:
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
         if: always()
