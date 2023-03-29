@@ -12,10 +12,9 @@
 ## Introduction
 
 The Node library provides easy access to Flutterwave for Business (F4B) v3 APIs for your Node apps. It abstracts the complexity involved in direct integration and allows you to make quick calls to the APIs.
-
 Available features include:
 
-- Collections: Card, Account, Mobile money, Bank Transfers, USSD, Barter, NQR.
+- Collections: Card, Account, Mobile money, Bank Transfers, USSD, Barter, NQR, Apple Pay, Google Pay.
 - Payouts and Beneficiaries.
 - Recurring payments: Tokenization and Subscriptions.
 - Split payments
@@ -27,7 +26,6 @@ Available features include:
 
 
 ## Table of Content
-
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Initialization](#initialization)
@@ -440,7 +438,6 @@ updateSubaccount();
 ```
 
 ## Testing
-
 All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. They can be run by running the test command in your terminal.
 
 ```sh
@@ -448,16 +445,12 @@ npm run test
 ```
 
 ## Debugging Errors
-
 We understand that you may run into some errors while integrating our library. You can read more about our error messages [here](https://developer.flutterwave.com/docs/integration-guides/errors).
-
 For `authorization` and `validation` error responses, double-check your API keys and request. If you get a `server` error, kindly engage the team for support.
 
 
 ## Support
-
-For additional assistance using this library, contact the developer experience (DX) team via [email](mailto:developers@flutterwavego.com) or on [slack](https://bit.ly/34Vkzcg). 
-
+For additional assistance using this library, contact the developer experience (DX) team via [email](mailto:developers@flutterwavego.com) or on [slack](https://bit.ly/34Vkzcg).
 You can also follow us [@FlutterwaveEng](https://twitter.com/FlutterwaveEng) and let us know what you think 😊.
 
 
@@ -466,7 +459,5 @@ Read more about our community contribution guidelines [here](/CONTRIBUTING.md)
 
 
 ## License
-
 By contributing to this library, you agree that your contributions will be licensed under its [MIT license](/LICENSE).
-
 Copyright (c) Flutterwave Inc.
