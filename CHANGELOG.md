@@ -23,4 +23,3 @@ This release fixes all npm warnings and dependabot error messages.
 
 Planned tasks
 - [] Add tests for new schemas and classes.
-
