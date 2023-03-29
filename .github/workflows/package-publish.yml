@@ -2,8 +2,7 @@ name: Publish changes to Node package manager
 
 on:
   release:
-    types: [created]
-    branches: ['master']
+    types: [created, edited]
 
 jobs:
   check-readme-and-changelog:
