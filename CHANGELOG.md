@@ -1,6 +1,6 @@
 # Changelog
 ## 1.1.3 | 2023-03-29
-General housekeeping. This release fixes all the bugs in the new SDK (v1.1.0)
+Scheduled updates and bug fixes. This release fixes all the bugs in the new SDK (v1.1.0)
 ### Version changes.
 - [FIXED] Updated validation for empty meta objects in charge and transfer methods.
 - [FIXED] Added conditional validation for `Country`, `Network`and `Voucher` parameters in Mobile Money schema.
