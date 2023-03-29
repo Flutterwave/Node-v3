@@ -574,4 +574,33 @@ describe('#Rave transfers', function () {
     expect(resp.body.data[0]).to.have.property('fee_type');
     expect(resp.body.data[0]).to.have.property('fee');
   });
+
+  it('should fetch single transfer details', async function () {
+    this.timeout(10000);
+
+    const fetchTransferStub = sinon
+      .stub(transferInstance, 'get_a_transfer')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'Transfer fee fetched',
+          data: [{ currency: 'NGN', fee_type: 'value', fee: 26.875 }],
+        },
+      });
+
+    var payload = {
+      id: '396456',
+    };
+
+    var resp = await transferInstance.get_a_transfer(payload);
+    // console.log(resp);
+
+    expect(fetchTransferStub).to.have.been.calledOnce;
+    expect(fetchTransferStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+
+    expect(resp.body.data[0]).to.have.property('fee_type');
+    expect(resp.body.data[0]).to.have.property('fee');
+  });
 });

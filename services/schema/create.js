@@ -40,7 +40,7 @@ const bankChargeSchema = joi.object({
     .default('::127.0.0.1'),
   device_fingerprint: joi.string().trim().max(200),
   redirect_url: joi.string().uri(),
-  meta: joi.object({}),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
 });
 
 // create a beneficiary
@@ -187,7 +187,7 @@ const cardSchema = joi.object({
         throw new Error('phone number should be digits');
       return value;
     }),
-  title: joi.string().valid('Mr', 'Mrs', 'Miss').required(),
+  title: joi.string().uppercase().valid('MR', 'MRS', 'MISS').required(),
   gender: joi.string().length(1).valid('M', 'F').required(),
   callback_url: joi.string().uri(),
 });
@@ -239,7 +239,7 @@ const cardChargeSchema = joi.object({
     zipcode: joi.number().positive(),
   }),
   payment_plan: joi.string(),
-  meta: joi.object({}),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
 });
 
 // initiate collections for different payment methods
@@ -271,7 +271,7 @@ const chargeSchema = joi.object({
   billing_state: joi.string(),
   billing_country: joi.string().uppercase().length(2).default('NG'),
   billing_zipcode: joi.number().positive(),
-  meta: joi.object({}),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
 });
 
 // create mobile money charge
@@ -291,7 +291,24 @@ const momoSchema = joi.object({
     .required(),
   network: joi.when('currency', {
     is: 'GHS',
-    then: joi.string().default('MTN').required(),
+    then: joi.string().valid('MTN', 'VODAFONE', 'TIGO').required().messages({
+      'any.only': 'Only MTN, VODAFONE and TIGO are valid network values.',
+    }),
+    otherwise: joi.when('currency', {
+      is: 'UGX',
+      then: joi
+        .string()
+        .valid('MTN', 'VODAFONE', 'Airtel')
+        .required()
+        .messages({
+          'any.only': 'Only MTN, VODAFONE and Airtel are valid network values.',
+        }),
+    }),
+  }),
+  voucher: joi.when('network', {
+    is: 'VODAFONE',
+    then: joi.number().required(),
+    otherwise: joi.optional(),
   }),
   country: joi.when('currency', {
     is: joi.valid('XAF', 'XOF'),
@@ -308,7 +325,7 @@ const momoSchema = joi.object({
       version: ['ipv4', 'ipv6'],
     })
     .default('::127.0.0.1'),
-  meta: joi.array().items(joi.object({})),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
   device_fingerprint: joi.string().trim().max(200),
   redirect_url: joi.string().uri(),
 });
@@ -343,7 +360,7 @@ const subaccountSchema = joi.object({
   business_contact: joi.string().trim().max(100),
   business_contact_mobile: joi.string().trim().max(100),
   country: joi.string().uppercase().length(2).default('NG'),
-  meta: joi.array().items(joi.object({})),
+  meta: joi.array().items(joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any())),
   split_type: joi.string().valid('percentage', 'flat'),
 });
 

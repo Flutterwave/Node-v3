@@ -230,10 +230,12 @@ describe('#Rave Misc', function () {
       });
 
     var payload = {
-      bvn: '12345678901',
+      account_number: '0690000032',
+      account_bank: '044',
     };
 
     var resp = await miscInstance.verify_Account(payload);
+    // console.log(resp);
 
     expect(resolveAccountSuccessStub).to.have.been.calledOnce;
     expect(resolveAccountSuccessStub).to.have.been.calledOnceWith(payload);
