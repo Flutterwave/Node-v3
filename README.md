@@ -37,7 +37,7 @@ Available features include:
 7. [Support](#support)
 8. [Contribution guidelines](#contribution-guidelines)
 9. [License](#license)
-10. Changelog
+10. [Changelog](/CHANGELOG.md)
 
 ## Requirements
 
