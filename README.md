@@ -20,7 +20,7 @@ Available features include:
 - Split payments
 - Card issuing
 - Transactions dispute management: Refunds and Chargebacks.
-- Transaction reporting: Collections, Payouts, Settlements, Refunds and Chargebacks.
+- Transaction reporting: Collections, Payouts, Settlements, Refunds, Chargebacks and Transaction timeline.
 - Bill payments: Airtime, Data bundle, Cable, Power, Toll, E-bills, and Remitta.
 - Identity verification: Resolve bank account, resolve BVN information and generate OTP.
 
@@ -60,9 +60,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 ```
 
 For staging, Use TEST API Keys and for production, use LIVE API KEYS.
-You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from the Flutterwave dashboard. 
-
-Read the [requirement section](#requirements) for more information on how to get your API keys.
+You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from the Flutterwave dashboard. Read the [requirement section](#requirements) for more information on how to get your API keys.
 
 
 ## Usage
