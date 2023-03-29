@@ -1,7 +1,7 @@
 # Changelog
 ## 1.1.3 | 2023-03-29
 General housekeeping. This release fixes all the bugs in the new SDK (v1.1.0)
-### All fixes.
+### Version changes.
 - [FIXED] Updated validation for empty meta objects in charge and transfer methods.
 - [FIXED] Added conditional validation for `Country`, `Network`and `Voucher` parameters in Mobile Money schema.
 - [FIXED] [#111](https://github.com/Flutterwave/Node/issues/111) Verify transaction error.
@@ -12,12 +12,12 @@ General housekeeping. This release fixes all the bugs in the new SDK (v1.1.0)
 
 ## 1.1.1 | 2023-03-17
 This release fixes all morx errors thrown in custom request class.
-### Morx error fix.
+### Version changes.
 - [FIXED] Morx error returned in custom service class in v1.1.0
 
 ## 1.1.0 | 2023-03-14
 This release fixes all npm warnings and dependabot error messages.
-### Dependency update and Services update.
+### Version changes.
 - [FIXED] [#103](https://github.com/Flutterwave/Node/issues/103)  Multiple Vulnerabilities Introduced by dependencies
 - [FIXED] [#87](https://github.com/Flutterwave/Node/issues/87)  Amount is required for payment plan creation
 - [FIXED] [#84](https://github.com/Flutterwave/Node/issues/84)  Cannot filter bills by category
