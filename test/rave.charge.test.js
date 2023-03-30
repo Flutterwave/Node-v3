@@ -104,7 +104,7 @@ describe('#Rave charge', function () {
 
     var payload = {
       public_key: public_key,
-      card_number: '5399838383838380',
+      card_number: '5399838383838381',
       cvv: '470',
       expiry_month: '10',
       expiry_year: '31',
@@ -121,7 +121,7 @@ describe('#Rave charge', function () {
       const resp = await chargeInstance.card(payload);
       expect.fail('Expected an error to be thrown.');
     } catch (error) {
-      expect(error.message).to.equal('email is required');
+      expect(error.message).to.equal('"email" is required');
     }
   });
 });
