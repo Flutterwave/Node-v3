@@ -53,7 +53,7 @@ describe('#Rave Mobile Money', function () {
       amount: '150',
       currency: 'GHS',
       voucher: '143256743',
-      network: 'MTN',
+      network: 'VODAFONE',
       email: 'stefan.wexler@hotmail.eu',
       phone_number: '054709929220',
       fullname: 'Yolande Aglaé Colbert',
@@ -61,11 +61,12 @@ describe('#Rave Mobile Money', function () {
       device_fingerprint: '62wd23423rq324323qew1',
       meta: {
         flightID: '213213AS',
+        anotherBanger: 'Rema or Spyce :)',
       },
     };
 
     var resp = await momoInstance.ghana(payload);
-    resp;
+    // console.log(resp);
 
     expect(createGHSMoMo).to.have.been.calledOnce;
     expect(createGHSMoMo).to.have.been.calledOnceWith(payload);
@@ -268,7 +269,7 @@ describe('#Rave Mobile Money', function () {
     };
 
     var resp = await momoInstance.franco_phone(payload);
-    console.log(resp);
+    // console.log(resp);
 
     expect(createXAFMoMo).to.have.been.calledOnce;
     expect(createXAFMoMo).to.have.been.calledOnceWith(payload);

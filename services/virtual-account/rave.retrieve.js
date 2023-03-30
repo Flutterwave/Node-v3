@@ -1,3 +1,5 @@
+const { logger } = require('../../utils/logger');
+const { validator } = require('../../utils/validator');
 const { fetchAccountSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {

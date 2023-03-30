@@ -5,6 +5,7 @@ const { fetchSchema } = require('../schema/base');
 async function service(data, _rave) {
   validator(fetchSchema, data);
   data.method = 'GET';
+  data.excludeQuery = true;
   const { body: response } = await _rave.request(
     `v3/transactions/${data.id}/verify`,
     data,

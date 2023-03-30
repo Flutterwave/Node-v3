@@ -123,7 +123,7 @@ const updateTokenSchema = joi.object({
       return value;
     })
     .required(),
-  fullname: joi.string().required(),
+  full_name: joi.string().required(),
 });
 
 // withdraw funds from a virtual card

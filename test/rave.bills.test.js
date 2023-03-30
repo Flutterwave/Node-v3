@@ -428,6 +428,7 @@ describe('#Rave Bills', function () {
     };
 
     var resp = await billsInstance.products_under_agency(payload);
+    // console.log(resp);
 
     expect(fetchProductsByAgencyStub).to.have.been.calledOnce;
     expect(fetchProductsByAgencyStub).to.have.been.calledOnceWith(payload);
