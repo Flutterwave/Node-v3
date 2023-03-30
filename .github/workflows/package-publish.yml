@@ -1,34 +1,24 @@
-name: Publish to NPM
+name: Publish changes to Node package manager
 
 on:
   release:
     types: [created]
 
 jobs:
-  check-docs-update:
+  check-readme-and-changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-diff-action@v6
-        with:
-          PATTERNS: |
-            +(documentation)/*.md
-            *.md
-            CHANGE*.md
-          FILES: |
-            CHANGELOG.md
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: log git diff
+      - name: Check for README and CHANGELOG changes
         run: |
-          echo ${{ env.GIT_DIFF }}
-          echo ${{ env.MATCHED_FILES }}
-          echo ${{ env.GIT_DIFF_FILTERED }}
-
-      - name: Check if README.md or Doc/** is updated else exit
-        if: (env.GIT_DIFF == '')
-        run: |
-          echo Update documentation files and README.md before push
-          exit 1
+          if ! git diff --quiet HEAD~ HEAD -- README.md CHANGELOG.md; then
+            echo "README and/or CHANGELOG have been modified. Proceeding with deployment."
+          else
+            echo "README and/or CHANGELOG have not been modified. Terminating deployment."
+            exit 1
+          fi
 
       - name: push build status to Slack
         uses: 8398a7/action-slack@v3
@@ -39,27 +29,27 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
 
-  distribute:
+  publish:
+    needs: check-readme-and-changelog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
+      - name: Setup Node Engine
+        uses: actions/setup-node@v1
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
-      - run: npm ci
+      - name: Install Node dependencies
+        run: npm ci
 
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-      - name: push build status to Slack
+      - name: Send Slack Notification
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
