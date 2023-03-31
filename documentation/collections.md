@@ -161,8 +161,6 @@ const charge_ng_acct = async () => {
         const payload = {
             "tx_ref": "example01",
             "amount": "100",
-            "account_bank": "044",
-            "account_number": "0690000037",
             "currency": "NGN",
             "email": "olufemi@flw.com",
             "phone_number": "09000000000", 
@@ -268,7 +266,8 @@ const ussd = async () => {
 
         const payload = {
             "tx_ref": "MC-15852309v5050e8",
-            "account_bank": "058"
+            "account_bank":"044",
+            "account_number":"0690000032",
             "amount": "1500",
             "currency": "NGN",
             "email": "user@flw.com",

@@ -24,8 +24,7 @@ const charge_with_token =  async()=>{
             "country": "NG",
             "amount": 200,
             "email": "user@gmail.com",
-            "first_name": "temi",
-            "last_name": "desola",
+            "full_name": "temi desola",
             "narration": "Sample tokenized charge",
             "tx_ref": "MCs"+Date.now(),
             "redirect_url":"https://www.google.com"
@@ -57,8 +56,7 @@ const update_token = async () => {
         const payload = {
             "token": "flw-t1nf-cff007a7699efee339c9271b9be4f3d7-m03k",
             "email": "user@example.com",
-            "first_name": "Kendrick",
-            "last_name": "Graham",
+            "full_name": "temi desola",
             "phone_number": "09090909990"
         }
         const response = await flw.Tokenized.update_token(payload)
