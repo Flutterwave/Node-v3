@@ -1,9 +1,13 @@
 # Changelog
+## 1.1.5 | 2023-04-13
+Hotfix to hide header information in the library response.
+### Version changes.
+- [FIXED] Removed headers in the response.
+
 ## 1.1.4 | 2023-04-13
 This release fixes the empty subscription fetch query with user email.
 ### Version changes.
 - [FIXED] Empty data in response object for subscription fetch with email query parameter
-- [FIXED] Removed headers in the response.
 
 ## 1.1.3 | 2023-03-29
 Scheduled updates and bug fixes. This release fixes all the bugs in the new SDK (v1.1.0)
