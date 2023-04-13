@@ -1,4 +1,9 @@
 # Changelog
+## 1.1.4 | 2023-04-13
+This release fixes the empty subscription fetch query with user email.
+### Version changes.
+- [FIXED] Empty data in response object for subscription fetch with email query parameter
+
 ## 1.1.3 | 2023-03-29
 Scheduled updates and bug fixes. This release fixes all the bugs in the new SDK (v1.1.0)
 ### Version changes.
