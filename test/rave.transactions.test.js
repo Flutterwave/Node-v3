@@ -38,7 +38,7 @@ describe('#Rave Transactions', function () {
     };
 
     var resp = await trxInstance.verify(payload);
-    // console.log(resp);
+    console.log(resp);
   });
 
   it('should successfully return transaction events', async function () {
