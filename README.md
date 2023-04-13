@@ -45,7 +45,7 @@ Available features include:
 
 ## Installation
 
-To install the library, run this comman in your terminal:
+To install the library, run this comman in your Node terminal:
 
 ```sh
 npm install flutterwave-node-v3
@@ -89,9 +89,7 @@ This describes how to get all subscriptions
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 const fetchSubscription = async () => {
 
     try {
@@ -112,10 +110,8 @@ This describes how to fetch subscriptions made by a single user.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
-const fetchSubscription = async () => {
+const getSubscription = async () => {
 
     try {
         const data = {
@@ -127,7 +123,7 @@ const fetchSubscription = async () => {
         console.log(error)
     }
 
-fetchSubscription();
+getSubscription();
 
 ```
 
