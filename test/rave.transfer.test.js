@@ -565,6 +565,7 @@ describe('#Rave transfers', function () {
     };
 
     var resp = await transferInstance.fee(payload);
+    // console.log(resp);
 
     expect(fetchFeeStub).to.have.been.calledOnce;
     expect(fetchFeeStub).to.have.been.calledOnceWith(payload);
