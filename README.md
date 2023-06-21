@@ -45,7 +45,7 @@ Available features include:
 
 ## Installation
 
-To install the library, run this comman in your terminal:
+To install the library, run this comman in your Node terminal:
 
 ```sh
 npm install flutterwave-node-v3
@@ -81,8 +81,6 @@ You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from 
 14. [Misc](documentation/misc.md)
 15. Virtual Cards
 
-### `Get bill payment agencies`
-
 
 ## SUBSCRIPTIONS
 ### ```Get all subscriptions```
@@ -91,9 +89,7 @@ This describes how to get all subscriptions
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 const fetchSubscription = async () => {
 
     try {
@@ -105,6 +101,29 @@ const fetchSubscription = async () => {
     }
 
 fetchSubscription();
+
+```
+
+### ```Fetch subscriptions with customer's email```
+
+This describes how to fetch subscriptions made by a single user.
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const getSubscription = async () => {
+
+    try {
+        const data = {
+            "email": "user@example.com"
+        }
+        const response = await flw.Subscription.get(data)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+getSubscription();
 
 ```
 
