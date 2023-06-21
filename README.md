@@ -458,7 +458,7 @@ updateSubaccount();
 All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. They can be run by running the test command in your terminal.
 
 ```sh
-npm run test
+npm run test or npm test
 ```
 
 ## Debugging Errors
