@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.6 | 2023-06-21
+Hotfix on Transfer fees and Bank lists.
+### Version changes.
+- [FIXED] Transfer fees returning 0 for all amounts.
+- [FIXED] Null data response for Bank lists.
+
 ## 1.1.5 | 2023-04-13
 Hotfix to hide header information in the library response.
 ### Version changes.
