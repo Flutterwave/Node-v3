@@ -6,6 +6,7 @@ const { validator } = require('../../utils/validator');
 async function service(data, _rave) {
   validator(listSchema, data);
   data.method = 'GET';
+  data.excludeQuery = true;
   const { body: response } = await _rave.request(
     `v3/transfers/fee?currency=${data.currency}&amount=${data.amount}`,
     data,
