@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.7 | 2023-07-05
+Hotfix to add required parameters for the update payment plan method.
+### Version changes.
+- [ADDED] "status" as a body parameter in the updatePlanSchema.
+- [REMOVED] "amount" as a body parameter in the updatePlanSchema.
+- [ADDED] tests for the payment plan feature.
+- [FIXED] updated the transaction tests to stub response.
+
 ## 1.1.6 | 2023-06-21
 Hotfix on Transfer fees and Bank lists.
 ### Version changes.
