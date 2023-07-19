@@ -1,14 +1,14 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { bankChargeSchema } = require('../schema/create');
+const { momoSchema } = require('../schema/create');
 
 async function service(data, _rave) {
-  validator(bankChargeSchema, data);
+  validator(momoSchema, data);
   const { body: response } = await _rave.request(
-    `v3/charges?type=account-ach-uk`,
+    `v3/charges?type=mobile_money_tanzania`,
     data,
   );
-  logger(`UK direct debit`, _rave);
+  logger(`Create ${data.currency} MoMo charge`, _rave);
   return response;
 }
 

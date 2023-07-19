@@ -1,12 +1,18 @@
 # Changelog
 
-## 1.1.7 | 2023-07-05
-Hotfix to add required parameters for the update payment plan method.
+## 1.1.7 | 2023-07-19
+This release includes the addition of Tanzania mobilemoney, updates to NG (mono), UK & EU bank charge and Hotfix to add required parameters for the update payment plan method.
 ### Version changes.
-- [ADDED] "status" as a body parameter in the updatePlanSchema.
-- [REMOVED] "amount" as a body parameter in the updatePlanSchema.
+- [ADDED] Support for Tanzania mobilemoney and tests for TZS mobilemoney.
+- [ADDED] "beneficiary_name" as a required body parameter and "currency" & "bank_name" as optional body parameters in the beneficiarySchema.
+- [ADDED] "expires" as an optional body parameters for PWBT(pay with bank transfer).
 - [ADDED] tests for the payment plan feature.
+- [ADDED] schema for the USSD charge (ussdChargeSchema).
+- [ADDED] "status" as a body parameter in the updatePlanSchema.
 - [FIXED] updated the transaction tests to stub response.
+- [FIXED] updated the UK & USSD bank charge.
+- [FIXED] updated the NG bank charge(mono).
+- [REMOVED] "amount" as a body parameter in the updatePlanSchema.
 
 ## 1.1.6 | 2023-06-21
 Hotfix on Transfer fees and Bank lists.
