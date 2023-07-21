@@ -6,7 +6,7 @@ This release includes the addition of Tanzania mobilemoney, updates to NG (mono)
 - [ADDED] Support for Tanzania mobilemoney and tests for TZS mobilemoney.
 - [ADDED] "beneficiary_name" as a required body parameter and "currency" & "bank_name" as optional body parameters in the beneficiarySchema.
 - [ADDED] "expires" as an optional body parameters for PWBT(pay with bank transfer).
-- [ADDED] tests for the payment plan, Charge NG Bank Account, Charge with Bank Transfer(PWBT), and Change UK & EU Bank Account.
+- [ADDED] tests for the payment plan, Charge NG Bank Account (mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
 - [ADDED] schema for the USSD charge (ussdChargeSchema).
 - [ADDED] "status" as a body parameter in the updatePlanSchema.
 - [FIXED] updated the transaction tests to stub response.

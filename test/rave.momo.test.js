@@ -328,9 +328,10 @@ describe('#Rave Mobile Money', function () {
     this.timeout(10000);
 
     const createTZSMoMo = sinon.stub(momoInstance, 'tanzania').resolves({
-      "status": "success",
-      "message": "Charge initiated",
-      "data": {
+      body: {
+       "status": "success",
+       "message": "Charge initiated",
+       "data": {
           "id": 976392302,
           "tx_ref": "MC-158523s09v5050e8",
           "flw_ref": "SWWD88181689192176819143",
@@ -357,6 +358,7 @@ describe('#Rave Mobile Money', function () {
               "email": "user@example.com",
               "created_at": "2023-07-12T20:02:56.000Z"
           }
+        }
       }
   });
 
@@ -380,10 +382,10 @@ describe('#Rave Mobile Money', function () {
     expect(createTZSMoMo).to.have.been.calledOnce;
     expect(createTZSMoMo).to.have.been.calledOnceWith(payload);
 
-    expect(resp).to.have.property('status', 'success');
-    expect(resp).to.have.property('message', 'Charge initiated');
+    expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('message', 'Charge initiated');
 
-    expect(resp.data).to.have.property('currency', 'TZS');
-    expect(resp.data).to.have.property('customer');
+    expect(resp.body.data).to.have.property('currency', 'TZS');
+    expect(resp.body.data).to.have.property('customer');
   });
 });
