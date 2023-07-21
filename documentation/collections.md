@@ -18,10 +18,11 @@ Collect payments from your users via any of these methods:
 9. Rwanda Mobile Money
 10. Zambia Mobile Money
 11. Francophone Mobile Money (for Senegal, Cote D'Ivoire, Mali and Cameroon).
-12. USSD
-13. eNaira
-14. ApplePay 
-15. GooglePay
+12. Tanzania Mobile Money
+13. USSD
+14. eNaira
+15. ApplePay 
+16. GooglePay
 
 There are three steps involved in collecting payments from your users:
 
@@ -127,10 +128,9 @@ const  bank_trf = async () => {
             "currency": "NGN",
             "client_ip": "154.123.220.1",
             "device_fingerprint": "62wd23423rq324323qew1",
-            "duration": 2,
-            "frequency": 5,
             "narration": "All star college salary for May",
-            "is_permanent": 1,
+            "is_permanent": false,
+            "expires": 3600
         }
 
         const response = await flw.Charge.bank_transfer(payload)
@@ -181,7 +181,7 @@ charge_ng_acct();
 ```
 
 
-## Direct debit (UK bank account)
+## Direct debit (UK & EU bank account)
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -193,13 +193,13 @@ const charge_uk_acct = async () => {
 
         const payload = {
             "tx_ref": "MC-1585230ew9v5050e8",
-            "amount": "100",
-            "account_bank": "00000",
-            "account_number": "0000000000",
+            "amount": "10",
             "currency": "GBP",
             "email": "olufemi@flw.com",
             "phone_number": "0902620185",
-            "fullname": "Olufemi Obafunmiso"
+            "fullname": "Olufemi Obafunmiso",
+            "redirect_url": "https://flutterwave.ng",
+            "is_token_io": 1
         }
 
         const response = await flw.Charge.uk(payload)
@@ -214,6 +214,46 @@ const charge_uk_acct = async () => {
 charge_uk_acct();
 
 ```
+Sample Response
+```javascript
+{
+    "status": "success",
+    "message": "Charge initiated",
+    "data": {
+        "id": 4474995,
+        "tx_ref": "MC-1585230ew9v5050e8",
+        "flw_ref": "LFTT5300124270590",
+        "device_fingerprint": "N/A",
+        "amount": 10,
+        "charged_amount": 10,
+        "app_fee": 0.14,
+        "merchant_fee": 0,
+        "processor_response": "Transaction is pending authentication",
+        "auth_model": "TOKEN",
+        "currency": "GBP",
+        "ip": "52.209.154.143",
+        "narration": "Flutterwave Developers",
+        "status": "pending",
+        "payment_type": "account-ach-uk",
+        "fraud_status": "ok",
+        "charge_type": "normal",
+        "created_at": "2023-07-20T09:22:11.000Z",
+        "account_id": 20937,
+        "customer": {
+            "id": 2151343,
+            "phone_number": "07086234518",
+            "name": "Olufemi Obafunmiso",
+            "email": "olufemi@flw.com",
+            "created_at": "2023-07-20T09:22:11.000Z"
+        }
+    },
+    "meta": {
+        "authorization": {
+            "mode": "redirect",
+            "redirect": "https://token-io-fe.dev-flutterwave.com/transactions?reference=LFTT5300124270590"
+        }
+    }
+}
 
 ## ACH Payement
 This shows you how to accept ZAR and USD  ACH charges from your customers. Read more about ACH payments [here](https://developer.flutterwave.com/docs/direct-charge/ach-payment).
@@ -580,6 +620,76 @@ Sample Response
             authorization: {
             redirect: 'https://checkout.flutterwave.com/captcha/verify/1287327:4880b0705d15b949b84e056d7cf8b1dd',
             mode: 'redirect'
+        }
+    }
+}
+```
+### ```Tanzania mobile money```
+This describes how to collect payments via  Tanzania  mobile money.
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+
+const tanzania_mobile_money =  async () =>{
+ 
+    try {
+
+        const payload = {
+            "tx_ref":"MC-158523s09v5050e8",
+            "amount":"150",
+            "currency":"TZS",
+            "network":"Halopesa",
+            "email":"user@example.com",
+            "phone_number":"0782835136",
+            "fullname":"Yolande Aglaé Colbert",
+            "client_ip":"154.123.220.1",
+            "device_fingerprint":"62wd23423rq324323qew1",
+            "meta":{
+               "flightID":"213213AS"
+                  }
+        }
+       const response =  await flw.MobileMoney.tanzania(payload)
+       console.log(response);
+    } catch (error) {
+        console.log(error)
+    }                               
+}
+
+tanzania_mobile_money();
+```
+
+Sample Response
+```javascript
+{
+ "status": "success",
+ "message": "Charge initiated",
+ "data": {
+     "id": 976392302,
+     "tx_ref": "MC-158523s09v5050e8",
+     "flw_ref": "SWWD88181689192176819143",
+     "device_fingerprint": "62wd23423rq324323qew1",
+     "amount": 150,
+     "charged_amount": 150,
+     "app_fee": 1000,
+     "merchant_fee": 0,
+     "processor_response": "request successful 20230712200256022250 Payment Request has been Accepted Successfully Waiting for Confirmation",
+     "auth_model": "MOBILEMONEY",
+     "currency": "TZS",
+     "ip": "154.123.220.1",
+     "narration": "Adekunle Odujoko",
+     "status": "pending",
+     "payment_type": "mobilemoneytz",
+     "fraud_status": "ok",
+     "charge_type": "normal",
+     "created_at": "2023-07-12T20:02:56.000Z",
+     "account_id": 1834035,
+     "customer": {
+         "id": 617886609,
+         "phone_number": "0782835136",
+         "name": "Yolande Aglaé",
+         "email": "user@example.com",
+          "created_at": "2023-07-12T20:02:56.000Z"
         }
     }
 }

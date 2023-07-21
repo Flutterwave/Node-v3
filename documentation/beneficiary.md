@@ -23,7 +23,7 @@ const createBeneficiary = async () => {
         const payload = {
             "account_number": "0690000034",
             "account_bank":"044" // This is the beneficiary’s bank code, you can use the List of Banks to retrieve a bank code.
-            
+            "beneficiary_name": 'Ade Bond'
         }
         const response = await flw.Beneficiary.create(payload)
         console.log(response);
