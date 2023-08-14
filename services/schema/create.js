@@ -279,10 +279,40 @@ const chargeSchema = joi.object({
   billing_city: joi.string(),
   billing_state: joi.string(),
   billing_country: joi.string().uppercase().length(2).default('NG'),
-  billing_zipcode: joi.number().positive(),
+  billing_zip: joi.number().positive(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
   expires: joi.number().positive().max(31536000),
 });
+
+// create eNaira charge
+const eNairaChargeSchema = joi.object({
+  amount: joi.number().positive().required(),
+  email: joi.string().max(100).email().required(),
+  tx_ref: joi.string().trim().max(100).required(),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
+  fullname: joi.string().max(100),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    }),
+  client_ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  device_fingerprint: joi.string().trim().max(200),
+  redirect_url: joi.string().uri(),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  is_token: joi.number().positive(),
+  is_qr: joi.number().positive(),
+});
+
+
 
 // create mobile money charge
 const momoSchema = joi.object({
@@ -619,6 +649,7 @@ module.exports = {
   cardSchema,
   cardChargeSchema,
   chargeSchema,
+  eNairaChargeSchema,
   momoSchema,
   planSchema,
   refundSchema,

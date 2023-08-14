@@ -6,8 +6,11 @@
 
 We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
 
+Manage Ebills via any of these methods:
+1. [Place Ebills Order](#place-ebills-order)
+2. [Update Ebills Order](#update-ebills-order)
 
-###  Place ebills order
+## Place ebills order
 
 This describes how to create a new Ebills order
 
@@ -25,7 +28,7 @@ const placeEbillsOrder = async () => {
             "narration": "mndkn blls",
             "number_of_units": 2,
             "currency": "NGN",
-            "amount": 200,
+            "amount": 100,
             "phone_number": "09384747474",
             "email": "jake@rad.com",
             "tx_ref": "akhlm-pstmn-109470393",
@@ -44,13 +47,25 @@ const placeEbillsOrder = async () => {
 
 
 placeEbillsOrder();
+```
 
+Sample Response
 
+```javascript
+{
+   "status": "success",
+   "message": "Ebills ordered",
+   "data": {
+      "flw_ref": "RVEBLS-F35542EA3BFE-73362",
+      "tx_ref": "akhlm-pstmn-109470393",
+      "response_message": "Pending funds transfer or bank branch payment"
+   }
+}
 ```
 
 
 
-###  Update ebills order
+## Update ebills order
 
 This describes how to update order for ebills
 
@@ -68,7 +83,7 @@ const updateEbillsOrder = async () => {
         const payload = {
             "reference": "RVEBLS-843984E9B66E-23240", //This is the reference returned in the create order endpoint as flw_ref.
             "currency": "NGN",
-            "amount": 100
+            "amount": 4000
         }
 
         const response = await flw.Ebills.update(payload)
@@ -81,6 +96,16 @@ const updateEbillsOrder = async () => {
 
 
 updateEbillsOrder();
+```
 
+Sample Response
 
+```javascript
+{
+   "status": "success",
+   "message": "Ebills order updated",
+   "data": {
+      "updated": true
+   }
+}
 ```

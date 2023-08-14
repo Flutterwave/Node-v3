@@ -15,7 +15,7 @@ const sinonChai = require('sinon-chai');
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
-describe('#Rave Subscriptions', function () {
+describe('#Rave Payment-plan', function () {
   const public_key = process.env.PUBLIC_KEY;
   const secret_key = process.env.SECRET_KEY;
   const ravebase = new base(public_key, secret_key);
