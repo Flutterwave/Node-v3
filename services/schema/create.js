@@ -416,8 +416,8 @@ const transferSchema = joi.object({
   currency: joi.string().uppercase().length(3).default('NGN').required(),
   account_bank: joi.when('currency', {
     is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
-    then: joi.string().length(3).optional(),
-    otherwise: joi.string().length(3).required(),
+    then: joi.string().optional(),
+    otherwise: joi.string().required(),
   }),
   account_number: joi.when('currency', {
     is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
@@ -578,6 +578,25 @@ const transferSchema = joi.object({
   }),
 });
 
+// to create a modified version of your original transferSchema to include bank_code.
+const modifiedTransferSchema = transferSchema.keys({
+  bank_code: joi.when('currency', {
+    is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
+    then: joi.string().optional(),
+    otherwise: joi.string().required(),
+  }),
+});
+
+// create a bulk transfer
+const createBulkTransferSchema = joi.object({
+  title: joi.string(),
+  bulk_data: joi.array().items(
+    modifiedTransferSchema.keys({
+      account_bank: joi.forbidden(), // Remove account_bank
+    }).rename('account_bank', 'bank_code')
+  ).required(),
+});
+
 // create a tokenized charge
 const tokenSchema = joi.object({
   token: joi.string().required(),
@@ -649,6 +668,7 @@ module.exports = {
   cardSchema,
   cardChargeSchema,
   chargeSchema,
+  createBulkTransferSchema,
   eNairaChargeSchema,
   momoSchema,
   planSchema,

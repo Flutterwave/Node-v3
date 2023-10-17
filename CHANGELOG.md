@@ -1,17 +1,20 @@
 # Changelog
 
-## 1.1.7 | 2023-07-21
-This release includes the addition of Fawrypay and Tanzania mobilemoney, updates to NG (mono), UK & EU bank charge, googlepay, applepay, enaira and Hotfix to add required parameters for the update payment plan method.
+## 1.1.7 | 2023-10-18
+This release includes the addition of Fawrypay and Tanzania mobilemoney, updates to NG (mono), UK & EU bank charge, googlepay, applepay, enaira and Hotfix to add and update parameters for the update payment plan method, bulk transfers, and single transfers.
 ### Version changes.
 - [ADDED] Support for Tanzania mobilemoney and tests for TZS mobilemoney.
 - [ADDED] Support for Fawzy pay charge.
 - [ADDED] Unit tests for Fawry pay, googlepay, applepay and eNaira charge.
 - [ADDED] "beneficiary_name" as a required body parameter and "currency" & "bank_name" as optional body parameters in the beneficiarySchema.
+- [ADDED] createBulkTransferSchema to accept both "title" and "bulk_data" to create bulk transfers.
 - [ADDED] "expires" as an optional body parameters for PWBT(pay with bank transfer).
 - [ADDED] tests for the payment plan, Charge NG Bank Account (mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
 - [ADDED] schema for the USSD charge (ussdChargeSchema).
 - [ADDED] "status" as a body parameter in the updatePlanSchema.
 - [FIXED] updated the transaction tests to stub response.
+- [FIXED] "id" in the fetchSchema to accept only integer values.
+- [FIXED] updated the length of "account_bank" values in the transferSchema.
 - [FIXED] updated the UK & USSD bank charge.
 - [FIXED] updated the README.md file and documentation wikis.
 - [FIXED] updated the NG bank charge(mono).
