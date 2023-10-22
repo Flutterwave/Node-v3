@@ -54,6 +54,7 @@ describe('#Rave Beneficiaries', function () {
     var payload = {
       account_number: '0690000034',
       account_bank: '044',
+      beneficiary_name: 'Ade Bond'
     };
 
     var resp = await beneficiariesInstance.create(payload);

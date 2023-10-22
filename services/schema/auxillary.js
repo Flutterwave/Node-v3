@@ -106,8 +106,8 @@ const updateSchema = joi.object({
 // update payment plan details
 const updatePlanSchema = joi.object({
   id: joi.string().required(),
-  amount: joi.number().positive().required(),
   name: joi.string().trim().max(150).required(),
+  status: joi.string().valid('active', 'cancelled').required()
 });
 
 // update card token

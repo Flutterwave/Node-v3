@@ -2,7 +2,7 @@ const joi = require('joi');
 
 // fetch information with single id. enforce id in payload
 const fetchSchema = joi.object({
-  id: joi.string().required(),
+  id: joi.number().integer().required(),
 });
 
 // retrieve information with different query parameter. add enforceRequired to enforce query params and validate the request

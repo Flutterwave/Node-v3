@@ -15,14 +15,12 @@ const accountSchema = joi.object({
   amount: joi.number().positive(),
 });
 
-// charge bank accounts: base for NG+UK direct account debits and USSD
+// charge bank accounts: base for NG, UK & EU direct account debits
 const bankChargeSchema = joi.object({
-  account_bank: joi.string().length(3).required(),
-  account_number: joi.string().trim().max(20).required(),
   amount: joi.number().positive().required(),
   email: joi.string().max(100).email().required(),
   tx_ref: joi.string().trim().max(100).required(),
-  currency: joi.string().uppercase().length(3).default('NGN').required(),
+  currency: joi.string().uppercase().length(3).required(),
   fullname: joi.string().max(100),
   phone_number: joi
     .string()
@@ -41,12 +39,23 @@ const bankChargeSchema = joi.object({
   device_fingerprint: joi.string().trim().max(200),
   redirect_url: joi.string().uri(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  is_token_io: joi
+    .number()
+    .positive()
+    .when('currency', {
+      is: joi.string().valid('GBP', 'EUR'),
+      then: joi.required(),
+      otherwise: joi.optional()
+    }),
 });
 
 // create a beneficiary
 const beneficiarySchema = joi.object({
   account_number: joi.string().required(),
   account_bank: joi.string().required(),
+  beneficiary_name: joi.string().required(),
+  currency: joi.string().uppercase().length(3),
+  bank_name: joi.string(),
 });
 
 // create virtual account in bulk
@@ -270,9 +279,40 @@ const chargeSchema = joi.object({
   billing_city: joi.string(),
   billing_state: joi.string(),
   billing_country: joi.string().uppercase().length(2).default('NG'),
-  billing_zipcode: joi.number().positive(),
+  billing_zip: joi.number().positive(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  expires: joi.number().positive().max(31536000),
 });
+
+// create eNaira charge
+const eNairaChargeSchema = joi.object({
+  amount: joi.number().positive().required(),
+  email: joi.string().max(100).email().required(),
+  tx_ref: joi.string().trim().max(100).required(),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
+  fullname: joi.string().max(100),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    }),
+  client_ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  device_fingerprint: joi.string().trim().max(200),
+  redirect_url: joi.string().uri(),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  is_token: joi.number().positive(),
+  is_qr: joi.number().positive(),
+});
+
+
 
 // create mobile money charge
 const momoSchema = joi.object({
@@ -304,6 +344,12 @@ const momoSchema = joi.object({
           'any.only': 'Only MTN, VODAFONE and Airtel are valid network values.',
         }),
     }),
+    otherwise: joi.when('currency', {
+      is: 'TZS',
+      then: joi.string().valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone').messages({
+        'any.only': 'Only Airtel, Tigo, Halopesa and Vodafone are valid network values.'
+      })
+    })
   }),
   voucher: joi.when('network', {
     is: 'VODAFONE',
@@ -370,8 +416,8 @@ const transferSchema = joi.object({
   currency: joi.string().uppercase().length(3).default('NGN').required(),
   account_bank: joi.when('currency', {
     is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
-    then: joi.string().length(3).optional(),
-    otherwise: joi.string().length(3).required(),
+    then: joi.string().optional(),
+    otherwise: joi.string().required(),
   }),
   account_number: joi.when('currency', {
     is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
@@ -532,6 +578,25 @@ const transferSchema = joi.object({
   }),
 });
 
+// to create a modified version of your original transferSchema to include bank_code.
+const modifiedTransferSchema = transferSchema.keys({
+  bank_code: joi.when('currency', {
+    is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
+    then: joi.string().optional(),
+    otherwise: joi.string().required(),
+  }),
+});
+
+// create a bulk transfer
+const createBulkTransferSchema = joi.object({
+  title: joi.string(),
+  bulk_data: joi.array().items(
+    modifiedTransferSchema.keys({
+      account_bank: joi.forbidden(), // Remove account_bank
+    }).rename('account_bank', 'bank_code')
+  ).required(),
+});
+
 // create a tokenized charge
 const tokenSchema = joi.object({
   token: joi.string().required(),
@@ -552,6 +617,33 @@ const tokenSchema = joi.object({
   do_3ds: joi.boolean(),
   preauthorize: joi.boolean(),
   redirect_url: joi.string(),
+});
+
+// charge bank accounts: base for USSD charge
+const ussdChargeSchema = joi.object({
+  account_bank: joi.string().length(3).required(),
+  amount: joi.number().positive().required(),
+  email: joi.string().max(100).email().required(),
+  tx_ref: joi.string().trim().max(100).required(),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
+  fullname: joi.string().max(100),
+  phone_number: joi
+    .string()
+    .max(50)
+    .custom((value) => {
+      if (value && !/^\+?\d+$/.test(value))
+        throw new Error('phone number should be digits');
+      return value;
+    }),
+  client_ip: joi
+    .string()
+    .ip({
+      version: ['ipv4', 'ipv6'],
+    })
+    .default('::127.0.0.1'),
+  device_fingerprint: joi.string().trim().max(200),
+  redirect_url: joi.string().uri(),
+  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
 });
 
 // Initiate transfers from one F4B wallet to another
@@ -576,11 +668,14 @@ module.exports = {
   cardSchema,
   cardChargeSchema,
   chargeSchema,
+  createBulkTransferSchema,
+  eNairaChargeSchema,
   momoSchema,
   planSchema,
   refundSchema,
   subaccountSchema,
   transferSchema,
   tokenSchema,
+  ussdChargeSchema,
   walletTransferSchema,
 };
