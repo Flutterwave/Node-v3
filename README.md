@@ -24,8 +24,8 @@ Available features include:
 - Bill payments: Airtime, Data bundle, Cable, Power, Toll, E-bills, and Remitta.
 - Identity verification: Resolve bank account, resolve BVN information and generate OTP.
 
-
 ## Table of Content
+
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Initialization](#initialization)
@@ -40,8 +40,7 @@ Available features include:
 ## Requirements
 
 1. Flutterwave for business [API Keys](https://developer.flutterwave.com/docs/integration-guides/authentication)
-2. Node 
-
+2. Node
 
 ## Installation
 
@@ -50,7 +49,6 @@ To install the library, run this comman in your Node terminal:
 ```sh
 npm install flutterwave-node-v3
 ```
-
 
 ## Initialization
 
@@ -62,8 +60,8 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 For staging, Use TEST API Keys and for production, use LIVE API KEYS.
 You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from the Flutterwave dashboard. Read the [requirement section](#requirements) for more information on how to get your API keys.
 
-
 ## Usage
+
 1. [Collections](documentation/collections.md)
 2. [Tokenization](documentation/tokenization.md)
 3. [Split payments](documentation/splitPayments.md)
@@ -81,27 +79,31 @@ You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from 
 14. [Misc](documentation/misc.md)
 15. Virtual Cards
 
-
 ## SUBSCRIPTIONS
+
 ### ```Get all subscriptions```
 
 This describes how to get all subscriptions
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+
 const fetchSubscription = async () => {
+  try {
+    const response = await flw.Subscription.fetch_all()
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
-    try {
-        
-        const response = await flw.Subscription.fetch_all()
-        console.log(response);
-    } catch (error) {
-        console.log(error)
-    }
-
-fetchSubscription();
-
+fetchSubscription()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  })
 ```
 
 ### ```Fetch subscriptions with customer's email```
@@ -110,23 +112,27 @@ This describes how to fetch subscriptions made by a single user.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+
 const getSubscription = async () => {
-
-    try {
-        const data = {
-            "email": "user@example.com"
-        }
-        const response = await flw.Subscription.get(data)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
+  try {
+    const data = {
+      "email": "user@example.com"
     }
+    const response = await flw.Subscription.get(data)
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
-getSubscription();
-
+getSubscription()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
-
 
 ### ```Cancel a subscription```
 
@@ -134,25 +140,27 @@ This describes how to cancel a subscription
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 
 const cancelSubscription = async () => {
-
-    try {
-        const payload={
-            "id":"3477" //This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
-        }
-        
-        const response = await flw.Subscription.cancel(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
+  try {
+    const payload = {
+      "id": "3477" // This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
     }
 
+    const response = await flw.Subscription.cancel(payload)
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
-cancelSubscription();
+cancelSubscription()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Create order using billing code and product id`
@@ -163,35 +171,37 @@ This describes how to activate a subscription
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
-const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 
 const activateSubscription = async () => {
-
-    try {
-        const payload={
-            "id":"3477" //This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.id
-        }
-        
-        const response = await flw.Subscription.activate(payload)
-        console.log(response);
-    } catch (error) {
-        console.log(error)
+  try {
+    const payload = {
+      "id": "3477" // This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.id
     }
 
+    const response = await flw.Subscription.activate(payload)
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
-activateSubscription();
+activateSubscription()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ## PAYMENT PLANS
-###  ```Create payment plan```
+
+### ```Create payment plan```
 
 This describes  how to create a payment plan
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const createPaymentPlan = async () => {
@@ -207,10 +217,15 @@ const createPaymentPlan = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-createPaymentPlan();
+createPaymentPlan()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Get payment plan`
@@ -219,7 +234,6 @@ This describes how to fetch all payment plans on your account
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const fetchAllPlans = async () => {
@@ -228,10 +242,15 @@ const fetchAllPlans = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-fetchAllPlans();
+fetchAllPlans()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Get a payment plan`
@@ -240,7 +259,6 @@ This describes how to get a single payment plan
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const fetchPlan = async () => {
@@ -253,6 +271,7 @@ const fetchPlan = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -265,7 +284,6 @@ This describes how to update an existing payment plan
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const updatePlan = async () => {
@@ -280,18 +298,23 @@ const updatePlan = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-updatePlan();
+updatePlan()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Cancel a payment plan`
+
 This describes how to cancel an existing payment plan
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const cancelPlan = async () => {
@@ -304,20 +327,25 @@ const cancelPlan = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-cancelPlan();
+cancelPlan()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ## SUBACCOUNTS
+
 ### `Create a payment plan`
 
 This describes how to create a subaccount on Flutterwave
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const createSubaccount = async () => {
@@ -345,10 +373,15 @@ const createSubaccount = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-createSubaccount();
+createSubaccount()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Fetch all subaccounts`
@@ -357,7 +390,6 @@ This describes how to get all subaccounts
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const fetchAllSubaccounts = async () => {
@@ -366,10 +398,15 @@ const fetchAllSubaccounts = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-fetchAllSubaccounts();
+fetchAllSubaccounts()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Fetch a subaccount`
@@ -378,7 +415,6 @@ This describes how to fetch a subaccount using the sub-account's ID
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const fetchSubaccount = async () => {
@@ -391,10 +427,15 @@ const fetchSubaccount = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-fetchSubaccount();
+fetchSubaccount()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Update a subaccount`
@@ -403,9 +444,7 @@ This describes how to update a subaccount
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
-
 
 const updateSubaccount = async () => {
   try {
@@ -423,10 +462,15 @@ const updateSubaccount = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-updateSubaccount();
+updateSubaccount()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ### `Delete a subaccount`
@@ -435,7 +479,6 @@ This describes how to delete a subaccount
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
-
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
 
 const updateSubaccount = async () => {
@@ -448,13 +491,19 @@ const updateSubaccount = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-updateSubaccount();
+updateSubaccount()
+  .then(() => {})
+  .catch((err) => {
+    throw err;
+  });
 ```
 
 ## Testing
+
 All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. They can be run by running the test command in your terminal.
 
 ```sh
@@ -462,19 +511,20 @@ npm run test or npm test
 ```
 
 ## Debugging Errors
+
 We understand that you may run into some errors while integrating our library. You can read more about our error messages [here](https://developer.flutterwave.com/docs/integration-guides/errors).
 For `authorization` and `validation` error responses, double-check your API keys and request. If you get a `server` error, kindly engage the team for support.
 
-
 ## Support
+
 For additional assistance using this library, contact the developer experience (DX) team via [email](mailto:developers@flutterwavego.com) or on [slack](https://bit.ly/34Vkzcg).
 You can also follow us [@FlutterwaveEng](https://twitter.com/FlutterwaveEng) and let us know what you think 😊.
 
-
 ## Contribution guidelines
+
 Read more about our community contribution guidelines [here](/CONTRIBUTING.md)
 
-
 ## License
+
 By contributing to this library, you agree that your contributions will be licensed under its [MIT license](/LICENSE).
 Copyright (c) Flutterwave Inc.
