@@ -19,7 +19,11 @@ const transfer = require('./lib/rave.transfers');
 const virtual_acct = require('./lib/rave.virtual_account');
 const virtual_card = require('./lib/rave.virtual_cards');
 
-const Rave = function (public_key, public_secret, base_url_or_production_flag) {
+const Flutterwave = function (
+  public_key,
+  public_secret,
+  base_url_or_production_flag,
+) {
   const ravebase = new base(
     public_key,
     public_secret,
@@ -51,4 +55,4 @@ const Rave = function (public_key, public_secret, base_url_or_production_flag) {
   };
 };
 
-module.exports = Rave;
+module.exports = { Flutterwave };
