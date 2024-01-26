@@ -1,14 +1,14 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { eNairaChargeSchema } = require('../schema/create');
+const { bankChargeSchema } = require('../schema/create');
 
 async function service(data, _rave) {
-  validator(eNairaChargeSchema, data);
+  validator(bankChargeSchema, data);
   const { body: response } = await _rave.request(
-    `v3/charges?type=enaira`,
+    `v3/charges?type=fawry_pay`,
     data,
   );
-  logger(`Create eNaira charge`, _rave);
+  logger(`Create FawryPay charge`, _rave);
   return response;
 }
 
