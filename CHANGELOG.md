@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.7 | 2023-10-18
+## 1.1.7 | 2024-01-25
 This release includes the addition of Fawrypay and Tanzania mobilemoney, updates to NG (mono), UK & EU bank charge, googlepay, applepay, enaira and Hotfix to add and update parameters for the update payment plan method, bulk transfers, and single transfers.
 ### Version changes.
 - [ADDED] Support for Tanzania mobilemoney and tests for TZS mobilemoney.
@@ -14,6 +14,8 @@ This release includes the addition of Fawrypay and Tanzania mobilemoney, updates
 - [ADDED] "status" as a body parameter in the updatePlanSchema.
 - [FIXED] updated the transaction tests to stub response.
 - [FIXED] "id" in the fetchSchema to accept only integer values.
+- [FIXED] "authorization.zipcode" in the cardChargeSchema to accept string values.
+- [FIXED] "billing_zip" in the chargeSchema to accept string values.
 - [FIXED] updated the length of "account_bank" values in the transferSchema.
 - [FIXED] updated the UK & USSD bank charge.
 - [FIXED] updated the README.md file and documentation wikis.

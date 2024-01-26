@@ -245,7 +245,7 @@ const cardChargeSchema = joi.object({
     city: joi.string(),
     state: joi.string(),
     country: joi.string().uppercase().length(2).default('NG'),
-    zipcode: joi.number().positive(),
+    zipcode: joi.string(),
   }),
   payment_plan: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
@@ -279,7 +279,7 @@ const chargeSchema = joi.object({
   billing_city: joi.string(),
   billing_state: joi.string(),
   billing_country: joi.string().uppercase().length(2).default('NG'),
-  billing_zip: joi.number().positive(),
+  billing_zip: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
   expires: joi.number().positive().max(31536000),
 });
