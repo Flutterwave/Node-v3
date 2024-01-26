@@ -1,26 +1,26 @@
 # Changelog
 
 ## 1.1.7 | 2024-01-25
-This release includes the addition of Fawrypay and Tanzania mobilemoney, updates to NG (mono), UK & EU bank charge, googlepay, applepay, enaira and Hotfix to add and update parameters for the update payment plan method, bulk transfers, and single transfers.
-### Version changes.
-- [ADDED] Support for Tanzania mobilemoney and tests for TZS mobilemoney.
-- [ADDED] Support for Fawzy pay charge.
-- [ADDED] Unit tests for Fawry pay, googlepay, applepay and eNaira charge.
-- [ADDED] "beneficiary_name" as a required body parameter and "currency" & "bank_name" as optional body parameters in the beneficiarySchema.
-- [ADDED] createBulkTransferSchema to accept both "title" and "bulk_data" to create bulk transfers.
-- [ADDED] "expires" as an optional body parameters for PWBT(pay with bank transfer).
-- [ADDED] tests for the payment plan, Charge NG Bank Account (mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
-- [ADDED] schema for the USSD charge (ussdChargeSchema).
+In this release, we've enhanced payment methods and addressed various housekeeping issues to ensure a smoother experience. Check out the details below:
+
+### Version Changes.
+- [ADDED] Tanzania mobile money payment method.
+- [ADDED] Fawry Pay payment method.
+- [ADDED] Additional unit tests for Fawry Pay, Google Pay, Apple Pay, and eNaira.
+- [FIXED] Optional parameters in beneficiarySchema.
+- [ADDED] Supplementary parameters in the createBulkTransferSchema.
+- [ADDED] Introduced "expires" as an optional body parameter for PWBT (Pay with Bank Transfer).
+- [ADDED] New tests for payment plans, Charge NG Bank Account (Mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
+- [ADDED] Schema for USSD charge (ussdChargeSchema).
 - [ADDED] "status" as a body parameter in the updatePlanSchema.
-- [FIXED] updated the transaction tests to stub response.
-- [FIXED] "id" in the fetchSchema to accept only integer values.
-- [FIXED] "authorization.zipcode" in the cardChargeSchema to accept string values.
-- [FIXED] "billing_zip" in the chargeSchema to accept string values.
-- [FIXED] updated the length of "account_bank" values in the transferSchema.
-- [FIXED] updated the UK & USSD bank charge.
-- [FIXED] updated the README.md file and documentation wikis.
-- [FIXED] updated the NG bank charge(mono).
-- [REMOVED] "amount" as a body parameter in the updatePlanSchema.
+- [FIXED] Updated transaction tests to stub response.
+- [FIXED] Modified "id" in the fetchSchema to accept only integer values.
+- [FIXED] Adjusted "authorization.zipcode" in the cardChargeSchema to accept string values.
+- [FIXED] Adapted "billing_zip" in the chargeSchema to accept string values.
+- [FIXED] Extended the length of "account_bank" values in the transferSchema.
+- [FIXED] Updated the UK & USSD bank charge.
+- [FIXED] Revised the NG bank charge (Mono).
+- [REMOVED] Eliminated the "amount" parameter in the updatePlanSchema.
 
 ## 1.1.6 | 2023-06-21
 Hotfix on Transfer fees and Bank lists.
