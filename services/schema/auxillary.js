@@ -139,8 +139,15 @@ const validateSchema = joi.object({
 });
 
 // validate a BVN
-const validateBVNSchema = joi.object({
+const initiateBVNSchema = joi.object({
   bvn: joi.string().length(11).required(),
+  firstname: joi.string().max(100).required(),
+  lastname: joi.string().max(100).required(),
+  redirect_url: joi.string().uri(),
+});
+
+const verifyBVNSchema = joi.object({
+  reference: joi.string().trim().max(100).required(),
 });
 
 module.exports = {
@@ -158,5 +165,6 @@ module.exports = {
   updateTokenSchema,
   withdrawalSchema,
   validateSchema,
-  validateBVNSchema,
+  initiateBVNSchema,
+  verifyBVNSchema
 };
