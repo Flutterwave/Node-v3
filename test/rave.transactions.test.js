@@ -148,4 +148,38 @@ describe('#Rave Transactions', function () {
     expect(resp.data[0]).to.have.property('note');
     expect(resp.data[0]).to.have.property('actor');
   });
+
+  it('should successfully return transaction fee', async function () {
+    this.timeout(10000);
+
+    const getTransactionFeeStub = sinon
+      .stub(trxInstance, 'fee')
+      .resolves({
+        status: 'success',
+        message: 'Charged fee',
+        data: {
+          charge_amount: 1000,
+          fee: 14,
+          merchant_fee: 0,
+          flutterwave_fee: 14,
+          stamp_duty_fee: 0,
+          currency: 'NGN'
+        }
+      })
+
+    var payload = {
+      amount: 1000,
+      currency: "NGN"
+    };
+
+    var resp = await trxInstance.fee(payload);
+    expect(getTransactionFeeStub).to.have.been.calledOnce;
+
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
+    expect(resp).to.have.property('message', 'Charged fee');
+
+    expect(resp.data).to.have.property('charge_amount');
+    expect(resp.data).to.have.property('fee');
+  });
 });
