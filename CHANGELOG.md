@@ -5,7 +5,7 @@ This release, we've addressed several Hotfixes and added support for the new NIB
 
 ### Version Changes.
 - [ADDED] NIBBS BVN verification flow.
-- [ADDED] unit tests for the new BVN verification flow, transaction fees, and Card Collection into subaccounts.
+- [ADDED] unit tests for the new BVN verification flow, transaction fees, and Card Collection (split payments) into subaccounts.
 - [ADDED] 'subaccounts' as an optional body parameter for card charge and PWBT (Pay with Bank Transfer).
 - [FIXED] "URL Not Found" Error returned from Validate Bill Service method.
 - [FIXED] "Invalid currency provided" Error returned from the Transaction fees method.
