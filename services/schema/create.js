@@ -249,6 +249,14 @@ const cardChargeSchema = joi.object({
   }),
   payment_plan: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  subaccounts: joi.array().items(
+    joi.object({
+      id: joi.string().trim().max(100).required(),
+      transaction_split_ratio: joi.number().positive(),
+      transaction_charge_type: joi.string().valid('flat', 'percentage', 'flat_subaccount'),
+      transaction_charge: joi.number().positive(),
+    })
+  ).min(1),
 });
 
 // initiate collections for different payment methods
@@ -282,6 +290,14 @@ const chargeSchema = joi.object({
   billing_zip: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
   expires: joi.number().positive().max(31536000),
+  subaccounts: joi.array().items(
+    joi.object({
+      id: joi.string().trim().max(100).required(),
+      transaction_split_ratio: joi.number().positive(),
+      transaction_charge_type: joi.string().valid('flat', 'percentage', 'flat_subaccount'),
+      transaction_charge: joi.number().positive(),
+    })
+  ).min(1),
 });
 
 // create eNaira charge

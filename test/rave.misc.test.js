@@ -164,53 +164,71 @@ describe('#Rave Misc', function () {
     expect(resp.body.data[0]).to.have.property('ledger_balance');
   });
 
-  it('should verify BVN and return success message', async function () {
+  it('should initiate BVN consent and return success message', async function () {
     this.timeout(10000);
 
-    const resolveBVNSuccessStub = sinon.stub(miscInstance, 'bvn').resolves({
+    const resolveInitBVNSuccessStub = sinon.stub(miscInstance, 'bvn').resolves({
       body: {
         status: 'success',
-        message: 'BVN details fetched',
+        message: 'Bvn verification initiated',
         data: {
-          bvn: '123456789',
-          first_name: 'Wendy',
-          middle_name: 'Chucky',
-          last_name: 'Rhoades',
-          date_of_birth: '01-01-1905',
-          phone_number: '08012345678',
-          registration_date: '01-01-1921',
-          enrollment_bank: '044',
-          enrollment_branch: 'Idejo',
-          image_base_64: null,
-          address: null,
-          gender: 'Male',
-          email: null,
-          watch_listed: null,
-          nationality: 'Nigerian',
-          marital_status: null,
-          state_of_residence: null,
-          lga_of_residence: null,
-          image: null,
-        },
+          url: 'https://nibss-bvn-consent-management.dev-flutterwave.com/cms/BvnConsent?session=MWNkNDI4ZWYtMjgwNy00ZjA1LWE5NzUtNzUyZGUyZDRjZWQz',
+          reference: 'FLW71DC60942BAD76D2BD5B4E'
+        }
       },
     });
 
     var payload = {
-      bvn: '12345678901',
+      bvn: "12347832211",
+      firstname: "Lyra",
+      lastname: "Balacqua",
+      redirect_url: "https://example-url.company.com"
     };
 
     var resp = await miscInstance.bvn(payload);
 
-    expect(resolveBVNSuccessStub).to.have.been.calledOnce;
-    expect(resolveBVNSuccessStub).to.have.been.calledOnceWith(payload);
+    expect(resolveInitBVNSuccessStub).to.have.been.calledOnce;
+    expect(resolveInitBVNSuccessStub).to.have.been.calledOnceWith(payload);
 
     expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('message', 'Bvn verification initiated');
     expect(resp.body).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('bvn');
-    expect(resp.body.data).to.have.property('first_name');
-    expect(resp.body.data).to.have.property('date_of_birth');
-    expect(resp.body.data).to.have.property('phone_number');
+    expect(resp.body.data).to.have.property('reference');
+    expect(resp.body.data).to.have.property('url');
+  });
+
+  it('should verify BVN consent and return success message', async function () {
+    this.timeout(10000);
+
+    const resolveVerifyBVNSuccessStub = sinon.stub(miscInstance, 'verifybvn').resolves({
+      body: {
+        status: 'success',
+        message: 'Bvn details fetched',
+        data: {
+          first_name: 'Lyra',
+          last_name: 'Balacqua',
+          status: 'INITIATED',
+          reference: 'FLW71DC60942BAD76D2BD5B4E',
+          callback_url: null,
+          bvn_data: null,
+          created_at: '2024-02-16T08:28:10.000Z'
+        }
+      },
+    });
+
+    var payload = {
+      reference: "FLW71DC60942BAD76D2BD5B4E"
+    };
+
+    var resp = await miscInstance.verifybvn(payload);
+
+    expect(resolveVerifyBVNSuccessStub).to.have.been.calledOnce;
+    expect(resolveVerifyBVNSuccessStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('message', 'Bvn details fetched');
+    expect(resp.body).to.have.property('data');
   });
 
   it('should verify resolve bank account details', async function () {

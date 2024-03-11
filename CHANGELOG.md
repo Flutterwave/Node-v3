@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.8 | 2024-02-19
+This release, we've addressed several Hotfixes and added support for the new NIBBS BVN verification flow. Check out the details below:
+
+### Version Changes.
+- [ADDED] NIBBS BVN verification flow.
+- [ADDED] unit tests for the new BVN verification flow, transaction fees, and Card Collection (split payments) into subaccounts.
+- [ADDED] 'subaccounts' as an optional body parameter for card charge and PWBT (Pay with Bank Transfer).
+- [FIXED] "URL Not Found" Error returned from Validate Bill Service method.
+- [FIXED] "Invalid currency provided" Error returned from the Transaction fees method.
+
 ## 1.1.7 | 2024-01-25
 In this release, we've enhanced payment methods and addressed various housekeeping issues to ensure a smoother experience. Check out the details below:
 

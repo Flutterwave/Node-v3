@@ -738,4 +738,92 @@ describe('#Rave charge', function () {
       expect(err.message).to.include('"currency" is required');
     }
   });
+
+  it('should return charge into collection subaccounts', async function () {
+    this.timeout(10000);
+
+    const createCardChargeStub = sinon.stub(chargeInstance, 'card').resolves({
+      status: 'success',
+      message: 'Successful',
+      data: {
+        id: 4918672,
+        tx_ref: 'MC-3243e000',
+        flw_ref: 'FLW-MOCK-365702bdb12af7938bdd02860caf2bc2',
+        device_fingerprint: 'N/A',
+        amount: 100,
+        charged_amount: 100,
+        app_fee: 1.4,
+        merchant_fee: 0,
+        processor_response: 'Please enter the OTP sent to your mobile number 080****** and email te**@rave**.com',
+        auth_model: 'NOAUTH',
+        currency: 'NGN',
+        ip: '54.75.161.64',
+        narration: 'CARD Transaction ',
+        status: 'successful',
+        auth_url: 'https://ravesandboxapi.flutterwave.com/mockvbvpage?ref=FLW-MOCK-365702bdb12af7938bdd02860caf2bc2&code=00&message=Approved.%20Successful&receiptno=RN1708329200239',
+        payment_type: 'card',
+        plan: null,
+        fraud_status: 'ok',
+        charge_type: 'normal',
+        created_at: '2024-02-19T07:53:20.000Z',
+        account_id: 20937,
+        customer: {
+          id: 2356420,
+          phone_number: null,
+          name: 'Yolande Aglaé',
+          email: 'user@example.com',
+          created_at: '2024-02-19T07:53:20.000Z'
+        },
+        card: {
+          first_6digits: '553188',
+          last_4digits: '2950',
+          issuer: 'MASTERCARD  CREDIT',
+          country: 'NG',
+          type: 'MASTERCARD',
+          expiry: '09/32'
+        }
+      }
+    })
+
+    var payload = {
+      card_number:"5531886652142950",
+      cvv:"564",
+      expiry_month:"09",
+      expiry_year:"32",
+      currency:"NGN",
+      amount:"100",
+      fullname:"Yolande Aglaé Colbert",
+      email:"user@example.com",
+      tx_ref:"MC-3243e000",
+      redirect_url:"https://www,flutterwave.ng",
+      enckey: process.env.ENCRYPTION_KEY,
+      subaccounts: [
+        {
+          id: "RS_93667D2B73110DFFEF8449A8A0A32415",
+          transaction_split_ratio: 2,
+          transaction_charge_type: "flat",
+          transaction_charge: 100,
+        },
+        {
+          id: "RS_47CC41E35953182AC35E952D4F4CA713",
+          transaction_split_ratio: 3,
+          transaction_charge_type: "flat",
+          transaction_charge: 100,
+        },
+        {
+          id: "RS_EEF0D016C26BBF1543F09CEF6090AB49",
+          transaction_split_ratio: 5,
+          transaction_charge_type: "flat",
+          transaction_charge: 100,
+        },
+      ],
+    };
+    var resp = await chargeInstance.card(payload);
+    expect(createCardChargeStub).to.have.been.calledOnce;
+    expect(createCardChargeStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp).to.have.property('status', 'success');
+
+    expect(resp.data).to.have.property('status', 'successful');
+  });
 });

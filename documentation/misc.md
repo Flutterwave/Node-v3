@@ -212,9 +212,9 @@ Sample Response
 }
 ```
 
-## Resolve bvn details
+## Initiate BVN Consent
 
-This describes how to fetch bvn information
+This describes how to initiate bvn consent flow for your customer.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -223,11 +223,14 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 
 
 
-const resolveBvn = async () => {
+const initiateBvn = async () => {
 
     try {
         const payload = {
-            "bvn": "123456789010"
+          "bvn": "12347832211",
+          "firstname": "Lyra",
+          "lastname:" "Balacqua",
+          "redirect_url": "https://example-url.company.com"
         }
         const response = await flw.Misc.bvn(payload)
         console.log(response);
@@ -238,35 +241,65 @@ const resolveBvn = async () => {
 }
 
 
-resolveBvn();
+initiateBvn();
 ```
 
 Sample Response
 
 ```javascript
 {
-   "status": "success",
-   "message": "BVN details fetched",
-   "data": {
-      "bvn": "123456789",
-      "first_name": "Wendy",
-      "middle_name": "Chucky",
-      "last_name": "Rhoades",
-      "date_of_birth": "01-01-1905",
-      "phone_number": "08012345678",
-      "registration_date": "01-01-1921",
-      "enrollment_bank": "044",
-      "enrollment_branch": "Idejo",
-      "image_base_64": null,
-      "address": null,
-      "gender": "Male",
-      "email": null,
-      "watch_listed": null,
-      "nationality": "Nigerian",
-      "marital_status": null,
-      "state_of_residence": null,
-      "lga_of_residence": null,
-      "image": null
+   "status":"success",
+   "message":"Bvn verification initiated",
+   "data":{
+      "url":"https://nibss-bvn-consent-management.dev-flutterwave.com/cms/BvnConsent?session=MWNkNDI4ZWYtMjgwNy00ZjA1LWE5NzUtNzUyZGUyZDRjZWQz",
+      "reference":"FLW71DC60942BAD76D2BD5B4E"
+   }
+}
+```
+
+## Verify BVN consent
+
+This describes how to Verify consent and retirve the customer's BVN information.
+
+```javascript
+const Flutterwave = require('flutterwave-node-v3');
+
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+
+
+
+const verifyBvn = async () => {
+
+    try {
+        const payload = {
+          "reference":"FLW71DC60942BAD76D2BD5B4E"
+        }
+        const response = await flw.Misc.verifybvn(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+verifyBVN();
+```
+
+Sample Response
+
+```javascript
+{
+   "status":"success",
+   "message":"Bvn details fetched",
+   "data":{
+      "first_name":"Lyra",
+      "last_name":"Balacqua",
+      "status":"INITIATED",
+      "reference":"FLW71DC60942BAD76D2BD5B4E",
+      "callback_url":null,
+      "bvn_data":null,
+      "created_at":"2024-02-16T08:28:10.000Z"
    }
 }
 ```

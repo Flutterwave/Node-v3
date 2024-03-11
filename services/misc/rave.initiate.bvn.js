@@ -1,15 +1,14 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { validateBVNSchema } = require('../schema/auxillary');
+const { initiateBVNSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
-  validator(validateBVNSchema, data);
-  data.method = 'GET';
+  validator(initiateBVNSchema, data);
   const { body: response } = await _rave.request(
-    `v3/kyc/bvns/${data.bvn}`,
+    `v3/bvn/verifications`,
     data,
   );
-  logger(`Resolve BVN details`, _rave);
+  logger(`Initiate BVN consent`, _rave);
   return response;
 }
 
