@@ -6,8 +6,12 @@
 
 We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
 
+Manage Otps via any of these methods:
+1. [Create Otp](#create-otp)
+2. [Validate Otp](#validate-otp)
 
-###  Create Otp
+
+##  Create Otp
 
 This describes how to create an otp
 
@@ -23,10 +27,17 @@ const createOTP = async () => {
 
         const payload = {
             "length": 7,
-            "customer": { "name": "Kazan", "email": "kazan@mailinator.com", "phone": "2348131149273" },
-            "sender": "log t",
+            "customer": {
+                "name": "Kazan",
+                "email": "kazan@mailinator.com",
+                "phone": "2348131149273"
+            },
+            "sender": "Test Sender",
             "send": true,
-            "medium": ["email", "whatsapp"],
+            "medium": [
+                "email",
+                "whatsapp"
+            ],
             "expiry": 5
         }
 
@@ -40,12 +51,33 @@ const createOTP = async () => {
 
 
 createOTP();
+```
 
+Sample Response
 
+```javascript
+{
+   "status": "success",
+   "message": "OTP generated successfully",
+   "data": [
+      {
+         "medium": "email",
+         "reference": "CF-BARTER-20230305031441503636",
+         "otp": "1495545",
+         "expiry": "2023-03-05T03:19:41.8110726+00:00"
+      },
+      {
+         "medium": "whatsapp",
+         "reference": "CF-BARTER-20230305031443536582",
+         "otp": "1495545",
+         "expiry": "2023-03-05T03:19:43.4362097+00:00"
+      }
+   ]
+}
 ```
 
 
-###  Validate Otp
+##  Validate Otp
 
 This describes how to validate an otp
 
@@ -75,7 +107,15 @@ const validateOTP = async () => {
 
 
 validateOTP();
+```
 
+Sample Response
 
+```javascript
+{
+    "status": "success",
+    "message": "Otp Authenticated successfully",
+    "data": null
+}
 ```
 

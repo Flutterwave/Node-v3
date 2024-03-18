@@ -1,16 +1,16 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { validateSchema } = require('../schema/bill');
+const { verifyBVNSchema } = require('../schema/auxillary');
 
 async function service(data, _rave) {
-  validator(validateSchema, data);
+  validator(verifyBVNSchema, data);
   data.method = 'GET';
   data.excludeQuery = true;
   const { body: response } = await _rave.request(
-    `v3/bill-items/${data.item_code}/validate?code=${data.code}&customer=${data.customer}`,
+    `v3/bvn/verifications/${data.reference}`,
     data,
   );
-  logger(`Validate bill payment`, _rave);
+  logger(`Verify BVN consent`, _rave);
   return response;
 }
 

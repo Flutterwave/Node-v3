@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.1.8 | 2024-02-19
+Updated BVN verification flow and hotfixes on subaccount, bills and transaction fees:
+
+### Version Changes.
+- [ADDED] New BVN verification flow (via NIBBS).
+- [ADDED] Unit tests for more coverage on the BVN verification, fees, and split payments.
+- [ADDED] Subaccounts parameter (optional) to card charge and PWBT requests.
+- [FIXED] Resolved "URL Not Found" Error returned from Validate Bill Service method.
+- [FIXED] Resolved "Invalid currency provided" Error returned from the Transaction fees method.
+
+## 1.1.7 | 2024-01-25
+Scheduled updates and bugfixes:
+
+### Version Changes.
+- [ADDED] Tanzania mobile money payment method.
+- [ADDED] Fawry Pay payment method.
+- [ADDED] Supplementary parameters in the createBulkTransferSchema.
+- [ADDED] Expires parameter (optional) to PWBT (Pay with Bank Transfer) requests.
+- [ADDED] Schema for USSD charge (ussdChargeSchema).
+- [ADDED] Status parameter to the updatePlanSchema requests.
+- [ADDED] Unit tests for more coverage on Fawry Pay, Google Pay, Apple Pay, and eNaira
+- [ADDED] Unit tests for more coverage on payment plans, Charge NG Bank Account (Mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
+- [FIXED] Optional parameters in beneficiarySchema.
+- [FIXED] Updated transaction tests to stub response.
+- [FIXED] Modified "id" in the fetchSchema to accept only integer values.
+- [FIXED] Support string values for zip code in the cardChargeSchema.
+- [FIXED] Support string values for "billing_zip" in the chargeSchema.
+- [FIXED] Extended the length of "account_bank" values in the transferSchema.
+- [FIXED] Updated the UK & USSD bank charge.
+- [FIXED] Revised the NG bank charge (Mono).
+- [REMOVED] Eliminated the "amount" parameter in the updatePlanSchema.
+
 ## 1.1.6 | 2023-06-21
 Hotfix on Transfer fees and Bank lists.
 ### Version changes.

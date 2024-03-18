@@ -150,3 +150,5 @@ describe('#Rave Bank', function () {
     expect(resp.body.data[0]).to.have.property('bank_id');
   });
 });
+
+

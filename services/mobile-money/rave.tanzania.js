@@ -1,14 +1,14 @@
 const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
-const { eNairaChargeSchema } = require('../schema/create');
+const { momoSchema } = require('../schema/create');
 
 async function service(data, _rave) {
-  validator(eNairaChargeSchema, data);
+  validator(momoSchema, data);
   const { body: response } = await _rave.request(
-    `v3/charges?type=enaira`,
+    `v3/charges?type=mobile_money_tanzania`,
     data,
   );
-  logger(`Create eNaira charge`, _rave);
+  logger(`Create ${data.currency} MoMo charge`, _rave);
   return response;
 }
 
