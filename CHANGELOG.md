@@ -1,32 +1,38 @@
 # Changelog
 
-## 1.1.8 | 2024-02-19
-This release, we've addressed several Hotfixes and added support for the new NIBBS BVN verification flow. Check out the details below:
+## 1.1.9 | 2024-03-18
+Hotfixes to allow a minimum of 3 characters and a maximum of 6 characters for the "account_bank" parameter in the subaccountSchema for the creation of subaccounts.
 
 ### Version Changes.
-- [ADDED] NIBBS BVN verification flow.
-- [ADDED] unit tests for the new BVN verification flow, transaction fees, and Card Collection (split payments) into subaccounts.
-- [ADDED] 'subaccounts' as an optional body parameter for card charge and PWBT (Pay with Bank Transfer).
-- [FIXED] "URL Not Found" Error returned from Validate Bill Service method.
-- [FIXED] "Invalid currency provided" Error returned from the Transaction fees method.
+- [FIXED] The min and max value for the 'account_bank" parameter in the subaccountSchema
+
+## 1.1.8 | 2024-02-19
+Updated BVN verification flow and hotfixes on subaccount, bills and transaction fees:
+
+### Version Changes.
+- [ADDED] New BVN verification flow (via NIBBS).
+- [ADDED] Unit tests for more coverage on the BVN verification, fees, and split payments.
+- [ADDED] Subaccounts parameter (optional) to card charge and PWBT requests.
+- [FIXED] Resolved "URL Not Found" Error returned from Validate Bill Service method.
+- [FIXED] Resolved "Invalid currency provided" Error returned from the Transaction fees method.
 
 ## 1.1.7 | 2024-01-25
-In this release, we've enhanced payment methods and addressed various housekeeping issues to ensure a smoother experience. Check out the details below:
+Scheduled updates and bugfixes:
 
 ### Version Changes.
 - [ADDED] Tanzania mobile money payment method.
 - [ADDED] Fawry Pay payment method.
-- [ADDED] Additional unit tests for Fawry Pay, Google Pay, Apple Pay, and eNaira.
-- [FIXED] Optional parameters in beneficiarySchema.
 - [ADDED] Supplementary parameters in the createBulkTransferSchema.
-- [ADDED] Introduced "expires" as an optional body parameter for PWBT (Pay with Bank Transfer).
-- [ADDED] New tests for payment plans, Charge NG Bank Account (Mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
+- [ADDED] Expires parameter (optional) to PWBT (Pay with Bank Transfer) requests.
 - [ADDED] Schema for USSD charge (ussdChargeSchema).
-- [ADDED] "status" as a body parameter in the updatePlanSchema.
+- [ADDED] Status parameter to the updatePlanSchema requests.
+- [ADDED] Unit tests for more coverage on Fawry Pay, Google Pay, Apple Pay, and eNaira
+- [ADDED] Unit tests for more coverage on payment plans, Charge NG Bank Account (Mono), Charge with Bank Transfer (PWBT), and Change UK & EU Bank Account.
+- [FIXED] Optional parameters in beneficiarySchema.
 - [FIXED] Updated transaction tests to stub response.
 - [FIXED] Modified "id" in the fetchSchema to accept only integer values.
-- [FIXED] Adjusted "authorization.zipcode" in the cardChargeSchema to accept string values.
-- [FIXED] Adapted "billing_zip" in the chargeSchema to accept string values.
+- [FIXED] Support string values for zip code in the cardChargeSchema.
+- [FIXED] Support string values for "billing_zip" in the chargeSchema.
 - [FIXED] Extended the length of "account_bank" values in the transferSchema.
 - [FIXED] Updated the UK & USSD bank charge.
 - [FIXED] Revised the NG bank charge (Mono).

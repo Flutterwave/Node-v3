@@ -413,7 +413,7 @@ const refundSchema = joi.object({
 
 // create a subaccount
 const subaccountSchema = joi.object({
-  account_bank: joi.string().length(3).required(),
+  account_bank: joi.string().min(3).max(6).required(),
   account_number: joi.string().trim().max(20).required(),
   business_name: joi.string().trim().max(100).required(),
   split_value: joi.number().min(0).max(1).required(),
@@ -637,7 +637,7 @@ const tokenSchema = joi.object({
 
 // charge bank accounts: base for USSD charge
 const ussdChargeSchema = joi.object({
-  account_bank: joi.string().length(3).required(),
+  account_bank: joi.string().min(3).max(6).required(),
   amount: joi.number().positive().required(),
   email: joi.string().max(100).email().required(),
   tx_ref: joi.string().trim().max(100).required(),
