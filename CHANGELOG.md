@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.9 | 2024-03-18
+Hotfixes to allow a minimum of 3 characters and a maximum of 6 characters for the "account_bank" parameter in the subaccountSchema for the creation of subaccounts.
+
+### Version Changes.
+- [FIXED] The min and max value for the 'account_bank" parameter in the subaccountSchema
+
 ## 1.1.8 | 2024-02-19
 Updated BVN verification flow and hotfixes on subaccount, bills and transaction fees:
 
