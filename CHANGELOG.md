@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0 | 2024-04-04
+## 1.1.10 | 2024-04-04
 Updated the variable name "package" which happens to be a reserved word in JavaScript, and it is causing compatibility issues with certain bundlers.
 
 ### Version Changes
