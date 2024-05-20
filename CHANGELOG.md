@@ -1,10 +1,16 @@
 # Changelog
 
+## 1.2.0 | 2024-04-04
+Updated the variable name "package" which happens to be a reserved word in JavaScript, and it is causing compatibility issues with certain bundlers.
+
+### Version Changes
+- [FIXED] changed the variable name 'package' to 'packageJson' in the logger.js file.
+
 ## 1.1.9 | 2024-03-18
-Hotfixes to allow a minimum of 3 characters and a maximum of 6 characters for the "account_bank" parameter in the subaccountSchema for the creation of subaccounts.
+Validation hotfix on subaccounts
 
 ### Version Changes.
-- [FIXED] The min and max value for the 'account_bank" parameter in the subaccountSchema
+- [FIXED] Update validation (minLength & maxLength) for 'account_bank" parameter in the subaccountSchema.
 
 ## 1.1.8 | 2024-02-19
 Updated BVN verification flow and hotfixes on subaccount, bills and transaction fees:
