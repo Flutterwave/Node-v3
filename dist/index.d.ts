@@ -1,0 +1,45 @@
+export = Rave;
+declare function Rave(public_key: any, public_secret: any, base_url_or_production_flag: any): void;
+declare class Rave {
+    constructor(public_key: any, public_secret: any, base_url_or_production_flag: any);
+    Bank: bank;
+    Beneficiary: beneficiary;
+    Bills: bills;
+    Charge: charge;
+    Ebills: ebills;
+    Misc: misc;
+    MobileMoney: mobile_money;
+    security: {
+        getEncryptionKey: (seckey: any) => any;
+        encrypt: (key: any, text: any) => any;
+        getIntegrityHash: (data: any, pubkey: any, seckey: any) => any;
+    };
+    Otp: otps;
+    PaymentPlan: payment_plan;
+    Settlement: settlement;
+    Subscription: subscription;
+    Subaccount: subaccount;
+    Tokenized: tokenized;
+    Transaction: transaction;
+    Transfer: transfer;
+    VirtualAcct: virtual_acct;
+    VirtualCard: virtual_card;
+    getIntegrityHash: (data: any) => any;
+}
+import bank = require("./lib/rave.banks");
+import beneficiary = require("./lib/rave.beneficiaries");
+import bills = require("./lib/rave.bills");
+import charge = require("./lib/rave.charge");
+import ebills = require("./lib/rave.ebills");
+import misc = require("./lib/rave.misc");
+import mobile_money = require("./lib/rave.mobile_money");
+import otps = require("./lib/rave.otps");
+import payment_plan = require("./lib/rave.payment_plan");
+import settlement = require("./lib/rave.settlements");
+import subscription = require("./lib/rave.subscriptions");
+import subaccount = require("./lib/rave.subaccount");
+import tokenized = require("./lib/rave.tokenized");
+import transaction = require("./lib/rave.transactions");
+import transfer = require("./lib/rave.transfers");
+import virtual_acct = require("./lib/rave.virtual_account");
+import virtual_card = require("./lib/rave.virtual_cards");
