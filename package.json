@@ -3,6 +3,7 @@
   "version": "1.1.10",
   "description": "The official Node.JS library for Flutterwave v3 payment APIs",
   "main": "index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\"",

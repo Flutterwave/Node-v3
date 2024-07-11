@@ -1,7 +1,6 @@
 export = Rave;
-declare function Rave(public_key: any, public_secret: any, base_url_or_production_flag: any): void;
 declare class Rave {
-    constructor(public_key: any, public_secret: any, base_url_or_production_flag: any);
+    constructor(public_key: string, public_secret: string, base_url_or_production_flag?: any);
     Bank: bank;
     Beneficiary: beneficiary;
     Bills: bills;
