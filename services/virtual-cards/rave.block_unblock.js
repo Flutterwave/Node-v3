@@ -14,7 +14,7 @@ async function service(data, _rave) {
     `v3/virtual-cards/${data.id}/status/${data.status_action}`,
     data,
   );
-  logger(`Fund a virtual card`, _rave);
+  logger(`${data.status_action} a virtual card`, _rave);
   return response;
 }
 module.exports = service;
