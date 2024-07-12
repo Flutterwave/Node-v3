@@ -206,7 +206,7 @@ const cardChargeSchema = joi.object({
   enckey: joi.string().required(),
   tx_ref: joi.string().trim().max(100).required(),
   amount: joi.number().positive().required(),
-  currency: joi.string().uppercase().length(3).default('NGN'),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
   card_number: joi.string().creditCard().required(),
   cvv: joi.string().min(3).max(4).required(),
   expiry_month: joi

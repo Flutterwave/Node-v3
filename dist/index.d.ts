@@ -42,6 +42,14 @@ import transaction = require("./lib/rave.transactions");
 import transfer = require("./lib/rave.transfers");
 import virtual_acct = require("./lib/rave.virtual_account");
 import virtual_card = require("./lib/rave.virtual_cards");
+import { string } from "joi";
+
+
+type Customer = {
+    name: string;
+    email: string;
+    phone: string;
+};
 
 export type CreateOTPSchema = {
     length: number;
@@ -50,12 +58,6 @@ export type CreateOTPSchema = {
     send: boolean;
     medium: Array<"email" | "whatsapp" | "sms">;
     expiry?: number;
-};
-
-type Customer = {
-    name: string;
-    email: string;
-    phone: string;
 };
 
 export type ValidateSchema = {
@@ -328,4 +330,248 @@ export type UnBlock = Block
 export type Withdraw = {
     id: string;
     anount: number;
+}
+
+export type BeneficiarySchema = {
+    account_number: string;
+    account_bank: string;
+    beneficiary_name: string;
+    currency?: string;
+    bank_name?: string;
+}
+
+export type CardChargeSchema = {
+    enckey: string;
+    tx_ref: string;
+    amount: number;
+    currency: string;
+    card_number: string;
+    cvv: string;
+    expiry_month: string;
+    expiry_year: string;
+    email: string;
+    fullname?: string;
+    phone_number?: string;
+    client_ip?: string;
+    device_fingerprint?: string;
+    redirect_url?: string;
+    authorization?: Authorization;
+    payment_plan?: string;
+    meta?: Record<string, any>;
+    subaccounts?: Subaccount[];
+};
+
+type Authorization = {
+    mode?: string;
+    pin?: number;
+    address?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    zipcode?: string;
+};
+
+type Subaccount = {
+    id: string;
+    transaction_split_ratio?: number;
+    transaction_charge_type?: 'flat' | 'percentage' | 'flat_subaccount';
+    transaction_charge?: number;
+};
+
+export type BankChargeSchema = {
+    amount: number;
+    email: string;
+    tx_ref: string;
+    currency: string;
+    fullname?: string;
+    phone_number?: string;
+    client_ip?: string;
+    device_fingerprint?: string;
+    redirect_url?: string;
+    meta?: Record<string, any>;
+    is_token_io?: number;
+};
+
+export type ChargeSchema = {
+    amount: number;
+    email: string;
+    tx_ref: string;
+    currency: string;
+    fullname?: string;
+    phone_number?: string;
+    client_ip?: string;
+    device_fingerprint?: string;
+    redirect_url?: string;
+    country?: string;
+    billing_address?: string;
+    billing_city?: string;
+    billing_state?: string;
+    billing_country?: string;
+    billing_zip?: string;
+    meta?: Record<string, any>;
+    expires?: number;
+    subaccounts?: Subaccount[];
+};
+
+export type UssdChargeSchema = {
+    account_bank: string;
+    amount: number;
+    email: string;
+    tx_ref: string;
+    currency: string;
+    fullname?: string;
+    phone_number?: string;
+    client_ip?: string;
+    device_fingerprint?: string;
+    redirect_url?: string;
+    meta?: Record<string, any>;
+};
+
+export type ValidateChargeSchema = {
+    otp: string;
+    flw_ref: string;
+    type?: "card" | "account";
+}
+
+export type ENairaChargeSchema = {
+    amount: number;
+    email: string;
+    tx_ref: string;
+    currency: string;
+    fullname?: string;
+    phone_number?: string;
+    client_ip?: string;
+    device_fingerprint?: string;
+    redirect_url?: string;
+    meta?: Record<string, any>;
+    is_token?: number;
+    is_qr?: number;
+};
+
+
+export type CreateEBillOrder = {
+    email: string;
+    tx_ref: string;
+    custom_business_name: string;
+    amount: number;
+    number_of_units: number;
+    currency?: string;
+    country?: string;
+    ip?: string;
+    phone_number?: string;
+}
+
+export type UpdateEBillOrder = {
+    reference: string;
+    amount: number;
+    currency?: string;
+}
+
+
+export type FetchBalanceSchema = {
+    currency: string;
+}
+
+export type InitiateBvnSchema = {
+    bvn: string;
+    firstname: string;
+    lastname: string;
+    redirect_url?: string;
+
+}
+
+export type VerifyBvnConsentSchema = {
+    reference: string;
+}
+
+export type ResolveAccountSchema = {
+    account_bank: string;
+    account_number: string;
+    country?: string;
+    type?: string;
+}
+
+export type MomoSchema = {
+    amount: number;
+    email: string;
+    tx_ref: string;
+    currency: string;
+    phone_number: string;
+    network?: string;
+    voucher?: number;
+    country?: string;
+    order_id?: string;
+    fullname?: string;
+    client_ip?: string;
+    meta?: Record<string, any>;
+    device_fingerprint?: string;
+    redirect_url?: string;
+};
+
+
+export type CreateBillSchema = {
+    country?: string;
+    amount: number;
+    customer: string;
+    recurrence: string;
+    reference: string;
+    type?: string;
+}
+
+export type AmountQuerySchema = {
+    id: string;
+    product_id: string;
+}
+
+type CreateSchema = {
+    country: string;
+    amount: number;
+    customer: string;
+    recurrence: string;
+    reference: string;
+    type: string;
+}
+
+export type BulkCreateSchema = {
+    bulk_reference: string;
+    callback_url: string;
+    bulk_data: CreateSchema[]
+}
+
+export type CreateOrderSchema = {
+    id: string;
+    product_id: string;
+    amount: number;
+    country: string;
+    reference: string;
+    customer: BillCustomer
+    fields: Fields[];
+};
+
+type BillCustomer = {
+    name: string;
+    email: string;
+    phone_number: string;
+};
+
+type Fields = {
+    id?: string;
+    quantity?: string;
+    value?: string;
+};
+
+export type FetchStatusSchema = {
+    reference: string;
+}
+
+export type UpdateOrderSchema = {
+    amount: number;
+    order_id: string;
+    reference: string;
+}
+
+export type ValidateBillSchema = {
+    code: string;
+    item_code: string;
+    customer: string;
 }
