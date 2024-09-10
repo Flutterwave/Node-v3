@@ -1,9 +1,9 @@
 # Changelog
 ## 1.1.11 | 2024-09-10
-Updated the `account_bank` field in all schema's.
+Update `account_bank` validation in create schema.
 
 ### Version Changes
-- [FIXED] Update validation (minLength & maxLength) for 'account_bank" parameter in the schema's.
+- [FIXED] Update minLength & maxLength validation for account_bank parameter.
 
 ## 1.1.10 | 2024-04-04
 Updated the variable name "package" which happens to be a reserved word in JavaScript, and it is causing compatibility issues with certain bundlers.
