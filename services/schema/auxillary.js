@@ -85,7 +85,7 @@ const orderSchema = joi.object({
 
 // resolve account details
 const resolveSchema = joi.object({
-  account_bank: joi.string().length(3).required(),
+  account_bank: joi.string().min(3).max(11).required(),
   account_number: joi.string().required(),
   country: joi.string().uppercase().length(2).default('NG'),
   type: joi.string(),
