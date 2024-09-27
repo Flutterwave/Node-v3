@@ -24,7 +24,7 @@ const listSchema = joi.object({
     .string()
     .max(20)
     .valid('daily', 'weekly', 'monthly', 'quarterly', 'yearly'),
-  account_bank: joi.string().min(3).max(11).required(),
+  account_bank: joi.string().min(3).max(11),
   account_number: joi.string().trim().max(20),
   bank_name: joi.string().trim().max(100),
   split_value: joi.number().min(0).max(1),
