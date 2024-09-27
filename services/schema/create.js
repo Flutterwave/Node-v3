@@ -206,7 +206,7 @@ const cardChargeSchema = joi.object({
   enckey: joi.string().required(),
   tx_ref: joi.string().trim().max(100).required(),
   amount: joi.number().positive().required(),
-  currency: joi.string().uppercase().length(3).default('NGN'),
+  currency: joi.string().uppercase().length(3).default('NGN').required(),
   card_number: joi.string().creditCard().required(),
   cvv: joi.string().min(3).max(4).required(),
   expiry_month: joi
@@ -336,41 +336,39 @@ const momoSchema = joi.object({
   email: joi.string().max(100).email().required(),
   tx_ref: joi.string().trim().max(100).required(),
   currency: joi.string().uppercase().length(3).required(),
-  phone_number: joi
-    .string()
+  phone_number: joi.string()
     .max(50)
-    .custom((value) => {
-      if (value && !/^\+?\d+$/.test(value))
-        throw new Error('phone number should be digits');
+    .custom((value, helpers) => {
+      if (value && !/^\+?\d+$/.test(value)) {
+        return helpers.error('any.invalid');
+      }
       return value;
     })
     .required(),
-  network: joi.when('currency', {
+  network: joi.alternatives().conditional('currency', {
     is: 'GHS',
     then: joi.string().valid('MTN', 'VODAFONE', 'TIGO').required().messages({
       'any.only': 'Only MTN, VODAFONE and TIGO are valid network values.',
     }),
-    otherwise: joi.when('currency', {
+    otherwise: joi.alternatives().conditional('currency', {
       is: 'UGX',
-      then: joi
-        .string()
+      then: joi.string()
         .valid('MTN', 'VODAFONE', 'Airtel')
         .required()
         .messages({
           'any.only': 'Only MTN, VODAFONE and Airtel are valid network values.',
         }),
-    }),
-    otherwise: joi.when('currency', {
-      is: 'TZS',
-      then: joi.string().valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone').messages({
+      otherwise: joi.alternatives().conditional('currency', {
+        is: 'TZS',
+        then: joi.string().valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone').messages({
         'any.only': 'Only Airtel, Tigo, Halopesa and Vodafone are valid network values.'
+        }),
       })
     })
   }),
   voucher: joi.when('network', {
     is: 'VODAFONE',
     then: joi.number().required(),
-    otherwise: joi.optional(),
   }),
   country: joi.when('currency', {
     is: joi.valid('XAF', 'XOF'),
@@ -381,16 +379,14 @@ const momoSchema = joi.object({
     then: joi.string().trim().max(100).required(),
   }),
   fullname: joi.string().max(100),
-  client_ip: joi
-    .string()
-    .ip({
-      version: ['ipv4', 'ipv6'],
-    })
-    .default('::127.0.0.1'),
-  meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
+  client_ip: joi.string().ip({
+    version: ['ipv4', 'ipv6'],
+  }).default('::127.0.0.1'),
+  meta: joi.object().pattern(/^[\w_]*$/, joi.any()),
   device_fingerprint: joi.string().trim().max(200),
   redirect_url: joi.string().uri(),
 });
+
 
 // create a payment plan
 const planSchema = joi.object({
@@ -430,15 +426,15 @@ const subaccountSchema = joi.object({
 const transferSchema = joi.object({
   amount: joi.number().positive().required(),
   currency: joi.string().uppercase().length(3).default('NGN').required(),
-  account_bank: joi.when('currency', {
-    is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
-    then: joi.string().optional(),
-    otherwise: joi.string().required(),
-  }),
-  account_number: joi.when('currency', {
-    is: joi.valid('EUR', 'GBP', 'USD', 'KES'),
+  account_bank: joi.alternatives().conditional('currency', {
+      is: joi.valid('EUR', 'GBP', 'USD', 'KES'), 
+      then: joi.string().optional(),
+      otherwise: joi.string().required() }
+),
+  account_number: joi.alternatives().conditional('currency', {
+    is: joi.valid('EUR', 'GBP', 'USD', 'KES'), 
     then: joi.string().trim().max(20).optional(),
-    otherwise: joi.string().trim().max(20).required(),
+    otherwise: joi.string().trim().max(20).required() 
   }),
   narration: joi.string().max(100),
   debit_subaccount: joi.string().max(100),
@@ -448,94 +444,8 @@ const transferSchema = joi.object({
   beneficiary_name: joi.string().max(100),
   destination_branch_code: joi.string().max(10),
   callback_url: joi.string().max(100),
-  meta: joi.when('currency', {
+  meta: joi.alternatives().conditional('currency', {
     is: 'EUR',
-    then: joi.array().items(
-      joi
-        .object({
-          AccountNumber: joi.string().trim().required().messages({
-            'any.required': 'Account number is required!',
-          }),
-          RoutingNumber: joi.string().trim().required().messages({
-            'any.required': 'Routing number is required!',
-          }),
-          SwiftCode: joi.string().required().messages({
-            'any.required': 'Swift code is required!',
-          }),
-          BankName: joi.string().required().messages({
-            'any.required': 'Destination bank name is required!',
-          }),
-          BeneficiaryName: joi.string().required().messages({
-            'any.required': 'Beneficiary name is required!',
-          }),
-          BeneficiaryCountry: joi
-            .string()
-            .uppercase()
-            .length(2)
-            .required()
-            .messages({
-              'any.required': 'Beneficiary country is required!',
-            }),
-          PostalCode: joi.string().required().messages({
-            'any.required': 'Postal code is required!',
-          }),
-          StreetNumber: joi.string().required().messages({
-            'any.required': 'Street number is required!',
-          }),
-          StreetName: joi.string().required().messages({
-            'any.required': 'Street name is required!',
-          }),
-          City: joi.string().required().messages({
-            'any.required': 'City is required!',
-          }),
-        })
-        .required(),
-    ),
-  }),
-  otherwise: joi.when('currency', {
-    is: 'GBP',
-    then: joi.array().items(
-      joi.object({
-        AccountNumber: joi.string().trim().required().messages({
-          'any.required': 'Account number is required!',
-        }),
-        RoutingNumber: joi.string().trim().required().messages({
-          'any.required': 'Routing numver is required!',
-        }),
-        SwiftCode: joi.string().required().messages({
-          'any.required': 'Swift code is required!',
-        }),
-        BankName: joi.string().required().messages({
-          'any.required': 'Destination bank name is required!',
-        }),
-        BeneficiaryName: joi.string().required().messages({
-          'any.required': 'Beneficiary name is required!',
-        }),
-        BeneficiaryCountry: joi
-          .string()
-          .uppercase()
-          .length(2)
-          .required()
-          .messages({
-            'any.required': 'Beneficiary country is required!',
-          }),
-        PostalCode: joi.string().required().messages({
-          'any.required': 'Postal code is required!',
-        }),
-        StreetNumber: joi.string().required().messages({
-          'any.required': 'Street number is required!',
-        }),
-        StreetName: joi.string().required().messages({
-          'any.required': 'Street name is required!',
-        }),
-        City: joi.string().required().messages({
-          'any.required': 'City is required!',
-        }),
-      }),
-    ),
-  }),
-  otherwise: joi.when('currency', {
-    is: 'USD',
     then: joi.array().items(
       joi.object({
         AccountNumber: joi.string().trim().required().messages({
@@ -553,45 +463,111 @@ const transferSchema = joi.object({
         BeneficiaryName: joi.string().required().messages({
           'any.required': 'Beneficiary name is required!',
         }),
-        BeneficiaryAddress: joi.string().required().messages({
-          'any.required': 'Beneficiary address is required!',
+        BeneficiaryCountry: joi.string().uppercase().length(2).required().messages({
+          'any.required': 'Beneficiary country is required!',
         }),
-        BeneficiaryCountry: joi
-          .string()
-          .uppercase()
-          .length(2)
-          .required()
-          .messages({
-            'any.required': 'Beneficiary country is required!',
-          }),
-      }),
-    ),
-  }),
-  otherwise: joi.when('currency', {
-    is: 'KES',
-    then: joi.array().items(
-      joi.object({
-        sender: joi.string().required().messages({
-          'any.required': 'Sender is required!',
+        PostalCode: joi.string().required().messages({
+          'any.required': 'Postal code is required!',
         }),
-        mobile_number: joi
-          .string()
-          .max(50)
-          .custom((value) => {
-            if (value && !/^\+?\d+$/.test(value))
-              throw new Error('phone number should be digits');
-            return value;
+        StreetNumber: joi.string().required().messages({
+          'any.required': 'Street number is required!',
+        }),
+        StreetName: joi.string().required().messages({
+          'any.required': 'Street name is required!',
+        }),
+        City: joi.string().required().messages({
+          'any.required': 'City is required!',
+        }),
+      }).required(),
+    ).required(),
+    otherwise: joi.alternatives().conditional('currency', {
+      is: 'GBP',
+      then: joi.array().items(
+            joi.object({
+              AccountNumber: joi.string().trim().required().messages({
+                'any.required': 'Account number is required!',
+              }),
+              RoutingNumber: joi.string().trim().required().messages({
+                'any.required': 'Routing number is required!',
+              }),
+              SwiftCode: joi.string().required().messages({
+                'any.required': 'Swift code is required!',
+              }),
+              BankName: joi.string().required().messages({
+                'any.required': 'Destination bank name is required!',
+              }),
+              BeneficiaryName: joi.string().required().messages({
+                'any.required': 'Beneficiary name is required!',
+              }),
+              BeneficiaryCountry: joi.string().uppercase().length(2).required().messages({
+                'any.required': 'Beneficiary country is required!',
+              }),
+              PostalCode: joi.string().required().messages({
+                'any.required': 'Postal code is required!',
+              }),
+              StreetNumber: joi.string().required().messages({
+                'any.required': 'Street number is required!',
+              }),
+              StreetName: joi.string().required().messages({
+                'any.required': 'Street name is required!',
+              }),
+              City: joi.string().required().messages({
+                'any.required': 'City is required!',
+              }),
+            }).required(),
+          ).required(),
+      otherwise: joi.alternatives().conditional('currency', {
+        is: 'USD',
+        then: joi.array().items(
+            joi.object({
+              AccountNumber: joi.string().trim().required().messages({
+                'any.required': 'Account number is required!',
+              }),
+              RoutingNumber: joi.string().trim().required().messages({
+                'any.required': 'Routing number is required!',
+              }),
+              SwiftCode: joi.string().required().messages({
+                'any.required': 'Swift code is required!',
+              }),
+              BankName: joi.string().required().messages({
+                'any.required': 'Destination bank name is required!',
+              }),
+              BeneficiaryName: joi.string().required().messages({
+                'any.required': 'Beneficiary name is required!',
+              }),
+              BeneficiaryAddress: joi.string().required().messages({
+                'any.required': 'Beneficiary address is required!',
+              }),
+              BeneficiaryCountry: joi.string().uppercase().length(2).required().messages({
+                'any.required': 'Beneficiary country is required!',
+              }),
+            }).required(),
+          ).required(),
+          otherwise: joi.alternatives().conditional('currency', {
+            is: 'KES',
+            then: joi.array().items(
+            joi.object({
+              sender: joi.string().required().messages({
+                'any.required': 'Sender is required!',
+              }),
+              mobile_number: joi.string().max(50).custom((value, helpers) => {
+                if (value && !/^\+?\d+$/.test(value)) {
+                  return helpers.error('any.invalid');
+                }
+                return value;
+              }).required().messages({
+                'any.required': 'Sender mobile is required!',
+              }),
+              sender_country: joi.string().uppercase().length(2).required().messages({
+                'any.required': 'Sender country is required!',
+              }),
+            }),
+          ).required(),
+          otherwise: joi.any().optional()
           })
-          .required()
-          .messages({
-            'any.required': 'Sender mobile is required!',
-          }),
-        sender_country: joi.string().uppercase().length(2).required().messages({
-          'any.required': 'Sender country is required!',
-        }),
-      }),
-    ),
-  }),
+      })
+    })
+  })
 });
 
 // to create a modified version of your original transferSchema to include bank_code.
