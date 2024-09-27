@@ -1,9 +1,9 @@
 # Changelog
 ## 1.1.12 | 2024-09-27
-Updated the `account_bank` field in the list schema.
+Update the list schema
 
 ### Version Changes
-- [FIXED] Update validation from required to optional for 'account_bank" parameter in the list schema.
+- [FIXED] Remove required validation on the 'account_bank" parameter.
 
 ## 1.1.11 | 2024-09-10
 Update `account_bank` validation in create schema.
