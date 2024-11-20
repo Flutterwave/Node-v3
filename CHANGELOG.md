@@ -17,6 +17,12 @@ Updated the `account_bank` field in all schema's.
 ### Version Changes
 - [FIXED] Update validation (minLength & maxLength) for 'account_bank" parameter in the schema's.
 
+## 1.1.11 | 2024-07-12
+Added Typescript support for the Flutterwave-node-v3 library
+
+### Version Changes
+- [ADDED] Type declaration for all the payment methods available in the Flutterwave-node-v3 library.
+
 ## 1.1.10 | 2024-04-04
 Updated the variable name "package" which happens to be a reserved word in JavaScript, and it is causing compatibility issues with certain bundlers.
 
