@@ -1,4 +1,10 @@
 # Changelog
+## 1.1.13 | 2024-11-19
+Updated the `getBalanceByCurrency` method to parse path parameters.
+
+### Version Changes
+- [FIXED] Update the `balance_currency` function in the Misc object to exclude queries when parsing a path parameter.
+
 ## 1.1.12 | 2024-09-27
 Updated the `account_bank` field in the list schema.
 
