@@ -367,11 +367,7 @@ const momoSchema = joi.object({
       })
     })
   }),
-  voucher: joi.when('network', {
-    is: 'VODAFONE',
-    then: joi.number().required(),
-    otherwise: joi.optional(),
-  }),
+  voucher: joi.number().positive().optional(),
   country: joi.when('currency', {
     is: joi.valid('XAF', 'XOF'),
     then: joi.string().uppercase().length(2).default('CM').required(),

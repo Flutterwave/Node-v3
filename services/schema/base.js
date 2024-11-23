@@ -5,6 +5,11 @@ const fetchSchema = joi.object({
   id: joi.number().integer().required(),
 });
 
+// fetch information with single id. enforce id in payload
+const fetchWithReferenceSchema = joi.object({
+  tx_ref: joi.string().trim().max(100).required(),
+});
+
 // retrieve information with different query parameter. add enforceRequired to enforce query params and validate the request
 const listSchema = joi.object({
   id: joi.string(),
@@ -61,4 +66,5 @@ module.exports = {
   listSchema,
   updateSchema,
   validateSchema,
+  fetchWithReferenceSchema,
 };
