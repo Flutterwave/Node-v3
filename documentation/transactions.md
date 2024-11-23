@@ -554,7 +554,7 @@ Sample Response
 }
 ```
 
-## Verify transaction by reference
+## Verify transaction with reference
 
 This describes how Verify transactions using the transaction reference tx_ref
 
