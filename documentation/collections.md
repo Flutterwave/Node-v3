@@ -594,17 +594,11 @@ const Gh_mobilemoney =  async () =>{
             "tx_ref": "test789",
             "amount": "150",
             "currency": "GHS",
-            "voucher": "143256743",
             "network": "VODAFONE",
             "email": "stefan.wexler@hotmail.eu",
             "phone_number": "054709929220",
             "fullname": "Yolande Aglaé Colbert",
-            "client_ip": "154.123.220.1",
             "device_fingerprint": "62wd23423rq324323qew1",
-            "meta": {
-                "flightID": "213213AS",
-                "anotherBanger": "Rema or Spyce :)"
-            }
         }
 
        const response =  await flw.MobileMoney.ghana(payload)
