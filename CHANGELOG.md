@@ -3,7 +3,7 @@
 Updated the `voucher` parameter in the momo schema.
 
 ### Version Changes
-- [FIXED] Update the `voucher` parameter in the momo schema to be an optional parameter.
+- [FIXED] Make the `voucher` parameter optional in the create mobile money schema.
 
 ## 1.1.13 | 2024-11-19
 Updated the `getBalanceByCurrency` method to parse path parameters.
@@ -12,10 +12,10 @@ Updated the `getBalanceByCurrency` method to parse path parameters.
 - [FIXED] Update the `balance_currency` function in the Misc object to exclude queries when parsing a path parameter.
 
 ## 1.1.12 | 2024-09-27
-Update the list schema
+Update the list schema.
 
 ### Version Changes
-- [FIXED] Remove required validation on the 'account_bank" parameter.
+- [FIXED] Remove the required validation on the 'account_bank' parameter.
 
 ## 1.1.11 | 2024-09-10
 Update `account_bank` validation in create schema.
