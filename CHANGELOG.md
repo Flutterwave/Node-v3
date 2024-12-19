@@ -1,4 +1,16 @@
 # Changelog
+## 1.1.14 | 2024-12-13
+Updated the `voucher` parameter in the momo schema.
+
+### Version Changes
+- [FIXED] Update the `voucher` parameter in the momo schema to be an optional parameter.
+
+## 1.1.13 | 2024-11-19
+Updated the `getBalanceByCurrency` method to parse path parameters.
+
+### Version Changes
+- [FIXED] Update the `balance_currency` function in the Misc object to exclude queries when parsing a path parameter.
+
 ## 1.1.12 | 2024-09-27
 Update the list schema
 

@@ -264,4 +264,39 @@ describe('#Rave Misc', function () {
     expect(resp.body.data).to.have.property('account_number');
     expect(resp.body.data).to.have.property('account_name');
   });
+
+  it('should fetch a balance by currency', async function () {
+    this.timeout(10000);
+
+    const fetchBalanceByCurrencySuccessStub = sinon
+      .stub(miscInstance, 'bal_currency')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'Wallet balance fetched',
+          data: {
+            currency: 'NGN',
+            available_balance: 4988877.82,
+            ledger_balance: 21072145.6
+          }
+        },
+      });
+
+    var payload = {
+      currency: 'NGN',
+    };
+
+    var resp = await miscInstance.bal_currency(payload);
+    // console.log(resp);
+
+    expect(fetchBalanceByCurrencySuccessStub).to.have.been.calledOnce;
+    expect(fetchBalanceByCurrencySuccessStub).to.have.been.calledOnceWith(payload);
+
+    expect(resp.body).to.have.property('status', 'success');
+    expect(resp.body).to.have.property('data');
+
+    expect(resp.body.data).to.have.property('currency');
+    expect(resp.body.data).to.have.property('available_balance');
+    expect(resp.body.data).to.have.property('ledger_balance');
+  });
 });
