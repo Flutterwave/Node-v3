@@ -1,4 +1,11 @@
 # Changelog
+## 1.1.15 | 2025-02-28
+Added transaction verification by reference and updated the settlement imports for the `fetch_all()` and `fetch()` settlement methods. 
+
+### Version Changes
+- [ADDED] Transaction verification by reference(`tx_ref`).
+- [FIXED] Update the `fetch_all()` and `fetch()` settlement methods to use the correct settlement imports, ensuring they send the correct requests to the Flutterwave API.
+
 ## 1.1.14 | 2024-12-13
 Updated the `voucher` parameter in the momo schema.
 
