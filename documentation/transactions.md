@@ -11,8 +11,9 @@ Manage user transactions via any of these methods:
 2. [Get transaction fee](#get-transaction-fee)
 3. [Resend transaction webhook](#resend-transaction-webhook)
 4. [Verify transaction](#verify-transaction)
-5. [Create a transaction refund](#create-a-transaction-refund)
-6. [View transaction timeline](#view-transaction-timeline)
+5. [Verify transaction with reference](#verify-transaction)
+6. [Create a transaction refund](#create-a-transaction-refund)
+7. [View transaction timeline](#view-transaction-timeline)
 
 ## Get all transactions
 
@@ -480,7 +481,7 @@ Sample Response
 
 ## Verify transaction
 
-This describes how Verify transactions using the transaction reference tx_ref
+This describes how to verify transactions using the transaction id
 
 ```javascript
 
@@ -550,6 +551,85 @@ Sample Response
       "created_at": "2020-07-15T14:31:15.000Z"
     }
   }
+}
+```
+
+## Verify transaction with reference
+
+This describes how to verify transactions status using the transaction reference (tx_ref).
+
+```javascript
+
+const Flutterwave = require('flutterwave-node-v3');
+
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
+
+
+
+const verify_by_tx = async () => {
+
+    try {
+        const payload = {"tx_ref": "txref-DI0NzMx13" //This is the transaction reference. It is returned in the initiate transaction call as data.tx_ref
+        }
+        const response = await flw.Transaction.verify_by_tx(payload)
+        console.log(response);
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+verify_by_tx();
+```
+
+Sample Response
+
+```javascript
+{
+    "status": "success",
+    "message": "Transaction fetched successfully",
+    "data": {
+        "id": 8415006,
+        "tx_ref": "txref-DI0NzMx13",
+        "flw_ref": "FLW-MOCK-3b10a512c4dae649e580a7e5747cfd2c",
+        "device_fingerprint": "2a4bf5d669b2a0cd4b684ffba8caaae8",
+        "amount": 2500,
+        "currency": "NGN",
+        "charged_amount": 2500,
+        "app_fee": 35,
+        "merchant_fee": 0,
+        "processor_response": "Please enter the OTP sent to your mobile number 080****** and email te**@rave**.com",
+        "auth_model": "NOAUTH",
+        "ip": "54.75.161.64",
+        "narration": "CARD Transaction ",
+        "status": "successful",
+        "payment_type": "card",
+        "created_at": "2025-02-27T18:29:34.000Z",
+        "account_id": 20937,
+        "card": {
+            "first_6digits": "418742",
+            "last_4digits": "4246",
+            "issuer": "ACCESS BANK PLC DEBIT CLASSIC",
+            "country": "NIGERIA NG",
+            "type": "VISA",
+            "token": "flw-t1nf-937086f0365b7334de60da246def40df-m03k",
+            "expiry": "09/32"
+        },
+        "meta": {
+            "__CheckoutInitAddress": "https://cdpn.io/FlutterwaveEng/fullembedgrid/PoVpKqb?animations=run&forceRefresh=1740680880044&type=embed",
+            "source": "docs-inline-test",
+            "consumer_mac": "92a3-912ba-1192a"
+        },
+        "amount_settled": 2462.37,
+        "customer": {
+            "id": 2362222,
+            "name": "Ayomide Jimi-Oni",
+            "phone_number": "08100000000",
+            "email": "test@mailinator.com",
+            "created_at": "2024-02-28T09:51:09.000Z"
+        }
+    }
 }
 ```
 
