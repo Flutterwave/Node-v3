@@ -8,6 +8,7 @@ Updated the package used for handling HTTP API calls from Request to Fetch. Adde
 
 - [ADDED] `sa_bank_code` in the chargeSchema.
 - [ADDED] Fetch API to handle HTTP calls in the SDK.
+- [FIXED] Bumped axios version to the latest.
 - [REMOVED] The deprecated request package as a dependency.
 
 ## 1.1.15 | 2025-02-28
