@@ -45,7 +45,7 @@ const bankChargeSchema = joi.object({
     .when('currency', {
       is: joi.string().valid('GBP', 'EUR'),
       then: joi.required(),
-      otherwise: joi.optional()
+      otherwise: joi.optional(),
     }),
 });
 
@@ -249,14 +249,19 @@ const cardChargeSchema = joi.object({
   }),
   payment_plan: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
-  subaccounts: joi.array().items(
-    joi.object({
-      id: joi.string().trim().max(100).required(),
-      transaction_split_ratio: joi.number().positive(),
-      transaction_charge_type: joi.string().valid('flat', 'percentage', 'flat_subaccount'),
-      transaction_charge: joi.number().positive(),
-    })
-  ).min(1),
+  subaccounts: joi
+    .array()
+    .items(
+      joi.object({
+        id: joi.string().trim().max(100).required(),
+        transaction_split_ratio: joi.number().positive(),
+        transaction_charge_type: joi
+          .string()
+          .valid('flat', 'percentage', 'flat_subaccount'),
+        transaction_charge: joi.number().positive(),
+      }),
+    )
+    .min(1),
 });
 
 // initiate collections for different payment methods
@@ -290,14 +295,20 @@ const chargeSchema = joi.object({
   billing_zip: joi.string(),
   meta: joi.object().pattern(/^[a-zA-Z0-9_]*$/, joi.any()),
   expires: joi.number().positive().max(31536000),
-  subaccounts: joi.array().items(
-    joi.object({
-      id: joi.string().trim().max(100).required(),
-      transaction_split_ratio: joi.number().positive(),
-      transaction_charge_type: joi.string().valid('flat', 'percentage', 'flat_subaccount'),
-      transaction_charge: joi.number().positive(),
-    })
-  ).min(1),
+  subaccounts: joi
+    .array()
+    .items(
+      joi.object({
+        id: joi.string().trim().max(100).required(),
+        transaction_split_ratio: joi.number().positive(),
+        transaction_charge_type: joi
+          .string()
+          .valid('flat', 'percentage', 'flat_subaccount'),
+        transaction_charge: joi.number().positive(),
+      }),
+    )
+    .min(1),
+  sa_bank_code: joi.string(),
 });
 
 // create eNaira charge
@@ -327,8 +338,6 @@ const eNairaChargeSchema = joi.object({
   is_token: joi.number().positive(),
   is_qr: joi.number().positive(),
 });
-
-
 
 // create mobile money charge
 const momoSchema = joi.object({
@@ -362,10 +371,14 @@ const momoSchema = joi.object({
     }),
     otherwise: joi.when('currency', {
       is: 'TZS',
-      then: joi.string().valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone').messages({
-        'any.only': 'Only Airtel, Tigo, Halopesa and Vodafone are valid network values.'
-      })
-    })
+      then: joi
+        .string()
+        .valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone')
+        .messages({
+          'any.only':
+            'Only Airtel, Tigo, Halopesa and Vodafone are valid network values.',
+        }),
+    }),
   }),
   voucher: joi.number().optional(),
   country: joi.when('currency', {
@@ -602,11 +615,16 @@ const modifiedTransferSchema = transferSchema.keys({
 // create a bulk transfer
 const createBulkTransferSchema = joi.object({
   title: joi.string(),
-  bulk_data: joi.array().items(
-    modifiedTransferSchema.keys({
-      account_bank: joi.forbidden(), // Remove account_bank
-    }).rename('account_bank', 'bank_code')
-  ).required(),
+  bulk_data: joi
+    .array()
+    .items(
+      modifiedTransferSchema
+        .keys({
+          account_bank: joi.forbidden(), // Remove account_bank
+        })
+        .rename('account_bank', 'bank_code'),
+    )
+    .required(),
 });
 
 // create a tokenized charge
