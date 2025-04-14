@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { listSchema } = require('../schema/base');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `/v3/subaccounts/${data.id}`,
     data,
   );
-  logger(`update subaccount details`, _rave);
+  // logger(`update subaccount details`, _rave);
   return response;
 }
 
