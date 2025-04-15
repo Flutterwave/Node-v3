@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { updatePlanSchema } = require('../schema/auxillary');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `v3/payment-plans/${data.id}`,
     data,
   );
-  logger(`Update plan details`, _rave);
+  // logger(`Update plan details`, _rave);
   return response;
 }
 

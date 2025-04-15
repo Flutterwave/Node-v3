@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { bulkAccountSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/bulk-virtual-account-numbers`,
     data,
   );
-  logger(`Create bulk accounts`, _rave);
+  // logger(`Create bulk accounts`, _rave);
   return response;
 }
 

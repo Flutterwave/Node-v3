@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { bulkTokenSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/bulk-tokenized-charges`,
     data,
   );
-  logger(`Create bulk tokenized payments`, _rave);
+  // logger(`Create bulk tokenized payments`, _rave);
   return response;
 }
 
