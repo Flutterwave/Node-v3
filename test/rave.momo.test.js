@@ -49,24 +49,15 @@ describe('#Rave Mobile Money', function () {
     });
 
     var payload = {
-      tx_ref: 'test789',
-      amount: '150',
-      currency: 'GHS',
-      voucher: '143256743',
-      network: 'VODAFONE',
-      email: 'stefan.wexler@hotmail.eu',
       phone_number: '054709929220',
-      fullname: 'Yolande Aglaé Colbert',
-      client_ip: '154.123.220.1',
-      device_fingerprint: '62wd23423rq324323qew1',
-      meta: {
-        flightID: '213213AS',
-        anotherBanger: 'Rema or Spyce :)',
-      },
-    };
+      amount: 1500,
+      currency: 'GHS',
+      network: "VODAFONE",
+      email: 'JoeBloggs@acme.co',
+      tx_ref: "HGHYGIHIKU",
+  };
 
     var resp = await momoInstance.ghana(payload);
-    // console.log(resp);
 
     expect(createGHSMoMo).to.have.been.calledOnce;
     expect(createGHSMoMo).to.have.been.calledOnceWith(payload);

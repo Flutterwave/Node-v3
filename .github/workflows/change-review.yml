@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 18
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: 'Cache node_modules'
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-v18-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v${{ matrix.node }}-
+            ${{ runner.os }}-node-v18-
 
       - name: Install Dependencies
         run: |
@@ -36,7 +36,7 @@ jobs:
         run: npm run coverage
 
       - name: upload coverage report to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4
 
       - name: push build status to Slack
         uses: 8398a7/action-slack@v3
