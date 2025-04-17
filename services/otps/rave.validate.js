@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { validateSchema } = require('../schema/auxillary');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/otps/${data.reference}/validate`,
     data,
   );
-  logger(`Validate OTP`, _rave);
+  // logger(`Validate OTP`, _rave);
   return response;
 }
 

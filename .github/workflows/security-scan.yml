@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OS: ubuntu-latest
-      PYTHON: '3.7'
     steps:
       - name: checkout code
         uses: actions/checkout@v2
@@ -20,7 +19,7 @@ jobs:
       - name: Checkmarx One ClI Action
         uses: checkmarx/ast-github-action@main
         with:
-          project_name: Python-v2
+          project_name: Node-v3
           cx_tenant: Flutterwave
           base_uri: https://eu.ast.checkmarx.net/
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}

@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { listSchema } = require('../schema/base');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `/v3/settlements/${data.id}`,
     data,
   );
-  logger(`Fetch a settlement`, _rave);
+  // logger(`Fetch a settlement`, _rave);
   return response;
 }
 

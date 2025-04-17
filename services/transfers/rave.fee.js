@@ -1,5 +1,5 @@
 const { listSchema } = require('../schema/base');
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 // const enforceRequired = require('../../utils/build');
 
@@ -11,7 +11,7 @@ async function service(data, _rave) {
     `v3/transfers/fee?currency=${data.currency}&amount=${data.amount}`,
     data,
   );
-  logger(`Fetch transfer fees`, _rave);
+  // logger(`Fetch transfer fees`, _rave);
   return response;
 }
 module.exports = service;

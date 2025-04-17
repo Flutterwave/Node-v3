@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { fetchBalance } = require('../schema/auxillary');
 
@@ -10,7 +10,7 @@ async function service(data, _rave) {
     `/v3/balances/${data.currency}`,
     data,
   );
-  logger(`Query balance by currency`, _rave);
+  // logger(`Query balance by currency`, _rave);
   return response;
 }
 

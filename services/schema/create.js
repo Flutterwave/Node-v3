@@ -356,28 +356,141 @@ const momoSchema = joi.object({
     .required(),
   network: joi.when('currency', {
     is: 'GHS',
-    then: joi.string().valid('MTN', 'VODAFONE', 'TIGO').required().messages({
-      'any.only': 'Only MTN, VODAFONE and TIGO are valid network values.',
-    }),
+    then: joi
+      .string()
+      .custom((val, helpers) => {
+        const upper = val.toUpperCase();
+        const valid = ['MTN', 'AIRTELTIGO', 'VODAFONE'];
+        if (!valid.includes(upper)) {
+          return helpers.error('any.only');
+        }
+        return upper;
+      })
+      .optional()
+      .messages({
+        'any.only': 'Only MTN, AIRTELTIGO, and VODAFONE are valid for GHS.',
+      }),
     otherwise: joi.when('currency', {
       is: 'UGX',
       then: joi
         .string()
-        .valid('MTN', 'VODAFONE', 'Airtel')
-        .required()
+        .custom((val, helpers) => {
+          const upper = val.toUpperCase();
+          const valid = ['MTN', 'AIRTEL'];
+          if (!valid.includes(upper)) {
+            return helpers.error('any.only');
+          }
+          return upper;
+        })
+        .optional()
         .messages({
-          'any.only': 'Only MTN, VODAFONE and Airtel are valid network values.',
+          'any.only': 'Only MTN and AIRTEL are valid for UGX.',
         }),
-    }),
-    otherwise: joi.when('currency', {
-      is: 'TZS',
-      then: joi
-        .string()
-        .valid('Airtel', 'Tigo', 'Halopesa', 'Vodafone')
-        .messages({
-          'any.only':
-            'Only Airtel, Tigo, Halopesa and Vodafone are valid network values.',
+      otherwise: joi.when('currency', {
+        is: 'KES',
+        then: joi
+          .string()
+          .custom((val, helpers) => {
+            const upper = val.toUpperCase();
+            const valid = ['SAFARICOM', 'AIRTEL'];
+            if (!valid.includes(upper)) {
+              return helpers.error('any.only');
+            }
+            return upper;
+          })
+          .optional()
+          .messages({
+            'any.only': 'Only SAFARICOM and AIRTEL are valid for KES.',
+          }),
+        otherwise: joi.when('currency', {
+          is: 'RWF',
+          then: joi
+            .string()
+            .custom((val, helpers) => {
+              const upper = val.toUpperCase();
+              const valid = ['MTN', 'AIRTEL'];
+              if (!valid.includes(upper)) {
+                return helpers.error('any.only');
+              }
+              return upper;
+            })
+            .optional()
+            .messages({
+              'any.only': 'Only MTN and AIRTEL are valid for RWF.',
+            }),
+          otherwise: joi.when('currency', {
+            is: 'TZS',
+            then: joi
+              .string()
+              .custom((val, helpers) => {
+                const upper = val.toUpperCase();
+                const valid = ['HALOPESA', 'AIRTEL', 'TIGO', 'VODACOM'];
+                if (!valid.includes(upper)) {
+                  return helpers.error('any.only');
+                }
+                return upper;
+              })
+              .optional()
+              .messages({
+                'any.only':
+                  'Only HALOPESA, AIRTEL, TIGO, and VODACOM are valid for TZS.',
+              }),
+            otherwise: joi.when('currency', {
+              is: 'ZMW',
+              then: joi
+                .string()
+                .custom((val, helpers) => {
+                  const upper = val.toUpperCase();
+                  const valid = ['MTN', 'AIRTEL', 'ZAMTEL'];
+                  if (!valid.includes(upper)) {
+                    return helpers.error('any.only');
+                  }
+                  return upper;
+                })
+                .optional()
+                .messages({
+                  'any.only': 'Only MTN, AIRTEL, and ZAMTEL are valid for ZMW.',
+                }),
+              otherwise: joi.when('currency', {
+                is: 'XOF',
+                then: joi
+                  .string()
+                  .custom((val, helpers) => {
+                    const upper = val.toUpperCase();
+                    const valid = ['WAVE', 'MTN', 'ORANGEMONEY'];
+                    if (!valid.includes(upper)) {
+                      return helpers.error('any.only');
+                    }
+                    return upper;
+                  })
+                  .optional()
+                  .messages({
+                    'any.only':
+                      'Only WAVE, MTN, and ORANGEMONEY are valid for XOF.',
+                  }),
+                otherwise: joi.when('currency', {
+                  is: 'XAF',
+                  then: joi
+                    .string()
+                    .custom((val, helpers) => {
+                      const upper = val.toUpperCase();
+                      const valid = ['MTN', 'ORANGEMONEY'];
+                      if (!valid.includes(upper)) {
+                        return helpers.error('any.only');
+                      }
+                      return upper;
+                    })
+                    .optional()
+                    .messages({
+                      'any.only': 'Only MTN and ORANGEMONEY are valid for XAF.',
+                    }),
+                  otherwise: joi.string().optional(),
+                }),
+              }),
+            }),
+          }),
         }),
+      }),
     }),
   }),
   voucher: joi.number().optional(),
