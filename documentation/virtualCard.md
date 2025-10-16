@@ -4,7 +4,7 @@
 
 # VIRTUAL CARDS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Virtual Cards via any of these methods:
 1. [Create Virtual Card](#create-virtual-card)
@@ -18,7 +18,7 @@ Manage Virtual Cards via any of these methods:
 
 ## Create virtual card
 
-This describes how to create a new virtual card
+This section describes how to create a new virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -96,7 +96,7 @@ Sample Response
 ## Get all virtual cards
 
 
-This describes how to Get all virtual cards
+This section describes how to get all virtual cards.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -179,7 +179,7 @@ Sample Response
 
 ##  Get a virtual card
 
-This describes how to fetch a virtual card
+This section describes how to fetch a virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -193,7 +193,7 @@ const fetchVCard = async () => {
 
     try {
         const payload = {
-            "id":"df3f2ba4-f137-4ce0-a6e3-3264c5831f17" //This is the unique id of the particular card you want to fetch its details. You can get this id from the call to create a virtual card or list virtual cards as data.id
+            "id":"df3f2ba4-f137-4ce0-a6e3-3264c5831f17" //This is the unique id of the particular card you want to fetch. You can get this id from the call to create a virtual card or list virtual cards as data.id.
         }
         const response = await flw.VirtualCard.fetch(payload)
         console.log(response);
@@ -241,7 +241,7 @@ Sample Response
 
 ## Fund a virtual card
 
-This describes how to fund an existing virtual card
+This section describes how to fund an existing virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -253,7 +253,7 @@ const fundCard = async () => {
 
     try {
         const payload = {
-            "id":"c6d7f40b-f772-47b7-8136-81256d2f87a2", //This is the unique id of the particular card you want to fund. You can get this id from the call to create a virtual card as data.id
+            "id":"c6d7f40b-f772-47b7-8136-81256d2f87a2", //This is the unique id of the particular card you want to fund. You can get this id from the call to create a virtual card as data.id.
             "amount":500,
             "debit_currency":"NGN"
         }
@@ -281,7 +281,7 @@ Sample Response
 
 ## Terminate a virtual card
 
-This describes how to terminate a virtual card
+This section describes how to terminate a virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -319,7 +319,7 @@ Sample Response
 
 ## Get virtual card transactions
 
-This describes how to fetch transactions by date range on a single card
+This section describes how to fetch transactions by date range on a single card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -335,8 +335,8 @@ const getTransactions = async () => {
             "id":"b1405144-3427-4baf-80ea-5c6075a01a74",
             "from":"2019-01-01",
             "to":"2022-09-24",
-            "index":"0", //Pass "0" if you want to start from the beginning
-            "size":"1"  //Specify how many transactions you want to retrieve in a single call
+            "index":"0", //Pass "0" if you want to start from the beginning.
+            "size":"1"  //Specify how many transactions you want to retrieve in a single call.
         }
         const response = await flw.VirtualCard.transactions(payload)
         console.log(response);
@@ -380,7 +380,7 @@ Sample Response
 
 ## Withdraw from a virtual card
 
-This describes how to withdraw existing funds from a virtual card
+This section describes how to withdraw existing funds from a virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -421,7 +421,7 @@ Sample Response
 
 ## Block Virtual Cards
 
-This describes how to block a virtual card
+This section describes how to block a virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -462,7 +462,7 @@ Sample Response
 
 ## Unblock Virtual Cards
 
-This describes how to unblock a virtual card
+This section describes how to unblock a virtual card.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');

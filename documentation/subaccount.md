@@ -2,9 +2,9 @@
     <img title="Flutterwave" height="200" src="https://flutterwave.com/images/logo/full.svg" width="50%"/>
 </p>
 
-# SUBACCOUNTS (COLLECTION)
+# COLLECTION SUBACCOUNTS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Collection Subaccounts via any of these methods:
 1. [Create a Subaccount](#create-a-subaccount)
@@ -16,7 +16,7 @@ Manage Collection Subaccounts via any of these methods:
 
 ## Create a subaccount
 
-This describes how to create a subaccount on Flutterwave
+This section describes how to create a subaccount.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -76,7 +76,7 @@ Sample Response
 
 ## Fetch all subaccounts
 
-This describes how to get all subaccounts
+This section describes how to get all subaccounts.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -275,7 +275,7 @@ Sample Response
 
 ## Fetch a subaccount
 
-This describes how to fetch a subaccount using the sub-account's ID
+This section describes how to fetch a single subaccount using the subaccount ID.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -325,7 +325,7 @@ Sample Response
 
 ## Update a subaccount
 
-This describes how to update a subaccount
+This section describes how to update an existing subaccount.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -336,7 +336,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 const updateSubaccount = async () => {
   try {
     const payload = {
-        "id": '2181', //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
+        "id": '2181', //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id.
         "business_name": "Luxe collectibles",
         "business_email": "mad@o.enterprises",
         "account_bank": "044",
@@ -387,7 +387,7 @@ Sample Response
 
 ## Delete a subaccount
 
-This describes how to delete a subaccount
+This section describes how to delete a subaccount.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -397,7 +397,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 const updateSubaccount = async () => {
   try {
     const payload = {
-      id: '2181', //This is the unique id of the subaccount you want to update. It is returned in the call to create a subaccount as data.id
+      id: '2181', //This is the unique id of the subaccount you want to delete. It is returned in the call to create a subaccount as data.id.
     };
 
     const response = await flw.Subaccount.delete(payload);

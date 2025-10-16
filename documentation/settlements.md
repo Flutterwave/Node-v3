@@ -4,7 +4,7 @@
 
 # SETTLEMENTS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Settlements via any of these methods:
 1. [Get all Settlements](#get-all-settlements)
@@ -12,7 +12,7 @@ Manage Settlements via any of these methods:
 
 ## Get all settlements
 
-This describes how to fetch all settlements
+This section describes how to fetch all settlements.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -308,7 +308,7 @@ Sample Response
 
 ### Get a settlement
 
-This describes how to fetch and search all your settlements
+This section describes how to fetch a settlement.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -321,7 +321,7 @@ const fetchSettlement = async () => {
     try {
         const payload = {
             
-            "id":"41497" ,//This is a unique identifier for the particular settlement you want to fetch.
+            "id":"41497" ,//This is the unique identifier of the particular settlement you want to fetch.
             "from":"2019-01-01",
             "to":"2020-05-22"
         }

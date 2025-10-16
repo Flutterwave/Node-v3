@@ -4,7 +4,7 @@
 
 # PAYMENT PLANS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Payment Plans via any of these methods:
 1. [Create Payment Plan](#create-payment-plan)
@@ -16,7 +16,7 @@ Manage Payment Plans via any of these methods:
 
 ##  Create payment plan
 
-This describes  how to create a payment plan
+This section describes how to create a payment plan.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -27,8 +27,8 @@ const createPaymentPlan = async () => {
   try {
     const payload = {
       amount: 1000,
-      name: 'SDK test Plan', //This is the name of the payment, it will appear on the subscription reminder emails
-      interval: 'monthly', //This will determine the frequency of the charges for this plan. Could be monthly, weekly, etc.
+      name: 'SDK test Plan', //This is the name of the payment plan, it will appear on the subscription reminder emails.
+      interval: 'monthly', //This will determine the interval at which customer is charged. Possible values are monthly, weekly, etc.
     };
 
     const response = await flw.PaymentPlan.create(payload);
@@ -63,7 +63,7 @@ Sample Response
 
 ## Get payment plans
 
-This describes how to fetch all payment plans on your account
+This section describes how to fetch all payment plans on your account.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -213,7 +213,7 @@ Sample Response
 
 ## Get a payment plan
 
-This describes how to get a single payment plan
+This section describes how to get a single payment plan.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -223,7 +223,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 const fetchPlan = async () => {
   try {
     const payload = {
-      id: '52045', //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
+      id: '52045', //This is the unique ìd of the payment plan you want to fetch. It is returned in the call to create a payment plan as 'data.id'
     };
 
     const response = await flw.PaymentPlan.get_plan(payload);
@@ -258,7 +258,7 @@ Sample Response
 
 ## Update a payment plan
 
-This describes how to update an existing payment plan
+This section describes how to update an existing payment plan.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -268,7 +268,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 const updatePlan = async () => {
   try {
     const payload = {
-      id: '34185', //This is the unique ìdof the payment plan you want to fetch. It is returned in the call to create a payment plan asdata.id`
+      id: '34185', //This is the unique ìd of the payment plan you want to fetch. It is returned in the call to create a payment plan as 'data.id'
       name: 'A sample KES monthly plan',
       status: 'active',
     };
@@ -304,7 +304,8 @@ Sample Response
 ```
 
 ## Cancel a payment plan
-This describes how to cancel an existing payment plan
+
+This section describes how to cancel an existing payment plan.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -314,7 +315,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 const cancelPlan = async () => {
   try {
     const payload = {
-      id: '34185', //This is the unique ìd` of the payment plan you want to cancel
+      id: '34185', //This is the unique ìd` of the payment plan you want to cancel.
     };
 
     const response = await flw.PaymentPlan.cancel(payload);

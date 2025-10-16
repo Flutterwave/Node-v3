@@ -4,7 +4,7 @@
 
 # BENEFICIARIES
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage transfer beneficiaries via any of these methods:
 1. [Create a Beneficiary](#create-a-beneficiary)
@@ -15,7 +15,7 @@ Manage transfer beneficiaries via any of these methods:
 
 ## Create a beneficiary
 
-This describes how to create a transfer beneficiary
+This section describes how to create a transfer beneficiary.
 
 ```javascript
 
@@ -62,7 +62,7 @@ Sample Response
 
 ## List all beneficiaries
 
-This describes how to get all beneficiaries
+This section describes how to get all beneficiaries.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -188,7 +188,7 @@ Sample Response
 
 ## Fetch a beneficiary
 
-This describes how to get a single transfer beneficiary details
+This section describes how to get a single transfer beneficiary details.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -202,7 +202,7 @@ const fetchBeneficiary = async () => {
     try {
         const payload = {
             
-            "id":"2923" //This is the unique identifier for the beneficiary you intend to fetch. It is returned in the call to create a beneficiary as data.id
+            "id":"2923" //This is the unique identifier for the beneficiary you intend to fetch. It is returned in the call to create a beneficiary as data.id.
             
         }
         const response = await flw.Beneficiary.fetch(payload)
@@ -237,7 +237,7 @@ Sample Response
 
 ## Delete a beneficiary
 
-This describes how to delete a transfer beneficiary
+This section describes how to delete a transfer beneficiary.
 
 
 ```javascript
@@ -251,7 +251,7 @@ const delBeneficiary = async () => {
     try {
         const payload = {
             
-            "id":"4150" //This is the unique identifier for the beneficiary you intend to fetch. It is returned in the call to create a beneficiary as data.id
+            "id":"4150" //This is the unique identifier for the beneficiary you intend to fetch. It is returned in the call to create a beneficiary as data.id.
             
         }
         const response = await flw.Beneficiary.delete(payload)

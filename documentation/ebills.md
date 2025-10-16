@@ -4,7 +4,7 @@
 
 # EBILLS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Ebills via any of these methods:
 1. [Place Ebills Order](#place-ebills-order)
@@ -12,7 +12,7 @@ Manage Ebills via any of these methods:
 
 ## Place ebills order
 
-This describes how to create a new Ebills order
+This section describes how to create a new Ebills order.
 
 ```javascript
 
@@ -67,7 +67,7 @@ Sample Response
 
 ## Update ebills order
 
-This describes how to update order for ebills
+This section describes how to update order for ebills.
 
 ```javascript
 

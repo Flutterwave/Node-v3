@@ -4,7 +4,7 @@
 
 # OTPS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Otps via any of these methods:
 1. [Create Otp](#create-otp)
@@ -13,7 +13,7 @@ Manage Otps via any of these methods:
 
 ##  Create Otp
 
-This describes how to create an otp
+This section describes how to create an OTP.
 
 ```javascript
 
@@ -79,7 +79,7 @@ Sample Response
 
 ##  Validate Otp
 
-This describes how to validate an otp
+This section describes how to validate an OTP.
 
 ```javascript
 

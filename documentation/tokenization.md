@@ -4,7 +4,7 @@
 
 # Tokenization
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Tokenized charges via any of these methods:
 1. [Create a tokenized charge](#charge-with-token)
@@ -15,7 +15,7 @@ Manage Tokenized charges via any of these methods:
 
 ## Charge with token
 
-This describes how to create a tokenized charge
+This section describes how to create a tokenized charge.
 
 ```javascript
 
@@ -97,7 +97,7 @@ Sample Response
 
 ## Update token details
 
-This describes how to update details tied to a card token
+This section describes how to update details tied to a card token.
 
 ```javascript
 
@@ -144,7 +144,7 @@ Sample Response
 
 ## Create bulk tokenized charge
 
-This describes how to charge multiple payment tokens at once
+This section describes how to charge multiple payment tokens at once.
 
 ```javascript
 const charge_bulk = async () => {
@@ -211,7 +211,7 @@ Sample Response
 
 ## Get a bulk tokenized charge status
 
-This describes how to get the status of a bulk tokenized charge
+This section describes how to get the status of a bulk tokenized charge.
 
 ```javascript
 
@@ -256,7 +256,7 @@ Sample Response
 
 ## Get bulk tokenized charge transactions
 
-This describes how to get specific bulk tokenized charge transactions
+This section describes how to get specific bulk tokenized charge transactions.
 
 ```javascript
 

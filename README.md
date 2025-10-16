@@ -11,18 +11,18 @@
 
 ## Introduction
 
-The Node library provides easy access to Flutterwave for Business (F4B) v3 APIs for your Node apps. It abstracts the complexity involved in direct integration and allows you to make quick calls to the APIs.
+The Node library provides easy access to Flutterwave's v3 APIs for developing your Node application. It abstracts the complexity involved in direct integration and allows you to make quick calls to the APIs.
 Available features include:
 
-- Collections: Card, Account, Mobile money, Bank Transfers, USSD, Apple Pay, Google Pay, Fawry Pay, eNaira.
+- Collections: Card, Account, Mobile Money, Bank Transfers, USSD, Apple Pay, Google Pay, Fawry Pay, and eNaira.
 - Payouts and Beneficiaries.
 - Recurring payments: Tokenization and Subscriptions.
-- Split payments
-- Card issuing
+- Split payments.
+- Card issuing.
 - Transactions dispute management: Refunds and Chargebacks.
 - Transaction reporting: Collections, Payouts, Settlements, Refunds, Chargebacks and Transaction timeline.
 - Bill payments: Airtime, Data bundle, Cable, Power, Toll, E-bills, and Remitta.
-- Identity verification: Resolve bank account, resolve BVN information and generate OTP.
+- Identity verification: Bank Account Verification, BVN Verification and OTP Generation.
 
 ## Table of Content
 
@@ -39,12 +39,12 @@ Available features include:
 
 ## Requirements
 
-1. Flutterwave for business (F4B) [API Keys](https://developer.flutterwave.com/docs/integration-guides/authentication)
-2. Node 18 or higher.
+1. Your [API Keys](https://developer.flutterwave.com/v3.0.0/docs/authentication#get-your-api-keys).
+2. Node version 18 or higher.
 
 ## Installation
 
-To install the package, run the following command in your Node terminal:
+To install our package, run the following command in your Node terminal:
 
 ```sh
 npm install flutterwave-node-v3
@@ -60,8 +60,7 @@ const flw = new Flutterwave(
 );
 ```
 
-For staging (Test environment), use the TEST API Keys and for production (Live environment), use LIVE API KEYS.
-You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from the Flutterwave dashboard. Read the [requirement section](#requirements) for more information on how to get your API keys.
+For the staging (test) environment, use your test API keys, while for the production (live) environment, use your live API keys. You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from the Flutterwave dashboard. Read the [requirement section](#requirements) for more information on retrieving your API keys.
 
 ## Usage
 
@@ -84,16 +83,18 @@ You can get your process.env.FLW_PUBLIC_KEY and process.env.FLW_SECRET_KEY from 
 
 ## Testing
 
-All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. They can be run by running the test command in your terminal.
+All of the libraries tests are run on Mocha. Available tests include `rave.bank.test`, `rave.beneficiaries.test`, `rave.bills.test`, `rave.charge.test`, `rave.ebills.test`, `rave.settlements.test`, `rave.subscriptions.test`. You can run all tests by executing the test command in your terminal.
 
 ```sh
-npm run test or npm test
+npm run test 
+or
+npm test
 ```
 
 ## Debugging Errors
 
-We understand that you may run into some errors while integrating our library. You can read more about our error messages [here](https://developer.flutterwave.com/docs/integration-guides/errors).
-For `authorization` and `validation` error responses, double-check your API keys and request. If you get a `server` error, kindly engage the team for support.
+We understand that you may encounter errors while integrating our library. You can read more about our error messages [here](https://developer.flutterwave.com/v3.0.0/docs/common-errors).
+If you experience` authorization` or `validation` errors, double-check your API keys and request. For server errors, please reach out to our support team for assistance.
 
 ## Support
 

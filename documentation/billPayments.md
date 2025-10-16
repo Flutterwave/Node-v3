@@ -4,7 +4,7 @@
 
 # BILLS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Make Bill payments via any of these methods:
 1. [Create Bill Payment](#create-a-bill-payment)
@@ -22,7 +22,7 @@ Make Bill payments via any of these methods:
 
 ##  Create a bill payment
 
-This describes how to create bill payments
+This section describes how to create bill payments.
 
 ```javascript
 
@@ -74,7 +74,7 @@ Sample Response
 
 ##  Create bulk bills
 
-This describes  how to create bulk bills payment
+This section describes how to create bulk bills payment.
 
 ```javascript
 
@@ -135,7 +135,7 @@ Sample Response
 
 ##  Get status of a bill payment
 
-This describes  how to  get the status of a bill purchase
+This section describes how to get the status of a bill purchase.
 
 ```javascript
 
@@ -189,7 +189,7 @@ Sample Response
 
 ##  Update bills order
 
-This describes  how to  update bills order
+This section describes how to update bills order.
 
 ```javascript
 
@@ -240,7 +240,7 @@ Sample Response
 
 ##  Validate bill service
 
-This describes  how to validate services like DSTV smartcard no, Meter number etc.
+This section describes how to validate services like DSTV smartcard no, Meter number etc.
 
 ```javascript
 
@@ -294,7 +294,7 @@ Sample Response
 
 ##  Get bill categories
 
-This describes  how to fetch all bill categories on your account
+This section describes how to fetch all supported bill payment categories.
 
 ```javascript
 
@@ -604,7 +604,7 @@ Sample Response
 
 ##  Get bill payment agencies
 
-This describes  how to get all government agencies you can pay into
+This section describes how to get all government agencies you can pay into.
 
 ```javascript
 
@@ -652,7 +652,7 @@ Sample Response
 
 ##  Get amount to be paid for a product
 
-This describes  how to get amount to be paid for a product
+This section describes how to get the amount to be paid for a product.
 
 ```javascript
 
@@ -721,7 +721,7 @@ Sample Response
 
 ##  Get bill payments
 
-This describes  how to get bill payments
+This section describes how to get bill payments.
 
 ```javascript
 
@@ -806,7 +806,7 @@ Sample Response
 
 ##  Get products under an agency
 
-This describes  how to get all products under a government agency.
+This section describes how to get all products under a government agency.
 
 ```javascript
 
@@ -867,7 +867,7 @@ Sample Response
 
 ##  Create order using billing code and product id
 
-This describes  how to create an order using the biller code and the product Id
+This section describes how to create an order using the biller code and the product Id.
 
 ```javascript
 

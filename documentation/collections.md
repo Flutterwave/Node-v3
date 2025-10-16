@@ -4,7 +4,7 @@
 
 # COLLECTIONS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Collect payments from your users via any of these methods:
 1. [Cards](#card-collections)
@@ -24,20 +24,20 @@ Collect payments from your users via any of these methods:
 15. [ApplePay](#apple-pay)
 16. [GooglePay](#google-pay)
 
-There are three steps involved in collecting payments from your users:
+There are three steps involved in collecting payments from your customers:
 
 - Initating the transaction.
 - Authorizing the transaction.
 - Verifying the transaction.
 
-Read more about the steps [here](https://developer.flutterwave.com/docs/direct-charge/overview)
+Read more about the steps [here](https://developer.flutterwave.com/v3.0.0/docs/paymentsintroduction)
 
 
 ## Card Collections
 
-This section describes how you can collect card payments in the SDK. You can learn more about the payment method [here](https://developer.flutterwave.com/docs/direct-charge/card).
+This section describes how to collect card payments. You can learn more about the payment method [here](https://developer.flutterwave.com/v3.0.0/docs/direct-card-charge).
 
-> Kindly note that `enckey` is your encryption key. You can get this from your API setting in the dashboard. You can check [here](https://developer.flutterwave.com/docs/integration-guides/authentication) to get more information on how to get your encryption key.
+> Kindly note that `enckey` is your encryption key. You can get this from the API setting in your dashboard. You can check [here](https://developer.flutterwave.com/v3.0.0/docs/authentication) to get more information on retrieving your encryption key.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -109,7 +109,7 @@ chargeCard();
 
 ## Bank Transfers
 
-This section covers how you can collect payments made via bank transfers. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/bank-transfer).
+This section describes how to collect payments made via bank transfers. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/bank-transfer-1).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -167,7 +167,7 @@ Sample Response
 
 ## Direct debit (Nigerian bank account)
 
-This section covers how you can collect payments made via your customers' bank accounts. The customer authorizes the payment with their bank, and the money is debited from their account. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/bank-account).
+This section describes how to collect payments from your customer via their NGN bank accounts. The customer authorizes the payment with their bank, and the money is debited from their account. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/nigeria).
 
 ```javascript
 
@@ -244,7 +244,7 @@ Sample Response
 
 ## Direct debit (UK & EU bank account)
 
-This section covers how you make EUR and GBP collections via your customers' bank accounts. The customer is redirected to an interface where they select their bank and authorize the payment via their bank apps. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/uk-bank-account).
+This section covers how to collect payment from your customer's via their EUR and GBP bank accounts. The customer is redirected to an interface where they select their bank and authorize the payment via their bank apps. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/uk-and-eu).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -322,7 +322,7 @@ Sample Response
 
 ## ACH Payement
 
-This shows you how to accept ZAR and USD  ACH charges from your customers.  We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/ach-payment).
+This section describes how to collect ZAR and USD ACH charges from your customers.  We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/ach-payment).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -400,7 +400,7 @@ Sample Response
 
 ## USSD
 
-This shows you how to accept payments via Direct USSD charge. You call our API to create a charge, then your customer completes the payment by dialling their bank's USSD code on their mobile phone.  We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/ussd).
+This section describes how to collect payments via Direct USSD charge. You call our API to create a charge, then your customer completes the payment by dialling their bank's USSD code on their mobile phone.  We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/ussd).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -509,7 +509,7 @@ charg_voucher();
 
 ## Mpesa
 
-This describes how to collect payments via Mpesa. Read more about Mpesa payments [here](https://developer.flutterwave.com/docs/direct-charge/mpesa).
+This section describes how to collect payments via Mpesa. Read more about Mpesa payments [here](https://developer.flutterwave.com/v3.0.0/docs/m-pesa).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -580,7 +580,7 @@ Sample Response
 
 ## Ghana mobile money
 
-This describes how to collect payments via Ghana mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/ghana-mobile-money).
+This section describes how to collect payments via Ghana mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/ghana).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -635,7 +635,7 @@ Sample Response
 
 ## Rwanda mobile money
 
-This describes how to collect payments via Rwanda mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/rwanda-mobile-money).
+This section describes how to collect payments via Rwanda mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/rwanda).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -685,7 +685,7 @@ Sample Response
 
 ## Uganda mobile money
 
-This describes how to collect payments via Uganda mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/uganda-mobile-money).
+This section describes how to collect payments via Uganda mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/uganda).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -739,7 +739,7 @@ Sample Response
 
 ## Francophone mobile money
 
-This describes how to collect payments via mobile money for Franc (XAF or XOF). We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/francophone-mobile-money).
+This section describes how to collect payments via mobile money for Franc (XAF or XOF). We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/francophone).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -817,7 +817,7 @@ Sample Response
 
 ## Zambia mobile money
 
-This describes how to collect payments via  Zambia  mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/zambia-mobile-money).
+This section describes how to collect payments via Zambia mobile money. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/zambia-mobile-money).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -862,7 +862,7 @@ Sample Response
 ```
 ## Tanzania mobile money
 
-This describes how to collect payments via  Tanzania  mobile money. You can get more information on Tanzania mobile money [here](https://developer.flutterwave.com/reference/endpoints/charge#tanzania-mobile-money)
+This section describes how to collect payments via Tanzania mobile money. You can get more information on Tanzania mobile money [here](https://developer.flutterwave.com/v3.0.0/docs/tanzania)
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -935,7 +935,7 @@ Sample Response
 
 ## Enaira
 
-This describes how to collect payments via enaira. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/enaira).
+This section describes how to collect payments via enaira. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/enaira-payment).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -1009,7 +1009,7 @@ Sample Response
 
 ## Apple Pay
 
-This describes how to collect payments via Apple Pay. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/apple-pay).
+This sectiondescribes how to collect payments via Apple Pay. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/apple-paytm%EF%B8%8F).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -1095,7 +1095,7 @@ Sample Response
 
 ## Google Pay
 
-This describes how to collect payments via Google Pay. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/docs/direct-charge/google-pay).
+This section describes how to collect payments via Google Pay. We go into more details on the payment flow itself [here](https://developer.flutterwave.com/v3.0.0/docs/google-paytm%EF%B8%8F).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');

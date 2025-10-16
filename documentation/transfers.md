@@ -4,7 +4,7 @@
 
 # TRANSFERS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Make Transfers (Payouts) via any of these methods:
 1. [Initiate a transfer](#create-a-transfer)
@@ -16,9 +16,9 @@ Make Transfers (Payouts) via any of these methods:
 
 
 ## Create a transfer
-This describes how to initiate a transfer
+This section describes how to initiate a transfer.
 
-For more info about the payload parameteres definition, check  [here](https://developer.flutterwave.com/reference#create-a-transfer)
+For more information on the parameter definitions, visit [here](https://developer.flutterwave.com/v3.0.0/reference/create-a-transfer).
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -35,7 +35,7 @@ const initTrans = async () => {
         "amount": 5500,
         "narration": "Akhlm Pstmn Trnsfr xx007",
         "currency": "NGN",
-        "reference": "akhlm-pstmnpyt-r02ens007_PMCKDU_1", //This is a merchant's unique reference for the transfer, it can be used to query for the status of the transfer
+        "reference": "akhlm-pstmnpyt-r02ens007_PMCKDU_1", //This is the merchant's unique transfer reference, it is used to verify the status of the transfer.
         "callback_url": "https://www.flutterwave.com/ng/",
         "debit_currency": "NGN"
     }
@@ -81,7 +81,7 @@ Sample Response
 ```
 
 ## Create bulk transfer
-This describes how to initiate a bulk transfer
+This section describes how to initiate a bulk transfer.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -142,7 +142,7 @@ Sample Response
 ```
 
 ## Get transfer fee
-This describes how to get applicable transfer fee
+This section describes how to get applicable transfer fee.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -188,7 +188,7 @@ Sample Response
 ```
 
 ## Get all transfers
-This describes how to fetch all transfers on your account
+This section describes how to fetch all transfers on your account.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -470,7 +470,7 @@ Sample Response
 ```
 
 ## Get a transfer
-This describes how to fetch a single transfer on your account
+This section describes how to fetch a single transfer.
 
 ```javascript
 
@@ -516,7 +516,7 @@ Sample Response
 
 
 ## Wallet to Wallet Transfer
-This will show you how to initiate a transfer from one Flutterwave wallet to another
+This section describes how to initiate transfers from one Flutterwave wallet to another.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -527,13 +527,13 @@ const walletToWallet = async () => {
 
     try {
         const payload = {
-            "account_bank": "flutterwave", // This should always be set to flutterwave
-            "account_number": "99992069", //This is the recipient merchant ID
-            "amount": 500, //This is the amount to transfer to the recipient
+            "account_bank": "flutterwave", // This should always be set to flutterwave.
+            "account_number": "99992069", //This is the recipient merchant ID.
+            "amount": 500, //This is the amount to transfer to the recipient.
             "narration": "payment for x service provided",
-            "currency": "NGN", //This can be NGN, GHS, KES, UGX, TZS, USD
-            "reference": "wallet-transfer998", //This is a merchant's unique reference for the transfer, it can be used to query for the status of the transfer
-            "debit_currency": "NGN" //You can pass this when you want to debit a currency balance and send money in another currency.
+            "currency": "NGN", 
+            "reference": "wallet-transfer998", //This is a merchant's unique transfer reference, which can be used to verify the status of the transfer.
+            "debit_currency": "NGN" //Pass this to select a different currency balance as the source of transfer funds.
         }
 
         const response = await flw.Transfer.wallet_to_wallet(payload)
