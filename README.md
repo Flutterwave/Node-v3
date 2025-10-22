@@ -39,7 +39,7 @@ Available features include:
 
 ## Requirements
 
-1. Your [API Keys](https://developer.flutterwave.com/v3.0.0/docs/authentication#get-your-api-keys).
+1. Your Flutterwave [API Keys](https://developer.flutterwave.com/v3.0.0/docs/authentication#get-your-api-keys).
 2. Node version 18 or higher.
 
 ## Installation
