@@ -10,11 +10,11 @@ Manage Ebills via any of these methods:
 1. [Place Ebills Order](#place-ebills-order)
 2. [Update Ebills Order](#update-ebills-order)
 
-## Place ebills order
+## Place EBills order
 
 This section describes how to create a new Ebills order.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -51,7 +51,7 @@ placeEbillsOrder();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Ebills ordered",
@@ -67,9 +67,9 @@ Sample Response
 
 ## Update ebills order
 
-This section describes how to update order for ebills.
+This section describes how to update the order for Ebills.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -100,7 +100,7 @@ updateEbillsOrder();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Ebills order updated",
