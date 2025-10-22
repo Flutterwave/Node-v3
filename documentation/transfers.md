@@ -30,12 +30,12 @@ const initTrans = async () => {
 
     try {
         const payload = {
-        "account_bank": "044", //This is the recipient bank code. Get list here :https://developer.flutterwave.com/v3.0/reference#get-all-banks
+        "account_bank": "044", //This is the recipient bank code. Get list here:https://developer.flutterwave.com/v3.0/reference#get-all-banks
         "account_number": "0690000040",
         "amount": 5500,
         "narration": "Akhlm Pstmn Trnsfr xx007",
         "currency": "NGN",
-        "reference": "akhlm-pstmnpyt-r02ens007_PMCKDU_1", //This is the merchant's unique transfer reference, it is used to verify the status of the transfer.
+        "reference": "akhlm-pstmnpyt-r02ens007_PMCKDU_1", //This is the merchant's unique transfer reference; it is used to verify the status of the transfer.
         "callback_url": "https://www.flutterwave.com/ng/",
         "debit_currency": "NGN"
     }
@@ -142,7 +142,7 @@ Sample Response
 ```
 
 ## Get transfer fee
-This section describes how to get applicable transfer fee.
+This section describes how to get the applicable transfer fee.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
