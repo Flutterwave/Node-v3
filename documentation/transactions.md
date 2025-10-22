@@ -556,7 +556,7 @@ Sample Response
 
 ## Verify transaction with reference
 
-This section describes how to verify transactions status using the transaction reference (tx_ref).
+This section describes how to verify transaction status using the transaction reference (tx_ref).
 
 ```javascript
 
@@ -636,7 +636,7 @@ Sample Response
 ## View transaction timeline
 
 
-This section describes how view a Transaction Timeline.
+This section describes how to view a Transaction Timeline.
 
 ```javascript
 
