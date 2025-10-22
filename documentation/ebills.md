@@ -4,17 +4,17 @@
 
 # EBILLS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Ebills via any of these methods:
 1. [Place Ebills Order](#place-ebills-order)
 2. [Update Ebills Order](#update-ebills-order)
 
-## Place ebills order
+## Place EBills order
 
-This describes how to create a new Ebills order
+This section describes how to create a new Ebills order.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -51,7 +51,7 @@ placeEbillsOrder();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Ebills ordered",
@@ -67,9 +67,9 @@ Sample Response
 
 ## Update ebills order
 
-This describes how to update order for ebills
+This section describes how to update the order for Ebills.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -100,7 +100,7 @@ updateEbillsOrder();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Ebills order updated",
