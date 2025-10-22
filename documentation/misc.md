@@ -17,7 +17,7 @@ Verify user information via any of these methods:
 
 This section describes how to get all wallet balances on your account.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -42,7 +42,7 @@ fetchBal();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Wallet balances fetched",
@@ -128,9 +128,9 @@ Sample Response
 
 ## Get balances per currency
 
-This section describes how to get wallet balance for specific currencies.
+This section describes how to get the wallet balance for specific currencies.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -157,7 +157,7 @@ fetchBal();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Wallet balance fetched",
@@ -173,7 +173,7 @@ Sample Response
 
 This section describes how to resolve an account and obtain the account holder's details.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -201,7 +201,7 @@ resolveAcct();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Account details fetched",
@@ -216,7 +216,7 @@ Sample Response
 
 This section describes how to initiate bvn consent flow for your customer.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -246,7 +246,7 @@ initiateBvn();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status":"success",
    "message":"Bvn verification initiated",
@@ -261,7 +261,7 @@ Sample Response
 
 This section describes how to verify consent and retrieve your customer's BVN information.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -288,7 +288,7 @@ verifyBVN();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status":"success",
    "message":"Bvn details fetched",
