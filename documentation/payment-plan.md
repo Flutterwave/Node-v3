@@ -18,7 +18,7 @@ Manage Payment Plans via any of these methods:
 
 This section describes how to create a payment plan.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -28,7 +28,7 @@ const createPaymentPlan = async () => {
     const payload = {
       amount: 1000,
       name: 'SDK test Plan', //This is the name of the payment plan, it will appear on the subscription reminder emails.
-      interval: 'monthly', //This will determine the interval at which customer is charged. Possible values are monthly, weekly, etc.
+      interval: 'monthly', //This will determine the interval at which the customer is charged. Possible values are monthly, weekly, etc.
     };
 
     const response = await flw.PaymentPlan.create(payload);
@@ -43,7 +43,7 @@ createPaymentPlan();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Payment plan created",
@@ -65,7 +65,7 @@ Sample Response
 
 This section describes how to fetch all payment plans on your account.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -84,7 +84,7 @@ fetchAllPlans();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Payment plans fetched",
@@ -215,7 +215,7 @@ Sample Response
 
 This section describes how to get a single payment plan.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -238,7 +238,7 @@ fetchPlan();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Payment plan fetched",
@@ -260,7 +260,7 @@ Sample Response
 
 This section describes how to update an existing payment plan.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -285,7 +285,7 @@ updatePlan();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Payment plan updated",
@@ -307,7 +307,7 @@ Sample Response
 
 This section describes how to cancel an existing payment plan.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -330,7 +330,7 @@ cancelPlan();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Payment plan cancelled",
