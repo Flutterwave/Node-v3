@@ -17,7 +17,7 @@ Manage Virtual Accounts via any of these methods:
 
 This section describes how to create a virtual account number.
 
-Note: BVN is required for creating static account numbers in the Live Environment i.e if the value of is_permanent is True.
+Note: BVN is required for creating static account numbers in the Live Environment, i.e, if the value of is_permanent is True.
 Kindly visit our API section found [here](https://developer.flutterwave.com/v3.0.0/reference/create-a-virtual-account-number-1) for further information.
 
 ```javascript
@@ -121,7 +121,7 @@ Sample Response
 
 ## Get bulk virtual account details
 
-This section describes how to fetch bulk virtual account numbers using batch id.
+This section describes how to fetch bulk virtual account numbers using the batch ID.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -225,7 +225,7 @@ Sample Response
 
 ## Get a virtual account number
 
-This section describes how to fetch a virtual account number using order reference.
+This section describes how to fetch a virtual account number using the order reference.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
