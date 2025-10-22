@@ -14,7 +14,7 @@ Fetch Bank details via any of these methods:
 
 This section describes how to get a list of banks you can make transfers to.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -24,7 +24,7 @@ const getBanks = async () => {
     try {
         const payload = {
             
-            "country":"NG" //Pass either NG, GH, KE, UG, ZA or TZ to get list of banks in Nigeria, Ghana, Kenya, Uganda, South Africa or Tanzania respectively.
+            "country": "NG" //Pass either NG, GH, KE, UG, ZA, or TZ to get a list of banks in Nigeria, Ghana, Kenya, Uganda, South Africa, or Tanzania, respectively.
             
         }
         const response = await flw.Bank.country(payload)
@@ -40,7 +40,7 @@ getBanks();
 ```
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Banks fetched successfully",
@@ -358,7 +358,7 @@ Sample Response
 
 This section describes how to get a list of bank branches.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -385,7 +385,7 @@ getBranches();
 ```
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Bank branches fetched successfully",
@@ -425,7 +425,7 @@ Sample Response
     {
       "id": 996,
       "branch_code": "GH190105",
-      "branch_name": "STANBIC BANK GHANA -NORTH INDUSTIAL AREA",
+      "branch_name": "STANBIC BANK GHANA -NORTH INDUSTRIAL AREA",
       "swift_code": "SBICGHAC",
       "bic": "SBICGHACXXX",
       "bank_id": 280
