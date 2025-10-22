@@ -72,7 +72,7 @@ Sample Response
 }
 ```
 
-## Fetch subscriptions with customer's email
+## Fetch subscriptions with the customer's email
 
 This section describes how to fetch subscriptions using your customer's email address.
 
@@ -137,7 +137,7 @@ const cancelSubscription = async () => {
 
     try {
         const payload={
-            "id":"4147" //This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
+            "id":"4147" //This is the unique ID of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
         }
         
         const response = await flw.Subscription.cancel(payload)
@@ -184,7 +184,7 @@ const activateSubscription = async () => {
 
     try {
         const payload={
-            "id":"4147" //This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.id
+            "id":"4147" //This is the unique ID of the subscription you want to activate. It is returned in the Get a subscription call as data.id
         }
         
         const response = await flw.Subscription.activate(payload)
