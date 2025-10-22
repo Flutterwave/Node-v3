@@ -14,7 +14,7 @@ Manage Settlements via any of these methods:
 
 This section describes how to fetch all settlements.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -41,7 +41,7 @@ fetchSettlements();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Settlements fetched",
@@ -310,7 +310,7 @@ Sample Response
 
 This section describes how to fetch a settlement.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -339,7 +339,7 @@ fetchSettlement();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Settlement fetched",
