@@ -1,7 +1,6 @@
 var otp = require('../lib/rave.otps');
 var base = require('../lib/rave.base');
-
-var Promise = require('bluebird');
+// var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
@@ -15,13 +14,12 @@ const sinonChai = require('sinon-chai');
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
-describe('#Rave OTP', function () {
+describe('#Rave OTP Coverage', function () {
   const public_key = process.env.PUBLIC_KEY;
   const secret_key = process.env.SECRET_KEY;
   const ravebase = new base(public_key, secret_key);
 
   let otpInstance;
-  let otpStub;
 
   beforeEach(() => {
     otpInstance = new otp(ravebase);
@@ -34,8 +32,8 @@ describe('#Rave OTP', function () {
   it('should generate OTP and return success message', async function () {
     this.timeout(10000);
 
-    const generateOTPSuccessStub = sinon.stub(otpInstance, 'create').resolves({
-      body: {
+    const generateOTPSuccessStub = sinon.stub(ravebase, 'request').resolves({
+      body: { // The service extracts this 'body'
         status: 'success',
         message: 'OTP generated successfully',
         data: [
@@ -44,18 +42,12 @@ describe('#Rave OTP', function () {
             reference: 'CF-BARTER-20230305031441503636',
             otp: '1495545',
             expiry: '2023-03-05T03:19:41.8110726+00:00',
-          },
-          {
-            medium: 'whatsapp',
-            reference: 'CF-BARTER-20230305031443536582',
-            otp: '1495545',
-            expiry: '2023-03-05T03:19:43.4362097+00:00',
-          },
+          }
         ],
       },
     });
 
-    var payload = {
+    const payload = {
       length: 7,
       customer: {
         name: 'Kazan',
@@ -65,50 +57,37 @@ describe('#Rave OTP', function () {
       sender: 'Test Sender',
       send: true,
       medium: ['email', 'whatsapp'],
-      expiry: 5,
+      expiry: 5
     };
 
-    var resp = await otpInstance.create(payload);
-    // console.log(resp);
+    const resp = await otpInstance.create(payload);
 
     expect(generateOTPSuccessStub).to.have.been.calledOnce;
-    expect(generateOTPSuccessStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
-    expect(resp.body.message).to.eq('OTP generated successfully');
-
-    expect(resp.body.data[0]).to.have.property('medium');
-    expect(resp.body.data[0]).to.have.property('reference');
-    expect(resp.body.data[0]).to.have.property('expiry');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp.message).to.eq('OTP generated successfully');
+    expect(resp.data[0]).to.have.property('medium');
   });
 
   it('should validate OTP and return success message', async function () {
     this.timeout(10000);
 
-    const validateOTPSuccessStub = sinon
-      .stub(otpInstance, 'validate')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Otp Authenticated successfully',
-          data: null,
-        },
-      });
+    const validateOTPSuccessStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Otp Authenticated successfully',
+        data: null,
+      },
+    });
 
-    var payload = {
+    const payload = {
       reference: 'CF-BARTER-20230305031441503636',
       otp: '1495545',
     };
 
-    var resp = await otpInstance.validate(payload);
-    // console.log(resp);
+    const resp = await otpInstance.validate(payload);
 
     expect(validateOTPSuccessStub).to.have.been.calledOnce;
-    expect(validateOTPSuccessStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
-    expect(resp.body.message).to.eq('Otp Authenticated successfully');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp.message).to.eq('Otp Authenticated successfully');
   });
 });

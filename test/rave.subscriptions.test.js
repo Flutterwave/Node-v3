@@ -15,15 +15,16 @@ const sinonChai = require('sinon-chai');
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
-describe('#Rave Subscriptions', function () {
+describe('#Rave Subscriptions Coverage', function () {
   const public_key = process.env.PUBLIC_KEY;
   const secret_key = process.env.SECRET_KEY;
-  const ravebase = new base(public_key, secret_key);
 
+  let ravebase;
   let subscriptionInstance;
-  let subscriptionStub;
 
   beforeEach(() => {
+    // Fresh instantiation to ensure clean coverage state
+    ravebase = new base(public_key, secret_key);
     subscriptionInstance = new Subscriptions(ravebase);
   });
 
@@ -31,34 +32,72 @@ describe('#Rave Subscriptions', function () {
     sinon.restore();
   });
 
-  //   it.only('should return a single subscription ', async function () {
-  //     this.timeout(10000);
+  it('should successfully retrieve all subscriptions', async function () {
+    this.timeout(10000);
 
-  //     var payload = {
-  //       email: 'cornelius@flutterwavego.com',
-  //     };
-  //     var resp = await subscriptionInstance.get(payload);
-  //     console.log(resp);
-  //     return expect(resp).to.have.property('data');
-  //   });
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Subscriptions fetched',
+        data: [{ id: 11343, status: 'active' }]
+      }
+    });
 
-  //   it("should cancel a user's subscription", async function () {
-  //     this.timeout(10000);
+    const resp = await subscriptionInstance.fetch_all();
 
-  //     var payload = {
-  //       id: '11343',
-  //     };
-  //     var resp = await subscriptionInstance.cancel(payload);
-  //     return expect(resp).to.have.property('message');
-  //   });
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp.status).to.equal('success');
+  });
 
-  //   it('should activate Subscription', async function () {
-  //     this.timeout(10000);
+  it('should successfully retrieve a single subscription', async function () {
+    this.timeout(10000);
 
-  //     var payload = {
-  //       id: '11343',
-  //     };
-  //     var resp = await subscriptionInstance.activate(payload);
-  //     return expect(resp).to.have.property('data');
-  //   });
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        data: [{ id: 11343, email: 'test@flutterwavego.com' }]
+      }
+    });
+
+    const payload = { email: 'test@flutterwavego.com' };
+    const resp = await subscriptionInstance.get(payload);
+
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp.status).to.equal('success');
+  });
+  
+  it('should successfully cancel a subscription', async function () {
+    this.timeout(10000);
+
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Subscription cancelled'
+      }
+    });
+
+    const payload = { id: '11343' }; 
+    const resp = await subscriptionInstance.cancel(payload);
+
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp.message).to.equal('Subscription cancelled');
+  });
+
+  it('should successfully activate a subscription', async function () {
+    this.timeout(10000);
+
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Subscription activated'
+      }
+    });
+
+    const payload = { id: '11343' };
+    const resp = await subscriptionInstance.activate(payload);
+
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp.status).to.equal('success');
+  });
 });
+

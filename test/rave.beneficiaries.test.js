@@ -1,14 +1,10 @@
 var beneficiaries = require('../lib/rave.beneficiaries');
 var base = require('../lib/rave.base');
-
-var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
-
 var dotenv = require('dotenv').config();
-
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
@@ -21,7 +17,6 @@ describe('#Rave Beneficiaries', function () {
   const ravebase = new base(public_key, secret_key);
 
   let beneficiariesInstance;
-  let beneficiariesStub;
 
   beforeEach(() => {
     beneficiariesInstance = new beneficiaries(ravebase);
@@ -34,22 +29,19 @@ describe('#Rave Beneficiaries', function () {
   it('should create a Beneficiary', async function () {
     this.timeout(10000);
 
-    const createBeneficiariesSuccessStub = sinon
-      .stub(beneficiariesInstance, 'create')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Banks fetched successfully',
-          data: {
-            id: 3644,
-            account_number: '0690000034',
-            bank_code: '044',
-            full_name: 'Ade Bond',
-            created_at: '2020-01-16T18:01:28.000Z',
-            bank_name: 'ACCESS BANK NIGERIA',
-          },
+    const CreatebeneficiaryrequestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Beneficiary created successfully',
+        data: {
+          id: 3644,
+          account_number: '0690000034',
+          bank_code: '044',
+          full_name: 'Ade Bond',
+          bank_name: 'ACCESS BANK NIGERIA',
         },
-      });
+      },
+    });
 
     var payload = {
       account_number: '0690000034',
@@ -58,116 +50,87 @@ describe('#Rave Beneficiaries', function () {
     };
 
     var resp = await beneficiariesInstance.create(payload);
-    // console.log(resp);
 
-    // success case
-    expect(createBeneficiariesSuccessStub).to.have.been.calledOnce;
-    expect(createBeneficiariesSuccessStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
-
-    expect(resp.body.data).to.have.property('id');
-    expect(resp.body.data).to.have.property('account_number');
-    expect(resp.body.data).to.have.property('bank_code');
-    expect(resp.body.data).to.have.property('full_name');
-    expect(resp.body.data).to.have.property('bank_name');
-  });
-
-  it('should return Account resolve error', async function () {
-    this.timeout(10000);
-
-    const createBeneficiariesFailedStub = sinon
-      .stub(beneficiariesInstance, 'create')
-      .resolves({
-        body: {
-          status: 'error',
-          message: 'Account resolve failed',
-          data: null,
-        },
-      });
-
-    var payload = {
-      account_number: '0690000034',
-      account_bank: '044',
-    };
-
-    var resp = await beneficiariesInstance.create(payload);
-
-    // failed case
-    expect(createBeneficiariesFailedStub).to.have.been.calledOnce;
-    expect(createBeneficiariesFailedStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'error');
-    expect(resp.body.message).to.eq('Account resolve failed');
+    expect(CreatebeneficiaryrequestStub).to.have.been.calledOnce;
+    expect(resp, "Service returned undefined").to.not.be.undefined;
+    expect(resp).to.have.property('status', 'success');
+    expect(resp.data).to.have.property('id', 3644);
   });
 
   it('should return a single beneficiary ', async function () {
     this.timeout(10000);
 
-    const fetchBeneficiariesStub = sinon
-      .stub(beneficiariesInstance, 'fetch')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Payout beneficiary fetched',
-          data: {
-            id: 2923,
-            account_number: '0690000032',
-            bank_code: '044',
-            full_name: 'Pastor Bright',
-            meta: null,
-            created_at: '2019-11-28T08:15:29.000Z',
-            bank_name: 'ACCESS BANK NIGERIA',
-          },
-        },
-      });
+    const SinglebeneficiaryrequestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Payout beneficiary fetched',
+        data: { id: 2923, full_name: 'Pastor Bright' },
+      },
+    });
 
-    var payload = {
-      id: '2923',
-    };
-
+    var payload = { id: '2923' };
     var resp = await beneficiariesInstance.fetch(payload);
 
-    // success case
-    expect(fetchBeneficiariesStub).to.have.been.calledOnce;
-    expect(fetchBeneficiariesStub).to.have.been.calledOnceWith(payload);
+    expect(SinglebeneficiaryrequestStub).to.have.been.calledOnce;
+    expect(resp.data.id).to.eq(2923);
+  });
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+  it('should successfully fetch all transfer beneficiaries (Covers rave.retrieve-all.js)', async function () {
+    this.timeout(10000);
 
-    expect(resp.body.data).to.have.property('id');
-    expect(resp.body.data).to.have.property('account_number');
-    expect(resp.body.data).to.have.property('bank_code');
-    expect(resp.body.data).to.have.property('full_name');
-    expect(resp.body.data).to.have.property('bank_name');
+    const ListbeneficiaryrequestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Beneficiaries fetched',
+        data: [
+          {
+            id: 12345,
+            account_number: '0690000040',
+            bank_code: '044',
+            full_name: 'Alexis Sanchez',
+            bank_name: 'ACCESS BANK NIGERIA'
+          }
+        ],
+        meta: {
+          page_info: {
+            total: 1,
+            current_page: 1,
+            total_pages: 1
+          }
+        }
+      }
+    });
 
-    expect(resp.body.data.id).to.eq(2923);
+    // Use a string for the page parameter to satisfy strict validation
+    const payload = {
+      page: "1"
+    };
+
+    const resp = await beneficiariesInstance.fetch_all(payload);
+
+    expect(ListbeneficiaryrequestStub).to.have.been.calledOnce;
+
+    // Assert against the response directly
+    expect(resp).to.have.property('status', 'success');
+    expect(resp.data).to.be.an('array');
+    expect(resp.data[0]).to.have.property('full_name', 'Alexis Sanchez');
   });
 
   it('should successfully delete beneficiary ', async function () {
     this.timeout(10000);
 
-    const deleteBeneficiariesStub = sinon
-      .stub(beneficiariesInstance, 'delete')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Beneficiary deleted',
-          data: 'Deleted',
-        },
-      });
+    const DeletebeneficiaryrequestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Beneficiary deleted',
+        data: 'Deleted',
+      },
+    });
 
-    var payload = {
-      id: '3644',
-    };
-
+    var payload = { id: '3644' };
     var resp = await beneficiariesInstance.delete(payload);
 
-    expect(deleteBeneficiariesStub).to.have.been.calledOnce;
-    expect(deleteBeneficiariesStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body.message).to.eq('Beneficiary deleted');
+    expect(DeletebeneficiaryrequestStub).to.have.been.calledOnce;
+    expect(resp.message).to.eq('Beneficiary deleted');
   });
 });
