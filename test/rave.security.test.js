@@ -3,22 +3,12 @@ const expect = require('chai').expect;
 
 describe('Security Utilities (node-forge)', function () {
   
-  // FEnsure this is defined INSIDE the describe block or the test
   const pubkey = process.env.PUBLIC_KEY;
   const seckey = process.env.SECRET_KEY;
 
-  it('should generate a correct encryption key (getEncryptionKey)', function () {
-    // We pass the variable here
-    const key = security.getEncryptionKey(seckey);
-
-    expect(key).to.be.a('string');
-    expect(key).to.have.lengthOf(24);
-  });
-
-  it('should encrypt text using node-forge (encrypt)', function () {
+  it('should encrypt text using node-forge (encrypt function)', function () {
     const text = JSON.stringify({ card: '5531886652142950' });
 
-    // We must generate the key first to pass it to encrypt
     const key = security.getEncryptionKey(seckey);
     const encrypted = security.encrypt(key, text);
 

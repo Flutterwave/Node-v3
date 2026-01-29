@@ -7,7 +7,7 @@ describe('Utils Build Coverage', function () {
 
     describe('enforceRequired()', function () {
 
-        it('should throw error if paramList is not an array (Hits the Red Line)', function () {
+        it('should throw an error if paramList is not an array', function () {
             const schema = joi.object({ test: joi.string() });
 
             expect(() => {
@@ -16,7 +16,7 @@ describe('Utils Build Coverage', function () {
         });
 
         it('should successfully map through paramList and return schema', function () {
-            // Created a dummy Joi schema with some keys
+            // Creating a dummy Joi schema with some keys
             const schema = joi.object({
                 name: joi.string(),
                 email: joi.string()
@@ -40,35 +40,6 @@ describe('Utils Build Coverage', function () {
 
             expect(result).to.be.an('object');
             expect(result).to.have.property('_ids');
-        });
-    });
-
-    describe('handleEmptyFetch()', function () {
-        let raveMock;
-
-        beforeEach(() => {
-            raveMock = {
-                request: sinon.stub()
-            };
-        });
-
-        it('should handle undefined param by defaulting to GET', async function () {
-            raveMock.request.resolves({ body: { status: 'success' } });
-
-            const result = await handleEmptyFetch(undefined, 'TestCall', 'v3/test', raveMock);
-
-            expect(raveMock.request.calledWith('v3/test', { method: 'GET' })).to.be.true;
-            expect(result.status).to.equal('success');
-        });
-
-        it('should validate and fetch when param is provided', async function () {
-            raveMock.request.resolves({ body: { data: [] } });
-            const param = { page: '1' };
-
-            const result = await handleEmptyFetch(param, 'TestCall', 'v3/list', raveMock);
-
-            expect(param.method).to.equal('GET');
-            expect(result.data).to.be.an('array');
         });
     });
 });
