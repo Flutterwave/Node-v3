@@ -18,13 +18,14 @@ chai.use(sinonChai);
 describe('#Rave Bills', function () {
   const public_key = process.env.PUBLIC_KEY;
   const secret_key = process.env.SECRET_KEY;
-  const ravebase = new base(public_key, secret_key);
 
   let billsInstance;
-  let billStub;
+  let ravebase
 
   beforeEach(() => {
+    ravebase = new base(public_key, secret_key);
     billsInstance = new bills(ravebase);
+
   });
 
   afterEach(() => {
@@ -35,7 +36,7 @@ describe('#Rave Bills', function () {
     this.timeout(10000);
 
     const createSingleBillSuccessStub = sinon
-      .stub(billsInstance, 'create_bill')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -57,27 +58,26 @@ describe('#Rave Bills', function () {
       amount: 500,
       recurrence: 'ONCE',
       type: 'AIRTIME',
-      reference: '9300ko984',
+      reference: '9300ko984'
     };
 
     var resp = await billsInstance.create_bill(payload);
 
     expect(createSingleBillSuccessStub).to.have.been.calledOnce;
-    expect(createSingleBillSuccessStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('flw_ref');
-    expect(resp.body.data).to.have.property('amount');
-    expect(resp.body.data).to.have.property('tx_ref');
+    expect(resp.data).to.have.property('flw_ref');
+    expect(resp.data).to.have.property('amount');
+    expect(resp.data).to.have.property('tx_ref');
   });
 
   it('should create bulk bills payment ', async function () {
     this.timeout(10000);
 
     const createBulkBillSuccessStub = sinon
-      .stub(billsInstance, 'create_bulk')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -113,22 +113,21 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.create_bulk(payload);
 
     expect(createBulkBillSuccessStub).to.have.been.calledOnce;
-    expect(createBulkBillSuccessStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
-    expect(resp.body.message).to.eq(
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
+    expect(resp.message).to.eq(
       'Bulk bill Payment was queued for processing',
     );
 
-    expect(resp.body.data).to.have.property('batch_reference');
+    expect(resp.data).to.have.property('batch_reference');
   });
 
   it('should return status of a bill purchase', async function () {
     this.timeout(10000);
 
     const fetchBillsStatusStub = sinon
-      .stub(billsInstance, 'fetch_status')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -156,21 +155,64 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.fetch_status(payload);
 
     expect(fetchBillsStatusStub).to.have.been.calledOnce;
-    expect(fetchBillsStatusStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('product');
-    expect(resp.body.data).to.have.property('amount');
-    expect(resp.body.data).to.have.property('product_name');
-    expect(resp.body.data).to.have.property('extra');
+    expect(resp.data).to.have.property('product');
+    expect(resp.data).to.have.property('amount');
+    expect(resp.data).to.have.property('product_name');
+    expect(resp.data).to.have.property('extra');
+  });
+
+  it('should return supported bill categories', async function () {
+    this.timeout(10000);
+
+    const fetchBillCategoriesStub = sinon
+      .stub(ravebase, 'request')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'Bill status fetch successful',
+          data:
+            [
+              {
+                id: 1,
+                name: "Airtime",
+                code: "AIRTIME",
+                description: "Airtime",
+                country_code: "NG"
+              },
+              {
+                id: 2,
+                name: "Mobile Data Service",
+                code: "MOBILEDATA",
+                description: "Mobile Data Service",
+                country_code: "NG"
+              }
+            ]
+        },
+      });
+
+    var payload = {
+      country: 'NG',
+    };
+    var resp = await billsInstance.fetch_bills_Cat(payload);
+
+    expect(fetchBillCategoriesStub).to.have.been.calledOnce;
+
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
+
+    expect(resp.data[0]).to.have.property('name', 'Airtime');
+    expect(resp.data[0]).to.have.property('code', 'AIRTIME');
+    expect(resp.data[0]).to.have.property('id', 1);
   });
 
   it('should update bills order', async function () {
     this.timeout(10000);
 
-    const updateBillsStub = sinon.stub(billsInstance, 'update_bills').resolves({
+    const updateBillsStub = sinon.stub(ravebase, 'request').resolves({
       body: {
         status: 'success',
         message: 'bills order updated successfully',
@@ -197,20 +239,19 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.update_bills(payload);
 
     expect(updateBillsStub).to.have.been.calledOnce;
-    expect(updateBillsStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('order_reference');
-    expect(resp.body.data).to.have.property('flw_ref');
-    expect(resp.body.data).to.have.property('tx_ref');
+    expect(resp.data).to.have.property('order_reference');
+    expect(resp.data).to.have.property('flw_ref');
+    expect(resp.data).to.have.property('tx_ref');
   });
 
   it('should validate bills services', async function () {
     this.timeout(10000);
 
-    const validateBillsStub = sinon.stub(billsInstance, 'validate').resolves({
+    const validateBillsStub = sinon.stub(ravebase, 'request').resolves({
       body: {
         status: 'success',
         message: 'Item validated successfully',
@@ -239,21 +280,20 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.validate(payload);
 
     expect(validateBillsStub).to.have.been.calledOnce;
-    expect(validateBillsStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('response_message');
-    expect(resp.body.data).to.have.property('name');
-    expect(resp.body.data).to.have.property('customer');
+    expect(resp.data).to.have.property('response_message');
+    expect(resp.data).to.have.property('name');
+    expect(resp.data).to.have.property('customer');
   });
 
   it('should return amount to be paid', async function () {
     this.timeout(10000);
 
     const verifyBillAmountStub = sinon
-      .stub(billsInstance, 'amt_to_be_paid')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -296,22 +336,21 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.amt_to_be_paid(payload);
 
     expect(verifyBillAmountStub).to.have.been.calledOnce;
-    expect(verifyBillAmountStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('items');
-    expect(resp.body.data).to.have.property('product_name');
-    expect(resp.body.data).to.have.property('product_code');
-    expect(resp.body.data).to.have.property('amount');
+    expect(resp.data).to.have.property('items');
+    expect(resp.data).to.have.property('product_name');
+    expect(resp.data).to.have.property('product_code');
+    expect(resp.data).to.have.property('amount');
   });
 
   it('should return history of all purchased bill services', async function () {
     this.timeout(10000);
 
     const fetchBillHistoryStub = sinon
-      .stub(billsInstance, 'fetch_bills')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -342,17 +381,6 @@ describe('#Rave Bills', function () {
               },
               {
                 currency: 'NGN',
-                customer_id: '+2349082930030',
-                frequency: 'One Time',
-                amount: '500.0000',
-                product: 'AIRTIME',
-                product_name: '9MOBILE',
-                commission: 10,
-                created_at: '2018-08-24T01:06:31.55Z',
-                tx_id: 7891,
-              },
-              {
-                currency: 'NGN',
                 customer_id: '2349082930030',
                 frequency: 'One Time',
                 amount: '500.0000',
@@ -378,24 +406,23 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.fetch_bills(payload);
 
     expect(fetchBillHistoryStub).to.have.been.calledOnce;
-    expect(fetchBillHistoryStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('summary');
-    expect(resp.body.data).to.have.property('transactions');
+    expect(resp.data).to.have.property('summary');
+    expect(resp.data).to.have.property('transactions');
 
-    expect(resp.body.data.transactions[0]).to.have.property('customer_id');
-    expect(resp.body.data.transactions[0]).to.have.property('product');
-    expect(resp.body.data.transactions[0]).to.have.property('tx_id');
+    expect(resp.data.transactions[0]).to.have.property('customer_id');
+    expect(resp.data.transactions[0]).to.have.property('product');
+    expect(resp.data.transactions[0]).to.have.property('tx_id');
   });
 
   it('should return all products under a government agency.', async function () {
     this.timeout(10000);
 
     const fetchProductsByAgencyStub = sinon
-      .stub(billsInstance, 'products_under_agency')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -424,27 +451,62 @@ describe('#Rave Bills', function () {
       });
 
     var payload = {
-      id: 'BIL136',
+      id: 136
     };
 
-    var resp = await billsInstance.products_under_agency(payload);
+    var resp = await billsInstance.fetch_products_under_agency(payload);
     // console.log(resp);
 
     expect(fetchProductsByAgencyStub).to.have.been.calledOnce;
-    expect(fetchProductsByAgencyStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('biller_code');
-    expect(resp.body.data).to.have.property('products');
+    expect(resp.data).to.have.property('biller_code');
+    expect(resp.data).to.have.property('products');
+  });
+
+
+  it('should return all bill payment government agency.', async function () {
+    this.timeout(10000);
+
+    const fetchBillPaymentAgencies = sinon
+      .stub(ravebase, 'request')
+      .resolves({
+        body: {
+          status: 'success',
+          message: 'billers retrieval successful',
+          data: [
+            {
+              code: 'OT150',
+              name: 'GENESIS GROUP ACCOMODATION',
+            },
+            {
+              code: 'OT151',
+              name: 'GENESIS GROUP COLLEGE GRADUATION FEES',
+            },
+          ],
+        },
+      });
+
+
+    var resp = await billsInstance.fetch_bills_agencies();
+    // console.log(resp);
+
+    expect(fetchBillPaymentAgencies).to.have.been.calledOnce;
+
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
+    expect(resp.data[0]).to.have.property('name', 'GENESIS GROUP ACCOMODATION');
+
+
   });
 
   it('should Create order using billing code and product id', async function () {
     this.timeout(10000);
 
     const createOrderWithBillingCodeStub = sinon
-      .stub(billsInstance, 'create_ord_billing')
+      .stub(ravebase, 'request')
       .resolves({
         body: {
           status: 'success',
@@ -462,6 +524,7 @@ describe('#Rave Bills', function () {
 
     var payload = {
       id: '3644',
+      country: 'NG',
       product_id: 'OT151',
       amount: '3500.00',
       reference: 'FLWTTOT1000000029',
@@ -487,12 +550,48 @@ describe('#Rave Bills', function () {
     var resp = await billsInstance.create_ord_billing(payload);
 
     expect(createOrderWithBillingCodeStub).to.have.been.calledOnce;
-    expect(createOrderWithBillingCodeStub).to.have.been.calledOnceWith(payload);
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+    expect(resp).to.have.property('status', 'success');
+    expect(resp).to.have.property('data');
 
-    expect(resp.body.data).to.have.property('tx_ref');
-    expect(resp.body.data).to.have.property('order_reference');
+    expect(resp.data).to.have.property('tx_ref');
+    expect(resp.data).to.have.property('order_reference');
+  });
+  
+  it('should trigger the Joi custom phone number validation for Creating Orders', async function () {
+    this.timeout(10000);
+
+   
+    const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
+
+    var payload = {
+      id: '3644',
+      country: 'NG',
+      product_id: 'OT151',
+      amount: '3500.00',
+      reference: 'FLWTTOT1000000029',
+      customer: {
+        name: 'emmanuel',
+        email: 'emmanuel@x.com',
+        phone_number: 'weewewewwewe',
+      },
+      fields: [
+        {
+          id: '42107711:42107712',
+          quantity: '1',
+          value: '3500',
+        },
+        {
+          id: '42107710',
+          quantity: '1',
+          value: 't@x.com',
+        },
+      ],
+    };
+
+    await expect(billsInstance.create_ord_billing(payload))
+      .to.be.rejectedWith('phone number should be digits');
+
+    expect(requestStub).to.not.have.been.called;
   });
 });
