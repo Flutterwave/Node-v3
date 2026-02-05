@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { verifyBVNSchema } = require('../schema/auxillary');
 
@@ -10,7 +10,7 @@ async function service(data, _rave) {
     `v3/bvn/verifications/${data.reference}`,
     data,
   );
-  logger(`Verify BVN consent`, _rave);
+  // logger(`Verify BVN consent`, _rave);
   return response;
 }
 

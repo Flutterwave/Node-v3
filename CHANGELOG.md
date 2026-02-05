@@ -1,8 +1,25 @@
 # Changelog
+## 1.3.0 | 2025-04-17
 
-## 1.1.16 | 2025-03-27
+Remove SDK logger
 
-Updated the package used for handling HTTP API calls from Request to Fetch. Added `sa_bank_code` to the chargeSchema for ACH charge in `zar` for specific OZOW banks.
+### Version Changes
+
+- [REMOVED] logger tracking errors in the integration libraries.
+
+
+## 1.2.1 | 2025-04-14
+
+Added validation for mobile money networks.
+
+### Version Changes
+
+- [ADDED] `network` validations for mobilemoney collections in the momoSchema.
+- [ADDED] checkmarx security scan to the package build pipeline.
+
+## 1.2.0 | 2025-04-09
+
+Replace `Request` package with `Fetch` for HTTP requests and update the charge schema.
 
 ### Version Changes
 
@@ -25,8 +42,8 @@ Added transaction verification by reference and updated the settlement imports f
 Updated the `voucher` parameter in the momo schema.
 
 ### Version Changes
-- [FIXED] Make the `voucher` parameter optional in the create mobile money schema.
 
+- [FIXED] Make the `voucher` parameter optional in the create mobile money schema.
 
 ## 1.1.13 | 2024-11-19
 
@@ -37,15 +54,19 @@ Updated the `getBalanceByCurrency` method to parse path parameters.
 - [FIXED] Update the `balance_currency` function in the Misc object to exclude queries when parsing a path parameter.
 
 ## 1.1.12 | 2024-09-27
+
 Update the list schema.
 
 ### Version Changes
+
 - [FIXED] Remove the required validation on the 'account_bank' parameter.
 
 ## 1.1.11 | 2024-09-10
+
 Update `account_bank` validation in create schema.
 
 ### Version Changes
+
 - [FIXED] Update minLength & maxLength validation for account_bank parameter.
 
 ## 1.1.10 | 2024-04-04

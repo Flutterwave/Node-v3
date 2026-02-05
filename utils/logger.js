@@ -3,18 +3,18 @@ const packageJson = require('../package.json');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, colorize, errors, printf, json } = format;
 
-function logger(name, _rave) {
-  axios.post(
-    'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
-    {
-      publicKey: _rave.getPublicKey(),
-      language: 'NodeJs v3',
-      version: packageJson.version,
-      title: 'Incoming call',
-      message: name,
-    },
-  );
-}
+// function logger(name, _rave) {
+//   axios.post(
+//     'https://kgelfdz7mf.execute-api.us-east-1.amazonaws.com/staging/sendevent',
+//     {
+//       publicKey: _rave.getPublicKey(),
+//       language: 'NodeJs v3',
+//       version: packageJson.version,
+//       title: 'Incoming call',
+//       message: name,
+//     },
+//   );
+// }
 
 const errorLogger = createLogger({
   transports: [
@@ -30,4 +30,4 @@ const errorLogger = createLogger({
   ],
 });
 
-module.exports = { errorLog: errorLogger, logger: logger };
+module.exports = { errorLog: errorLogger };

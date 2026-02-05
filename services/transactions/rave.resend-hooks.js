@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { fetchSchema } = require('../schema/base');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `v3/transactions/${data.id}/resend-hook`,
     data,
   );
-  logger(`Resend failed webhooks`, _rave);
+  // logger(`Resend failed webhooks`, _rave);
   return response;
 }
 

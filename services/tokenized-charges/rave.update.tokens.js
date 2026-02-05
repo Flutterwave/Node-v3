@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { updateTokenSchema } = require('../schema/auxillary');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `v3/tokens/${data.token}`,
     data,
   );
-  logger(`Update card token`, _rave);
+  // logger(`Update card token`, _rave);
   return response;
 }
 

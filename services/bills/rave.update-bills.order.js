@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { updateOrderSchema } = require('../schema/bill');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `v3/product-orders/${data.reference}`,
     data,
   );
-  logger(`Update bill order`, _rave);
+  // logger(`Update bill order`, _rave);
   return response;
 }
 

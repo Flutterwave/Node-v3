@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { chargeSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/charges?type=googlepay`,
     data,
   );
-  logger(`Create GooglePay charge`, _rave);
+  // logger(`Create GooglePay charge`, _rave);
   return response;
 }
 

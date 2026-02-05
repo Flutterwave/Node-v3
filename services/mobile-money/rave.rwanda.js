@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { momoSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/charges?type=mobile_money_rwanda`,
     data,
   );
-  logger(`Create ${data.currency} MoMo charge`, _rave);
+  // logger(`Create ${data.currency} MoMo charge`, _rave);
   return response;
 }
 
