@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { withdrawalSchema } = require('../schema/auxillary');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/virtual-cards/${data.id}/withdraw`,
     data,
   );
-  logger(`Virtual card withdrawals`, _rave);
+  // logger(`Virtual card withdrawals`, _rave);
   return response;
 }
 

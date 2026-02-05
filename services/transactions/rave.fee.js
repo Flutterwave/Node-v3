@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { feeSchema } = require('../schema/auxillary');
 
@@ -10,7 +10,7 @@ async function service(data, _rave) {
     `v3/transactions/fee?amount=${data.amount}&currency=${data.currency}`,
     data,
   );
-  logger(`Create OTP`, _rave);
+  // logger(`Create OTP`, _rave);
   return response;
 }
 

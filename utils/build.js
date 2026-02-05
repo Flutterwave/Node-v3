@@ -1,6 +1,6 @@
 const joi = require('joi');
 const { listSchema } = require('../services/schema/base');
-const { logger } = require('./logger');
+// const { logger } = require('./logger');
 const { validator } = require('./validator');
 
 // make parameter required in the listSchema
@@ -34,7 +34,7 @@ async function handleEmptyFetch(param, name, uri, _rave) {
 
     const responseBody = response.body || response;
 
-    logger(name, _rave);
+    // logger(name, _rave);
     return responseBody;
   }
 
@@ -44,7 +44,7 @@ async function handleEmptyFetch(param, name, uri, _rave) {
   const response = await _rave.request(uri, param);
   const responseBody = response.body || response;
 
-  logger(name, _rave);
+  // logger(name, _rave);
   return responseBody;
 }
 

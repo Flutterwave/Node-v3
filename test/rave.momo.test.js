@@ -52,10 +52,10 @@ describe('#Rave Mobile Money', function () {
       phone_number: '054709929220',
       amount: 1500,
       currency: 'GHS',
-      network: "VODAFONE",
+      network: 'VODAFONE',
       email: 'JoeBloggs@acme.co',
-      tx_ref: "HGHYGIHIKU",
-  };
+      tx_ref: 'HGHYGIHIKU',
+    };
 
     var resp = await momoInstance.ghana(payload);
 
@@ -188,7 +188,7 @@ describe('#Rave Mobile Money', function () {
       amount: '150',
       currency: 'UGX',
       voucher: '128373',
-      network: 'VODAFONE',
+      network: 'MTN',
       email: 'stefan.wexler@hotmail.eu',
       phone_number: '054709929220',
       fullname: 'Yolande Aglaé Colbert',
@@ -320,52 +320,53 @@ describe('#Rave Mobile Money', function () {
 
     const createTZSMoMo = sinon.stub(momoInstance, 'tanzania').resolves({
       body: {
-       "status": "success",
-       "message": "Charge initiated",
-       "data": {
-          "id": 976392302,
-          "tx_ref": "MC-158523s09v5050e8",
-          "flw_ref": "SWWD88181689192176819143",
-          "device_fingerprint": "62wd23423rq324323qew1",
-          "amount": 150,
-          "charged_amount": 150,
-          "app_fee": 1000,
-          "merchant_fee": 0,
-          "processor_response": "request successful 20230712200256022250 Payment Request has been Accepted Successfully Waiting for Confirmation",
-          "auth_model": "MOBILEMONEY",
-          "currency": "TZS",
-          "ip": "154.123.220.1",
-          "narration": "Adekunle Odujoko",
-          "status": "pending",
-          "payment_type": "mobilemoneytz",
-          "fraud_status": "ok",
-          "charge_type": "normal",
-          "created_at": "2023-07-12T20:02:56.000Z",
-          "account_id": 1834035,
-          "customer": {
-              "id": 617886609,
-              "phone_number": "0782835136",
-              "name": "Yolande Aglaé",
-              "email": "user@example.com",
-              "created_at": "2023-07-12T20:02:56.000Z"
-          }
-        }
-      }
-  });
+        status: 'success',
+        message: 'Charge initiated',
+        data: {
+          id: 976392302,
+          tx_ref: 'MC-158523s09v5050e8',
+          flw_ref: 'SWWD88181689192176819143',
+          device_fingerprint: '62wd23423rq324323qew1',
+          amount: 150,
+          charged_amount: 150,
+          app_fee: 1000,
+          merchant_fee: 0,
+          processor_response:
+            'request successful 20230712200256022250 Payment Request has been Accepted Successfully Waiting for Confirmation',
+          auth_model: 'MOBILEMONEY',
+          currency: 'TZS',
+          ip: '154.123.220.1',
+          narration: 'Adekunle Odujoko',
+          status: 'pending',
+          payment_type: 'mobilemoneytz',
+          fraud_status: 'ok',
+          charge_type: 'normal',
+          created_at: '2023-07-12T20:02:56.000Z',
+          account_id: 1834035,
+          customer: {
+            id: 617886609,
+            phone_number: '0782835136',
+            name: 'Yolande Aglaé',
+            email: 'user@example.com',
+            created_at: '2023-07-12T20:02:56.000Z',
+          },
+        },
+      },
+    });
 
     var payload = {
-      tx_ref:"MC-158523s09v5050e8",
-      amount:"150",
-      currency:"TZS",
-      network:"Halopesa",
-      email:"user@example.com",
-      phone_number:"0782835136",
-      fullname:"Yolande Aglaé Colbert",
-      client_ip:"154.123.220.1",
-      device_fingerprint:"62wd23423rq324323qew1",
-      meta:{
-         flightID:"213213AS"
-      }
+      tx_ref: 'MC-158523s09v5050e8',
+      amount: '150',
+      currency: 'TZS',
+      network: 'Halopesa',
+      email: 'user@example.com',
+      phone_number: '0782835136',
+      fullname: 'Yolande Aglaé Colbert',
+      client_ip: '154.123.220.1',
+      device_fingerprint: '62wd23423rq324323qew1',
+      meta: {
+        flightID: '213213AS',
+      },
     };
 
     var resp = await momoInstance.tanzania(payload);

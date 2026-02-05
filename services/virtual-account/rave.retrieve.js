@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { fetchAccountSchema } = require('../schema/auxillary');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `v3/bulk-virtual-account-numbers/${data.order_ref}`,
     data,
   );
-  logger(`Fetch account details`, _rave);
+  // logger(`Fetch account details`, _rave);
   return response;
 }
 

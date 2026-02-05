@@ -1,5 +1,5 @@
 const { listSchema } = require('../schema/base');
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 
 async function service(data, _rave) {
@@ -10,7 +10,7 @@ async function service(data, _rave) {
     `v3/transactions/verify_by_reference?tx_ref=${data.tx_ref}`,
     data,
   );
-  logger(`Verify Transactions by tx_ref`, _rave);
+  // logger(`Verify Transactions by tx_ref`, _rave);
   return response;
 }
 module.exports = service;

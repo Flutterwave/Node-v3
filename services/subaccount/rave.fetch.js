@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { fetchSchema } = require('../schema/base');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `/v3/subaccounts/${data.id}`,
     data,
   );
-  logger(`Fetch a subaccount`, _rave);
+  // logger(`Fetch a subaccount`, _rave);
   return response;
 }
 

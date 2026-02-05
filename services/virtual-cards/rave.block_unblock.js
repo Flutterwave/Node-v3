@@ -1,5 +1,5 @@
 const joi = require('joi');
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 
 const spec = joi.object({
@@ -14,7 +14,7 @@ async function service(data, _rave) {
     `v3/virtual-cards/${data.id}/status/${data.status_action}`,
     data,
   );
-  logger(`Fund a virtual card`, _rave);
+  // logger(`Fund a virtual card`, _rave);
   return response;
 }
 module.exports = service;
