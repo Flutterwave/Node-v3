@@ -1,4 +1,12 @@
 # Changelog
+## 1.3.0 | 2025-04-17
+
+Remove SDK logger
+
+### Version Changes
+
+- [REMOVED] logger tracking errors in the integration libraries.
+
 
 ## 1.2.1 | 2025-04-14
 
