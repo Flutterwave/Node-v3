@@ -5,4 +5,4 @@ node_modules
 .prettierrc.json
 .eslintrc.json
 .nyc_output
-coverage
+coverage/
