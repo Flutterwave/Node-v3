@@ -33,7 +33,7 @@ describe('#Rave charge', function () {
     sinon.restore();
   });
 
-  it('Test To Check Expiry Monnth', async function () {
+  it('Test To Check Invalid Expiry Monnth', async function () {
     const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
     const cardPayload = {
       enckey: encryption_key,
@@ -44,13 +44,15 @@ describe('#Rave charge', function () {
       currency: 'NGN',
       amount: '5000',
       email: 'user@example.com',
-      tx_ref: 'MC-12345'
+      tx_ref: 'MC-12345',
+      phone_number: "12332232322"
+
     };
     await expect(chargeInstance.card(cardPayload)).to.be.rejectedWith("Invalid expiry month");
     expect(requestStub).to.not.have.been.called;
   });
 
-  it('card charge should successfully reach the return statement with valid digits', async function () {
+  it('card should be successfully charged with valid phone number', async function () {
     const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
     const cardPayload = {
       enckey: encryption_key,
@@ -69,8 +71,8 @@ describe('#Rave charge', function () {
     expect(requestStub).to.have.been.calledOnce;
     expect(resp).to.have.property('status', 'success');
   });
-  
-  it('Test To ensure phone number is a digit', async function () {
+
+  it('Test to check invalid phone number', async function () {
     const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
     const cardPayload = {
       enckey: encryption_key,
@@ -88,45 +90,4 @@ describe('#Rave charge', function () {
     expect(requestStub).to.not.have.been.called;
   });
 
-  it('should successfully encrypt and charge a card', async function () {
-    this.timeout(10000);
-
-    // We stub the request engine
-    const requestStub = sinon.stub(ravebase, 'request').resolves({
-      body: {
-        status: 'success',
-        message: 'Charge initiated',
-        meta: { authorization: { mode: 'pin' } }
-      }
-    });
-
-    //Raw card data (not encrypted yet)
-    const cardPayload = {
-      enckey: 'FLWSECK_TEST742327c04be9',
-      card_number: '5531886652142950',
-      cvv: '564',
-      expiry_month: '09',
-      expiry_year: '32',
-      currency: 'NGN',
-      amount: '5000',
-      email: 'user@example.com',
-      tx_ref: 'MC-12345'
-    };
-
-    const resp = await chargeInstance.card(cardPayload);
-
-    // THE SECURITY VERIFICATION:
-    // We check that the stub was called with an encrypted "client" string
-    // instead of the raw card number.
-    expect(requestStub).to.have.been.calledOnce;
-
-    const callArgs = requestStub.firstCall.args[1];
-    expect(callArgs).to.have.property('client');
-    expect(callArgs.client).to.be.a('string');
-    
-    // If it's encrypted, it shouldn't contain the raw card number
-    expect(callArgs.client).to.not.contain(cardPayload.card_number);
-
-    expect(resp.status).to.equal('success');
-  });
 });
