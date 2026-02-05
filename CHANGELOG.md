@@ -1,4 +1,16 @@
 # Changelog
+## 1.3.1 | 2026-02-05
+Update dependencies and fix compatibility issues
+
+### Version Changes
+- [FIXED] Downgrade ESlint to v8 for better compatibility with dependencies.
+- [FIXED] Bump @modelcontextprotocol/sdk from 1.25.3 to 1.26.0
+- [FIXED] Bump node-forge from 1.3.0 to 1.3.2
+- [FIXED] Bump axios from 1.8.4 to 1.12.0
+- [FIXED] Bump brace-expansion from 1.1.11 to 1.1.12
+- [FIXED] Bump sha.js from 2.4.11 to 2.4.12
+- [FIXED] Bump form-data from 4.0.2 to 4.0.4
+
 ## 1.3.0 | 2025-04-17
 
 Remove SDK logger
