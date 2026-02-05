@@ -4,6 +4,10 @@ on:
   release:
     types: [created]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   check-readme-and-changelog:
     runs-on: ubuntu-latest
@@ -34,20 +38,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node Engine
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 24
           registry-url: https://registry.npmjs.org/
 
       - name: Install Node dependencies
         run: npm ci
 
+      - name: Run build
+        run: npm run build --if-present
+
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
       - name: Send Slack Notification
         uses: 8398a7/action-slack@v3
