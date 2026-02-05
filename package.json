@@ -7,7 +7,7 @@
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\"",
     "coverage": "nyc npm run test",
-   "report-coverage": "nyc report --reporter=lcov --reporter=text"
+    "report-coverage": "nyc report --reporter=lcov --reporter=text"
   },
   "nyc": {
     "coverage": "test",
@@ -37,7 +37,7 @@
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^10.0.0",
-    "eslint": "^9.26.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "mocha": "^11.3.0",
