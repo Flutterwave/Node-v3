@@ -1,14 +1,10 @@
 var ebills = require('../lib/rave.ebills');
 var base = require('../lib/rave.base');
-
-var Promise = require('bluebird');
 var mocha = require('mocha');
 var chai = require('chai');
 var expect = chai.expect;
 var chaiAsPromised = require('chai-as-promised');
-
 var dotenv = require('dotenv').config();
-
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
@@ -21,7 +17,6 @@ describe('#Rave Ebills', function () {
   const ravebase = new base(public_key, secret_key);
 
   let ebillsInstance;
-  let ebillsStub;
 
   beforeEach(() => {
     ebillsInstance = new ebills(ravebase);
@@ -31,25 +26,23 @@ describe('#Rave Ebills', function () {
     sinon.restore();
   });
 
-  it('should  create a new Ebills order ', async function () {
+  it('should create a new Ebills order', async function () {
     this.timeout(10000);
 
-    const createEbillsSuccessStub = sinon
-      .stub(ebillsInstance, 'order')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Ebills ordered',
-          data: {
-            flw_ref: 'RVEBLS-F35542EA3BFE-73362',
-            tx_ref: 'akhlm-pstmn-109470393',
-            response_message: 'Pending funds transfer or bank branch payment',
-          },
+    // STUB: request to ensure services/ebills logic is hit
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Ebills ordered',
+        data: {
+          flw_ref: 'RVEBLS-F35542EA3BFE-73362',
+          tx_ref: 'akhlm-pstmn-109470393',
+          response_message: 'Pending funds transfer',
         },
-      });
+      },
+    });
 
     var payload = {
-      narration: 'mndkn blls',
       number_of_units: 2,
       currency: 'NGN',
       amount: 100,
@@ -61,33 +54,46 @@ describe('#Rave Ebills', function () {
       country: 'NG',
     };
 
-    var resp = await ebillsInstance.order(payload);
+    const resp = await ebillsInstance.order(payload);
 
-    expect(createEbillsSuccessStub).to.have.been.calledOnce;
-    expect(createEbillsSuccessStub).to.have.been.calledOnceWith(payload);
-
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
-
-    expect(resp.body.data).to.have.property('flw_ref');
-    expect(resp.body.data).to.have.property('tx_ref');
-    expect(resp.body.data).to.have.property('response_message');
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp, "Service returned undefined").to.not.be.undefined;
+    expect(resp).to.have.property('status', 'success');
   });
-
-  it('should return list of bank branches ', async function () {
+  
+  it('testing the phone number validation required to create a new Ebills order', async function () {
     this.timeout(10000);
 
-    const updateEbillsSuccessStub = sinon
-      .stub(ebillsInstance, 'update')
-      .resolves({
-        body: {
-          status: 'success',
-          message: 'Ebills order updated',
-          data: {
-            updated: true,
-          },
-        },
-      });
+    const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
+
+    var payload = {
+      number_of_units: 2,
+      currency: 'NGN',
+      amount: 100,
+      phone_number: 'ffrrrtrrtr',
+      email: 'jake@rad.com',
+      tx_ref: 'akhlm-pstmn-109470393',
+      ip: '127.9.0.7',
+      custom_business_name: 'John Madakin',
+      country: 'NG',
+    };
+
+    await expect(ebillsInstance.order(payload))
+      .to.be.rejectedWith('phone number should be digits');
+
+    expect(requestStub).to.not.have.been.called;
+  });
+
+  it('should update an Ebills order', async function () {
+    this.timeout(10000);
+
+    const requestStub = sinon.stub(ravebase, 'request').resolves({
+      body: {
+        status: 'success',
+        message: 'Ebills order updated',
+        data: { updated: true },
+      },
+    });
 
     var payload = {
       currency: 'NGN',
@@ -95,12 +101,19 @@ describe('#Rave Ebills', function () {
       reference: 'RVEBLS-F81CEEEE8218-73362',
     };
 
-    var resp = await ebillsInstance.update(payload);
+    const resp = await ebillsInstance.update(payload);
 
-    expect(updateEbillsSuccessStub).to.have.been.calledOnce;
-    expect(updateEbillsSuccessStub).to.have.been.calledOnceWith(payload);
+    expect(requestStub).to.have.been.calledOnce;
+    expect(resp).to.have.property('status', 'success');
+  });
 
-    expect(resp.body).to.have.property('status', 'success');
-    expect(resp.body).to.have.property('data');
+  it('should fail if email is missing', async function () {
+    
+    const requestStub = sinon.stub(ravebase, 'request').resolves({ body: { status: 'success' } });
+    
+    var invalidPayload = { amount: 100 }; // Missing email and other fields
+    
+    await expect(ebillsInstance.order(invalidPayload)).to.be.rejectedWith(/"email" is required/);
+    expect(requestStub).to.not.have.been.called;
   });
 });

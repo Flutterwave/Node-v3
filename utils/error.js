@@ -16,4 +16,4 @@ const getErrorMessage = (err) => {
   }
 };
 
-module.exports = { validationError };
+module.exports = { validationError, getErrorMessage };
