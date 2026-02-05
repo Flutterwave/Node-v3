@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { accountSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/virtual-account-numbers`,
     data,
   );
-  logger(`Create a virtual account`, _rave);
+  // logger(`Create a virtual account`, _rave);
   return response;
 }
 

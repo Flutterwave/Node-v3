@@ -4,7 +4,6 @@
 
 # Flutterwave v3 NodeJS Library
 
-![Node.js Package](https://github.com/Flutterwave/Flutterwave-node-v3/workflows/Node.js%20Package/badge.svg)
 ![npm](https://img.shields.io/npm/v/flutterwave-node-v3)
 ![npm](https://img.shields.io/npm/dt/flutterwave-node-v3)
 ![NPM](https://img.shields.io/npm/l/flutterwave-node-v3)
@@ -24,7 +23,7 @@ Available features include:
 - Bill payments: Airtime, Data bundle, Cable, Power, Toll, E-bills, and Remitta.
 - Identity verification: Resolve bank account, resolve BVN information and generate OTP.
 
-## Table of Content
+## Table of Contents
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)

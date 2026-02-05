@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { fetchSchema } = require('../schema/base');
 
@@ -9,7 +9,7 @@ async function service(data, _rave) {
     `/v3/virtual-cards/${data.id}/terminate`,
     data,
   );
-  logger(`Delete a virtual card`, _rave);
+  // logger(`Delete a virtual card`, _rave);
   return response;
 }
 

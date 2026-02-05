@@ -1,0 +1,27 @@
+name: Security scan on all changes (Commits/PRs)
+
+on:
+  push:
+    branches: ['main', 'master', 'pilots', 'dev']
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    env:
+      OS: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: Checkmarx One ClI Action
+        uses: checkmarx/ast-github-action@main
+        with:
+          project_name: Node-v3
+          cx_tenant: Flutterwave
+          base_uri: https://eu.ast.checkmarx.net/
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: --scan-types sast,iac-security,api-security,sca,container-security

@@ -1,4 +1,4 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { bankChargeSchema } = require('../schema/create');
 
@@ -8,7 +8,7 @@ async function service(data, _rave) {
     `v3/charges?type=account-ach-uk`,
     data,
   );
-  logger(`UK direct debit`, _rave);
+  // logger(`UK direct debit`, _rave);
   return response;
 }
 

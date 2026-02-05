@@ -1,11 +1,11 @@
-const { logger } = require('../../utils/logger');
+// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { momoSchema } = require('../schema/create');
 
 async function service(data, _rave) {
   validator(momoSchema, data);
   const { body: response } = await _rave.request(`v3/charges?type=mpesa`, data);
-  logger(`Create ${data.currency} MoMo charge`, _rave);
+  // logger(`Create ${data.currency} MoMo charge`, _rave);
   return response;
 }
 
