@@ -46,16 +46,9 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org/
 
-      - name: Install Node
-        run: npm install -g npm@latest
-        
-      - name: Add node dependencies
-        run: npm ci
-
-      - name: Run build
-        run: npm run build --if-present
-
-      - run: npm publish --provenance --access public
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
       - name: Send Slack Notification
         uses: 8398a7/action-slack@v3
