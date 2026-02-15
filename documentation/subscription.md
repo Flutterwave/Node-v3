@@ -4,7 +4,7 @@
 
 # SUBSCRIPTION
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage User subscriptions via any of these methods:
 1. [Get all Subscriptions](#get-all-subscriptions)
@@ -14,7 +14,7 @@ Manage User subscriptions via any of these methods:
 
 ## Get all subscriptions
 
-This describes how to get all subscriptions
+This section describes how to get all subscriptions on your account.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -72,9 +72,9 @@ Sample Response
 }
 ```
 
-## Fetch subscriptions with customer's email
+## Fetch subscriptions with the customer's email
 
-This describes how to fetch subscriptions made by a single user.
+This section describes how to fetch subscriptions using your customer's email address.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -126,7 +126,7 @@ Sample Response
 
 ## Cancel a subscription
 
-This describes how to cancel a subscription
+This section describes how to cancel a subscription.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -137,7 +137,7 @@ const cancelSubscription = async () => {
 
     try {
         const payload={
-            "id":"4147" //This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
+            "id":"4147" //This is the unique ID of the subscription you want to cancel. It is returned in the Get a subscription call as data.id
         }
         
         const response = await flw.Subscription.cancel(payload)
@@ -173,7 +173,7 @@ Sample Response
 
 ## Activate a subscription
 
-This describes how to activate a subscription
+This section describes how to activate a subscription.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -184,7 +184,7 @@ const activateSubscription = async () => {
 
     try {
         const payload={
-            "id":"4147" //This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.id
+            "id":"4147" //This is the unique ID of the subscription you want to activate. It is returned in the Get a subscription call as data.id
         }
         
         const response = await flw.Subscription.activate(payload)

@@ -4,18 +4,18 @@
 
 # OTPS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
-Manage Otps via any of these methods:
+Manage OTPs via any of these methods:
 1. [Create Otp](#create-otp)
 2. [Validate Otp](#validate-otp)
 
 
 ##  Create Otp
 
-This describes how to create an otp
+This section describes how to create an OTP.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -55,7 +55,7 @@ createOTP();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "OTP generated successfully",
@@ -79,9 +79,9 @@ Sample Response
 
 ##  Validate Otp
 
-This describes how to validate an otp
+This section describes how to validate an OTP.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -111,7 +111,7 @@ validateOTP();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
     "status": "success",
     "message": "Otp Authenticated successfully",

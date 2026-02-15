@@ -4,7 +4,7 @@
 
 # MISC
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Verify user information via any of these methods:
 1. [Get all wallet balances](#get-all-wallet-balances)
@@ -15,9 +15,9 @@ Verify user information via any of these methods:
 
 ## Get all wallet balances
 
-This describes how to get all wallet balances
+This section describes how to get all wallet balances on your account.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -42,7 +42,7 @@ fetchBal();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Wallet balances fetched",
@@ -128,9 +128,9 @@ Sample Response
 
 ## Get balances per currency
 
-This describes how to get balances for specific currencies
+This section describes how to get the wallet balance for specific currencies.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -157,7 +157,7 @@ fetchBal();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Wallet balance fetched",
@@ -171,9 +171,9 @@ Sample Response
 
 ## Resolve account details
 
-This describes how to resolve a bank account to get the account holder's details
+This section describes how to resolve an account and obtain the account holder's details.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -201,7 +201,7 @@ resolveAcct();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Account details fetched",
@@ -214,9 +214,9 @@ Sample Response
 
 ## Initiate BVN Consent
 
-This describes how to initiate bvn consent flow for your customer.
+This section describes how to initiate bvn consent flow for your customer.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -246,7 +246,7 @@ initiateBvn();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status":"success",
    "message":"Bvn verification initiated",
@@ -259,9 +259,9 @@ Sample Response
 
 ## Verify BVN consent
 
-This describes how to Verify consent and retirve the customer's BVN information.
+This section describes how to verify consent and retrieve your customer's BVN information.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -288,7 +288,7 @@ verifyBVN();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status":"success",
    "message":"Bvn details fetched",
