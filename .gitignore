@@ -6,3 +6,4 @@ node_modules
 .eslintrc.json
 .nyc_output
 coverage/
+.DS_Store

@@ -11,7 +11,7 @@ Manage user transactions via any of these methods:
 2. [Get transaction fee](#get-transaction-fee)
 3. [Resend transaction webhook](#resend-transaction-webhook)
 4. [Verify transaction](#verify-transaction)
-5. [Verify transaction with reference](#verify-transaction)
+5. [Verify transaction with reference](#verify-transaction-with-reference)
 6. [Create a transaction refund](#create-a-transaction-refund)
 7. [View transaction timeline](#view-transaction-timeline)
 
