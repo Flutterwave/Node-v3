@@ -1,27 +1,10 @@
-// var morx = require('morx');
+async function service(path, data, _rave) {
+  if (!path) {
+    throw new Error('A valid path is required for custom requests');
+  }
 
-// var q = require('q');
+  const { body: response } = await _rave.request(path, data);
+  return response;
+}
 
-// function newRefund(path, data, _rave) {
-//   var d = q.defer();
-
-//   q.fcall(() => {
-//     path = path || 'NO PATH PASSED, PLEASE PASS A VALID PATH';
-
-//     if (path == 'NO PATH PASSED, PLEASE PASS A VALID PATH') {
-//       throw path;
-//     }
-
-//     return _rave.request(path, data);
-//   })
-//     .then((response) => {
-//       d.resolve(response);
-//     })
-//     .catch((err) => {
-//       d.reject(err);
-//     });
-
-//   return d.promise;
-// }
-
-// module.exports = newRefund;
+module.exports = service;
