@@ -1,4 +1,16 @@
 # Changelog
+## 1.3.2 | 2026-04-15
+- [FIXED] remaining moderate vulnerabilities by updating dependencies and applying package overrides.
+- [ADDED] overrides to enforce safe versions for vulnerable transitive packages: 
+  - flatted → 3.4.2
+  - minimatch → 9.0.7
+  - follow-redirects → 1.16.0
+  - serialize-javascript → 7.0.5
+  - ajv → 6.14.0
+  - diff → 8.0.3
+- [UPDATED] axios from 1.13.3 → 1.15.0
+- [UPDATED] node-forge from 1.3.2 → 1.4.0
+
 ## 1.3.1 | 2026-02-05
 Update dependencies and fix compatibility issues
 
