@@ -4,7 +4,7 @@
 
 # VIRTUAL ACCOUNT NUMBERS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Manage Virtual Accounts via any of these methods:
 1. [Create a virtual account number](#create-a-virtual-account-number)
@@ -15,10 +15,10 @@ Manage Virtual Accounts via any of these methods:
 
 ## Create a virtual account number
 
-This describes how to create a virtual account number
+This section describes how to create a virtual account number.
 
-Note: BVN is required for creating static account numbers in the Live Environment i.e if the value of is_permanent is True.
-Kindly visit our API section found [here](https://developer.flutterwave.com/reference#create-a-virtual-account-number-1) for more information.
+Note: BVN is required for creating static account numbers in the Live Environment, i.e, if the value of is_permanent is True.
+Kindly visit our API section found [here](https://developer.flutterwave.com/v3.0.0/reference/create-a-virtual-account-number-1) for further information.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -74,7 +74,7 @@ Sample Response
 
 ## Create bulk virtual account numbers
 
-This describes how to create bulk virtual account numbers
+This section describes how to create bulk virtual account numbers.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -86,7 +86,7 @@ const createBulkAcct = async () => {
 
     try {
         const payload = {
-            "accounts": 5, //This is the number of virtual account numbers you want to generate
+            "accounts": 5, //This is the number of virtual account numbers you want to generate.
             "email": "sam@son.com",
             "is_permanent": true,
             "tx_ref": "jhn-mndkn-012439283422",
@@ -121,7 +121,7 @@ Sample Response
 
 ## Get bulk virtual account details
 
-This describes how to fetch bulk virtual account numbers using batch id
+This section describes how to fetch bulk virtual account numbers using the batch ID.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -133,7 +133,7 @@ const fetchBulk = async () => {
 
     try {
         const payload = {
-            "batch_id": "-RND_1311590351499953", // This is the batch ID returned in the bulk virtual account numbers creation
+            "batch_id": "-RND_1311590351499953", // This is the batch ID returned in the bulk virtual account numbers creation as 'data.batch_id'.
         }
         const response = await flw.VirtualAcct.fetch_bulk(payload)
         console.log(response);
@@ -225,7 +225,7 @@ Sample Response
 
 ## Get a virtual account number
 
-This describes how to fetch a virtual account number using order reference
+This section describes how to fetch a virtual account number using the order reference.
 
 ```javascript
 const Flutterwave = require('flutterwave-node-v3');
@@ -237,7 +237,7 @@ const fetch = async () => {
 
     try {
         const payload = {
-            "order_ref": "URF_1579513580629_5981535", // This is the order reference returned in the virtual account number creation
+            "order_ref": "URF_1579513580629_5981535", // This is the order reference returned in the virtual account number creation as 'data.order_ref'.
         }
         const response = await flw.VirtualAcct.fetch(payload)
         console.log(response);

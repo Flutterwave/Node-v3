@@ -4,7 +4,7 @@
 
 # BANKS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Fetch Bank details via any of these methods:
 1. [Fetch all Banks](#get-all-banks)
@@ -12,9 +12,9 @@ Fetch Bank details via any of these methods:
 
 ## Get all banks
 
-This describes how to get list of banks you can transfer to
+This section describes how to get a list of banks you can make transfers to.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -24,7 +24,7 @@ const getBanks = async () => {
     try {
         const payload = {
             
-            "country":"NG" //Pass either NG, GH, KE, UG, ZA or TZ to get list of banks in Nigeria, Ghana, Kenya, Uganda, South Africa or Tanzania respectively
+            "country": "NG" //Pass either NG, GH, KE, UG, ZA, or TZ to get a list of banks in Nigeria, Ghana, Kenya, Uganda, South Africa, or Tanzania, respectively.
             
         }
         const response = await flw.Bank.country(payload)
@@ -40,7 +40,7 @@ getBanks();
 ```
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Banks fetched successfully",
@@ -356,9 +356,9 @@ Sample Response
 
 ## Get bank branches
 
-This describes how to get a list of bank branches
+This section describes how to get a list of bank branches.
 
-```javascript
+```JavaScript
 const Flutterwave = require('flutterwave-node-v3');
 
 const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY  );
@@ -369,7 +369,7 @@ const getBranches = async () => {
     try {
         const payload = {
             
-            "id":280 //Unique bank ID, it is returned in the call to fetch banks GET /banks/:country
+            "id":280 //Unique bank ID, it is returned in the call to fetch banks GET /banks/:country.
             
         }
         const response = await flw.Bank.branches(payload)
@@ -385,7 +385,7 @@ getBranches();
 ```
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "Bank branches fetched successfully",
@@ -425,7 +425,7 @@ Sample Response
     {
       "id": 996,
       "branch_code": "GH190105",
-      "branch_name": "STANBIC BANK GHANA -NORTH INDUSTIAL AREA",
+      "branch_name": "STANBIC BANK GHANA -NORTH INDUSTRIAL AREA",
       "swift_code": "SBICGHAC",
       "bic": "SBICGHACXXX",
       "bank_id": 280

@@ -4,13 +4,13 @@
 
 # BILLS
 
-We recommend reading the main readme first, to understand the requirements for using the library and how to initiate this in your apps. This guide assumes you've read that.
+We recommend that you first review the [main README](../README.md) to understand the requirements for using our library and how to implement it in your applications. This guide assumes you have done that.
 
 Make Bill payments via any of these methods:
 1. [Create Bill Payment](#create-a-bill-payment)
 2. [Create Bulk Bills](#create-bulk-bills)
-3. [Get Bill Categories)](#get-bill-categories)
-4. [Get amount to be paif for a product)](#get-amount-to-be-paid-for-a-product)
+3. [Get Bill Categories](#get-bill-categories)
+4. [Get the amount to be paid for a product](#get-amount-to-be-paid-for-a-product)
 5. [Get Bill Payments](#get-bill-payments)
 6. [Get Bill Categories](#get-bill-categories)
 7. [Get Bill Payment Agencies](#get-bill-payment-agencies)
@@ -22,9 +22,9 @@ Make Bill payments via any of these methods:
 
 ##  Create a bill payment
 
-This describes how to create bill payments
+This section describes how to create bill payments.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -57,7 +57,7 @@ createBill();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Bill payment successful",
@@ -74,9 +74,9 @@ Sample Response
 
 ##  Create bulk bills
 
-This describes  how to create bulk bills payment
+This section describes how to create a bulk bill payment.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -123,7 +123,7 @@ createBulkBill();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Bulk bill Payment was queued for processing",
@@ -135,9 +135,9 @@ Sample Response
 
 ##  Get status of a bill payment
 
-This describes  how to  get the status of a bill purchase
+This section describes how to get the status of a bill purchase.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -165,7 +165,7 @@ getStatus();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Bill status fetch successful",
@@ -189,9 +189,9 @@ Sample Response
 
 ##  Update bills order
 
-This describes  how to  update bills order
+This section describes how to update Bill's order.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -220,7 +220,7 @@ updateBills();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "bills order updated successfully",
@@ -240,9 +240,9 @@ Sample Response
 
 ##  Validate bill service
 
-This describes  how to validate services like DSTV smartcard no, Meter number etc.
+This section describes how to validate services like DSTV smartcard number, Meter number, etc.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -271,7 +271,7 @@ validateBill();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Item validated successfully",
@@ -294,9 +294,9 @@ Sample Response
 
 ##  Get bill categories
 
-This describes  how to fetch all bill categories on your account
+This section describes how to fetch all supported bill payment categories.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -320,7 +320,7 @@ getBillsCategories();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "bill categories retrieval successful",
@@ -328,7 +328,7 @@ Sample Response
     {
       "id": 1,
       "biller_code": "BIL099",
-      "name": "MTN NIgeria",
+      "name": "MTN Nigeria",
       "default_commission": 0.02,
       "date_added": "2018-07-03T00:00:00Z",
       "country": "NG",
@@ -604,9 +604,9 @@ Sample Response
 
 ##  Get bill payment agencies
 
-This describes  how to get all government agencies you can pay into
+This section describes how to get all the government agencies you can pay into.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -631,7 +631,7 @@ paymentAgencies();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
     "status": "success",
     "message": "billers retrieval successful",
@@ -650,11 +650,11 @@ Sample Response
 
 
 
-##  Get amount to be paid for a product
+##  Get the amount to be paid for a product
 
-This describes  how to get amount to be paid for a product
+This section describes how to get the amount to be paid for a product.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -685,7 +685,7 @@ amountToBePaid();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "billers products item retrieval successful",
@@ -721,9 +721,9 @@ Sample Response
 
 ##  Get bill payments
 
-This describes  how to get bill payments
+This section describes how to get bill payments.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -735,9 +735,9 @@ const getBillsPayment = async () => {
     try {
 
         const payload = {
-            "from": "2019-08-01", //This is the start date it can be in any of this formats: YYYY-MM-DDTHH:MM:SSZ or YYYY-MM-DD
+            "from": "2019-08-01", //This is the start date, it can be in any of these formats: YYYY-MM-DDTHH:MM: SSZ or YYYY-MM-DD
             "to": "2020-08-27",
-            "page":"1", //This is the page you want to start from.
+            "page": "1", //This is the page you want to start from.
         }
 
         const response = await flw.Bills.fetch_bills(payload)
@@ -754,7 +754,7 @@ getBillsPayment();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
   "status": "success",
   "message": "bills retrieval successful",
@@ -806,9 +806,9 @@ Sample Response
 
 ##  Get products under an agency
 
-This describes  how to get all products under a government agency.
+This section describes how to get all products under a government agency.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -837,7 +837,7 @@ productsUnderAgency();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "billers products retrieval successful",
@@ -849,8 +849,8 @@ Sample Response
             "amount": "0.0",
             "code": "OT150",
             "fee": "0.0",
-            "name": "GENESIS GROUP ACCOMODATION",
-            "description": "GENESIS GROUP ACCOMODATION PAYMENT"
+            "name": "GENESIS GROUP ACCOMMODATION",
+            "description": "GENESIS GROUP ACCOMMODATION PAYMENT"
          },
          {
             "amount": "0.0",
@@ -865,11 +865,11 @@ Sample Response
 ```
 
 
-##  Create order using billing code and product id
+##  Create order using billing code and product ID
 
-This describes  how to create an order using the biller code and the product Id
+This section describes how to create an order using the biller code and the product ID.
 
-```javascript
+```JavaScript
 
 const Flutterwave = require('flutterwave-node-v3');
 
@@ -885,7 +885,7 @@ const Createorder = async () => {
             "amount": "3500.00",
             "reference": "FLWTTOT1000000029",
             "customer": {
-                "name": "emmanuel",
+                "name": "Emmanuel",
                 "email": "emmanuel@x.com",
                 "phone_number": "08060811638"
             },
@@ -917,7 +917,7 @@ Createorder();
 
 Sample Response
 
-```javascript
+```JavaScript
 {
    "status": "success",
    "message": "Order processed successfully",
