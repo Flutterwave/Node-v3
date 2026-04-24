@@ -1,4 +1,12 @@
 # Changelog
+## 1.3.2 | 2026-04-24
+Fix dependency vulnerabilities and update package dependencies.
+
+### Version Changes
+- [FIXED] Update package dependencies to enforce safe versions: flatted (3.4.2), minimatch (9.0.7), follow-redirects(1.16.0), serialize-javascript (7.0.5), ajv (6.14.0), and diff(8.0.3).
+- [UPDATED] Update axios dependency from 1.13.3 to 1.15.0
+- [UPDATED] Update node-forge from 1.3.2 to 1.4.0
+
 ## 1.3.1 | 2026-02-05
 Update dependencies and fix compatibility issues
 
