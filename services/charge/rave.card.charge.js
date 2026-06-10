@@ -1,5 +1,4 @@
 const encrypt = require('./encryp');
-// const { logger } = require('../../utils/logger');
 const { validator } = require('../../utils/validator');
 const { cardChargeSchema } = require('../schema/create');
 
@@ -16,7 +15,6 @@ async function service(data, _rave) {
     payload,
   );
 
-  // logger(`Create card charge`, _rave);
   return response;
 }
 module.exports = service;
