@@ -1,7 +1,7 @@
 <p align="center">
     <img title="Flutterwave" height="200" src="https://flutterwave.com/images/logo/full.svg" width="50%"/>
 </p>
-
+ 
 # Flutterwave v3 NodeJS Library 
 
 ![Node.js Package](https://github.com/Flutterwave/Flutterwave-node-v3/workflows/Node.js%20Package/badge.svg)
