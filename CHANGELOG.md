@@ -1,4 +1,11 @@
 # Changelog
+## 1.4.0 | 2026-06-15
+Add signoz monitoring for service reliability.
+
+### Version changes
+= [ADDED] Telemetry logger for integration and error events.
+- [REMOVED] Mocha and nyc dependencies. SDK now uses the built-in node function for testing.
+
 ## 1.3.2 | 2026-04-24
 Fix dependency vulnerabilities and update package dependencies.
 
