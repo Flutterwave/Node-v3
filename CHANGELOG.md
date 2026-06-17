@@ -1,23 +1,38 @@
 # Changelog
+
+## 1.4.1 | 2026-06-17
+
+Refactor Signoz integration.
+
+### Version changes
+
+- [UPDATED] Persist merchant name across different event logs.
+
 ## 1.4.0 | 2026-06-15
+
 Add signoz monitoring for service reliability.
 
 ### Version changes
+
 - [ADDED] Telemetry logger for integration and error events.
 - [REMOVED] Mocha and nyc dependencies. SDK now uses the built-in node function for testing.
 
 ## 1.3.2 | 2026-04-24
+
 Fix dependency vulnerabilities and update package dependencies.
 
 ### Version Changes
+
 - [FIXED] Update package dependencies to enforce safe versions: flatted (3.4.2), minimatch (9.0.7), follow-redirects(1.16.0), serialize-javascript (7.0.5), ajv (6.14.0), and diff(8.0.3).
 - [UPDATED] Update axios dependency from 1.13.3 to 1.15.0
 - [UPDATED] Update node-forge from 1.3.2 to 1.4.0
 
 ## 1.3.1 | 2026-02-05
+
 Update dependencies and fix compatibility issues
 
 ### Version Changes
+
 - [FIXED] Downgrade ESlint to v8 for better compatibility with dependencies.
 - [FIXED] Bump @modelcontextprotocol/sdk from 1.25.3 to 1.26.0
 - [FIXED] Bump node-forge from 1.3.0 to 1.3.2
@@ -33,7 +48,6 @@ Remove SDK logger
 ### Version Changes
 
 - [REMOVED] logger tracking errors in the integration libraries.
-
 
 ## 1.2.1 | 2025-04-14
 

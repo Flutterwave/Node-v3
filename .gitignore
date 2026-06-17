@@ -3,8 +3,10 @@ node_modules
 .vscode
 .env
 .prettierrc.json
+.prettierrc
 .eslintrc.json
 .nyc_output
+.flw_sdk.json
 coverage/
 sandbox.js
 reports
